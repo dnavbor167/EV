@@ -1,6 +1,6 @@
 <div id="logInMain">
   <?php
-  $attributes = array('id' => 'login', 'class' => 'logSigin', 'method' => 'post');
+  $attributes = array('id' => 'loginForm', 'class' => 'logSigin', 'method' => 'post');
   echo form_open('DashBoard/login', $attributes);
   ?>
   <p><?= $this->lang->line('logIn'); ?></p>
@@ -26,6 +26,8 @@
   <button type="submit" id="btnCreateAccount"><?= $this->lang->line('createAccount'); ?></button>
 
   <?= form_close(); ?>
+
+  <a href="<?= site_url('Dashboard/recoverPassword') ?>" id="forgotPass"><?= $this->lang->line('forgotPass'); ?></a>
 </div>
 
 <script>

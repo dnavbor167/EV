@@ -96,4 +96,11 @@ $(function () {
         $(this).prev().show()
         $('#userPassword').attr('type', 'password')
     })
+
+    //menu hover and click options
+    $('#menu-desplegable nav ul li').on('click, mouseenter', function () {
+        $(this).css('background-color', '#303030')
+    }).on('mouseleave', function () {
+        $(this).css('background-color', '#565656');
+    });
 });

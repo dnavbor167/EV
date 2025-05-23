@@ -1,6 +1,7 @@
 <?php
 //header
 $lang['title']            = "Eternals Vibes";
+$lang['home']             = "Home";
 $lang['menu']             = "menu";
 $lang['eventsName']       = "Events";
 $lang['createEvents']     = "Create Events";
@@ -31,6 +32,8 @@ $lang['createAccount']     = "Create Account";
 $lang['email']             = "email";
 $lang['password']          = "password";
 $lang['logInError']        = "Incorrect username or password";
+$lang['forgotPass']        = "Forgot your password?";
+$lang['recoverPass']       = "Recover Password";
 
 //Home
 $lang['schedule']          = "Schedule";

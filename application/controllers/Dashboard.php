@@ -45,11 +45,12 @@ class Dashboard extends CI_Controller
 			$data['email'] = $this->input->post('userEmail');
 			$data['password'] = $this->input->post('userPassword');
 			$login = $this->User_model->loginUser($data);
+
 			if ($login) {
 				$array = array(
 					'language' => $login->lenguage
 				);
-				$this->loadViews("home");
+				redirect(base_url('Dashboard'));
 			} else {
 				$data['error'] = true;
 				$this->loadViews("login", $data);
@@ -64,32 +65,6 @@ class Dashboard extends CI_Controller
 		redirect(base_url("DashBoard/login"));
 	}
 
-	public function eliminarEmpleado()
-	{
-		if (isset($_POST["idEmpleado"])) {
-			$this->Site_model->deleteEmpleado($_POST["idEmpleado"]);
-		}
-	}
-
-	public function actualizarEmpleado()
-	{
-		//verificamos si se ha pasado el tiempo
-		$tiempo = time() - $_SESSION["login_tmp"];
-		if (!isset($_SESSION['usuario']) || $tiempo >= 300) {
-			$this->session->sess_destroy();
-			echo json_encode(['status' => 'error', 'message' => "Sesión Expirada"]);
-			return;
-		}
-
-		if ($_POST) {
-			$this->Site_model->updateEmpleado($_POST["idEmpleadoUpdate"]);
-			echo json_encode(['status' => 'success', 'message' => "Actualizado"]);
-			redirect(base_url("DashBoard"));
-		} else {
-			echo json_encode(['status' => 'error', 'message' => "Sin id"]);
-		}
-	}
-
 
 	public function loadViews($view, $data = null)
 	{
@@ -102,6 +77,18 @@ class Dashboard extends CI_Controller
 		$this->load->view('templates/header');
 		$this->load->view($view, $data);
 		$this->load->view('templates/footer');
-		//si no tenemos iniciada sessión
+	}
+
+	public function recoverPassword() {
+		//form validation
+		$this->form_validation->set_rules('userEmail', $this->lang->line('email'), 'required|valid_email');
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('templates/header');
+			$this->load->view('recoverPassword');
+			$this->load->view('templates/footer');
+		} else {
+			
+		}
 	}
 }

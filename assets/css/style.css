@@ -30,6 +30,7 @@ a {
 
 ul {
     list-style: none;
+    padding: 0;
 }
 
 header nav a {
@@ -115,11 +116,13 @@ nav span {
 }
 
 #menu-desplegable nav ul li {
-    padding-bottom: 1rem;
+    padding-bottom: .5rem;
+    padding-top: .5rem;
+    padding-left: 2rem;
 }
 
 #usuarioMenu {
-    margin-top: auto;
+    margin-top: 4.2rem;
 }
 
 main {
@@ -405,9 +408,12 @@ Footer>div {
 
 #logInMain {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
 }
 
-#logInMain form > p {
+#logInMain form>p {
     font-weight: 900;
 }
 
@@ -417,6 +423,7 @@ Footer>div {
     margin: 0 auto;
     display: flex;
     flex-flow: row wrap;
+    flex: 0 0 100%;
 }
 
 #logInMain form * {
@@ -452,21 +459,21 @@ Footer>div {
     background-color: #FF7300;
 }
 
-#logInMain form > div {
+#logInMain form>div {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
 }
 
-#logInMain form > div input {
+#logInMain form>div input {
     flex: 0 0 100%;
 }
 
-#logInMain form > div div{
+#logInMain form>div div {
     position: absolute;
 }
 
-#logInMain form > div svg {
+#logInMain form>div svg {
     width: 1.5rem;
     height: auto;
     fill: black;
@@ -475,6 +482,26 @@ Footer>div {
     top: -.5rem;
 }
 
-#logInMain form > div svg#dontSeePass {
+#logInMain form>div svg#dontSeePass {
     display: none;
+}
+
+#forgotPass {
+    text-decoration: underline;
+}
+
+.btn-back {
+    align-self: flex-start;
+}
+
+.icon-back {
+    fill: #FF7300;
+    width: 3em;
+    height: auto;
+    margin-top: 20rem;
+}
+
+#btnRecoverPass {
+    background-color: #FF7300;
+    color: #303030;
 }
