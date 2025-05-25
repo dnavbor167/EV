@@ -1,7 +1,7 @@
 <div id="homeElements">
 	<div class="principalElementsHome">
 		<div class="requires-login coming-soon">
-			<a href="#">
+			<a href="#" class="requires-login">
 				<?= strtoupper($this->lang->line('schedule')); ?>
 			</a>
 		</div>

@@ -27,7 +27,7 @@
 
   <?= form_close(); ?>
 
-  <a href="<?= site_url('Dashboard/recoverPassword') ?>" id="forgotPass"><?= $this->lang->line('forgotPass'); ?></a>
+  <a href="<?= site_url('Dashboard/recoverPassword') ?>" id="forgotPass" class="ajax-link"><?= $this->lang->line('forgotPass'); ?></a>
 </div>
 
 <script>

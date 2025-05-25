@@ -66,17 +66,22 @@ class Dashboard extends CI_Controller
 	}
 
 
-	public function loadViews($view, $data = null)
+	private function loadViews($view, $data = null)
 	{
 		//si la vista es login se redirige a la home
 		if ($this->session->userdata('is_logged_in') && $view == "login") {
 			redirect(base_url() . "DashBoard", "location");
 		}
 
-		//si es una vista cualquiera se carga
-		$this->load->view('templates/header');
-		$this->load->view($view, $data);
-		$this->load->view('templates/footer');
+		if ($this->input->is_ajax_request()) {
+			$this->load->view($view, $data);
+		} else {
+			//si es una vista cualquiera se carga
+			$this->load->view('templates/header');
+			$this->load->view($view, $data);
+			$this->load->view('templates/footer');
+		}
+		
 	}
 
 	public function recoverPassword() {

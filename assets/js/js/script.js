@@ -16,7 +16,7 @@ $(function () {
         }
     })
 
-    $("#closeMenu").on("click", function (e) {
+    $("#closeMenu, #menu-desplegable ul li").on("click", function (e) {
         e.stopPropagation();
         $("div#menu-desplegable nav").hide();
         $("#login, #logo").fadeIn("fast");

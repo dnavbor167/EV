@@ -411,6 +411,8 @@ Footer>div {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    max-width: 450px; 
+    margin: 0 auto;
 }
 
 #logInMain form>p {
@@ -463,6 +465,7 @@ Footer>div {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
+    max-height: 48px;
 }
 
 #logInMain form>div input {
@@ -479,7 +482,7 @@ Footer>div {
     fill: black;
     position: relative;
     left: 23rem;
-    top: -.5rem;
+    top: .1rem;
 }
 
 #logInMain form>div svg#dontSeePass {

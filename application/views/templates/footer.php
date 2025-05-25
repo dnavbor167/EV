@@ -57,6 +57,9 @@
     </footer>
 
     <script>
+        //CAMBIAR PARA QUE SEA QUE ESTÉ LOGUEADO Y ESTE EN UN GRUPO O LO HAYA CREADO
+
+        
         //Si no ha iniciado bloquear todas las funciones
         <?php if (!$this->session->userdata('is_logged_in')): ?>
 			// Mostrar modal al hacer clic en enlaces que requieren login

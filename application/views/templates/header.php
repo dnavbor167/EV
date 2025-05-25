@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">
     <script src="<?= base_url('assets/js/jq/jquery-3.7.1.min.js'); ?>"></script>
     <script src="<?= base_url('assets/js/jq/jquery.animate-colors-min.js'); ?>"></script>
-    <script src="<?= base_url('assets/js/script.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/js/script.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/js/ajaxRequest.js'); ?>"></script>
 </head>
 
 <body>
@@ -29,14 +30,14 @@
                         $is_home = current_url() == site_url('DashBoard') ? '#' : site_url('Dashboard'); 
                         $is_logued = $this->session->userdata('is_logged_in') ? '#': site_url('Dashboard/login');
                         ?>
-                        <li><a href="<?= $is_home ?>"><?= strtoupper($this->lang->line('home')); ?></a></li>
-                        <li class="requires-login"><a href="#"><?= strtoupper($this->lang->line('eventsName')); ?></a></li>
-                        <li class="requires-login"><a href="#"><?= strtoupper($this->lang->line('createEvents')); ?></a></li>
-                        <li class="requires-login"><a href="#"><?= strtoupper($this->lang->line('createSongs')); ?></a></li>
-                        <li class="requires-login"><a href="#"><?= strtoupper($this->lang->line('songs')); ?></a></li>
+                        <li><a href="<?= $is_home ?>" class="ajax-link"><?= strtoupper($this->lang->line('home')); ?></a></li>
+                        <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('eventsName')); ?></a></li>
+                        <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('createEvents')); ?></a></li>
+                        <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('createSongs')); ?></a></li>
+                        <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('songs')); ?></a></li>
 
-                        <li id="usuarioMenu"><a href="<?= $is_logued; ?>"><?= strtoupper($this->lang->line('user')); ?></a></li>
-                        <li class="requires-login"><a href="#"><?= strtoupper($this->lang->line('infoWeb')); ?></a></li>
+                        <li id="usuarioMenu"><a href="<?= $is_logued; ?>" class="ajax-link"><?= strtoupper($this->lang->line('user')); ?></a></li>
+                        <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('infoWeb')); ?></a></li>
                     </ul>
                 </nav>
             </div>
@@ -45,12 +46,12 @@
 
         <!-- Logo -->
         <div id="logo">
-            <img src="<?= base_url('assets/img/icon/evLogo.svg'); ?>" alt="Icono EV" class="iconEv">
+            <a href="<?= $is_home ?>" class="ajax-link"><img src="<?= base_url('assets/img/icon/evLogo.svg'); ?>" alt="Icono EV" class="iconEv"></a>
         </div>
 
         <!-- user/Login -->
         <div id="login">
-            <a href="<?= $is_logued; ?>">
+            <a href="<?= $is_logued; ?>" class="ajax-link">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                     <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                     <path
@@ -60,12 +61,8 @@
         </div>
     </header>
 
-
-    <!--Hacemos el main o cuerpo-->
-    <main id="principalMenu">
-
-        <!-- Modal personalizado -->
-        <div id="loginModal" class="custom-modal">
+    <!-- Modal personalizado -->
+    <div id="loginModal" class="custom-modal">
             <div class="custom-modal-content">
                 <span class="custom-close">&times;</span>
                 <h3>
@@ -84,3 +81,6 @@
                 </div>
             </div>
         </div>
+
+    <!--Hacemos el main o cuerpo-->
+    <main id="principalMenu">
