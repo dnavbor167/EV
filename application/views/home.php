@@ -1,7 +1,7 @@
 <div id="homeElements">
 	<div class="principalElementsHome">
-		<div class="requires-login coming-soon">
-			<a href="#" class="requires-login">
+		<div class="coming-soon">
+			<a href="#">
 				<?= strtoupper($this->lang->line('schedule')); ?>
 			</a>
 		</div>
@@ -16,7 +16,7 @@
 
 	</div>
 	<div class="principalElementsHome">
-		<div class="requires-login coming-soon">
+		<div class="coming-soon">
 			<a href="#" id="rehearsals">
 				<?= strtoupper($this->lang->line('rehearsals')); ?>
 			</a>
@@ -26,38 +26,57 @@
 </div>
 
 <script>
-	$(function () {
-		$('.coming-soon').on('mouseenter', function () {
-			const $link = $(this).find('a')
-			const text = '<?= $this->lang->line('comingSoon'); ?>...'
-			let index = 0;
+	function bindComingSoon() {
+		$('.coming-soon').off('click mouseenter mouseleave');
 
-			$link.text('');
-			const interval = setInterval(function () {
-				$link.text($link.text() + text.charAt(index))
-				index++;
-				if (index >= text.length) {
-					clearInterval(interval);
-				}
-			}, 100); // velocidad de la "máquina"
+		if (window.innerWidth < 1024) {
+			$('.coming-soon').on('click', function() {
+				const $link = $(this).find('a');
+				const text = '<?= $this->lang->line('comingSoon'); ?>...';
+				$link.text(text);
+			})
 
-			// Guarda el intervalo para poder detenerlo si se sale antes de terminar
-			$(this).data('typingInterval', interval)
-		});
+		} else {
+			$('.coming-soon').on('mouseenter', function() {
+				const $link = $(this).find('a')
+				const text = '<?= $this->lang->line('comingSoon'); ?>...'
+				let index = 0;
 
-		$('.coming-soon').on('mouseleave', function () {
-			const $link = $(this).find('a')
-			const linkId = $link.attr('id')
+				$link.text('');
+				const interval = setInterval(function() {
+					$link.text($link.text() + text.charAt(index))
+					index++;
+					if (index >= text.length) {
+						clearInterval(interval);
+					}
+				}, 100); // velocidad de la "máquina"
+
+				// Guarda el intervalo para poder detenerlo si se sale antes de terminar
+				$(this).data('typingInterval', interval)
+			});
+
+			$('.coming-soon').on('mouseleave', function() {
+				const $link = $(this).find('a')
+				const linkId = $link.attr('id')
 
 
-			const originalText = linkId == 'rehearsals' 
-				? '<?= strtoupper($this->lang->line('rehearsals')); ?>' 
-				: '<?= strtoupper($this->lang->line('schedule')); ?>'
+				const originalText = linkId == 'rehearsals' ?
+					'<?= strtoupper($this->lang->line('rehearsals')); ?>' :
+					'<?= strtoupper($this->lang->line('schedule')); ?>'
 
-			// Detiene el intervalo si aún está escribiendo
-			clearInterval($(this).data('typingInterval'));
+				// Detiene el intervalo si aún está escribiendo
+				clearInterval($(this).data('typingInterval'));
 
-			$link.text(originalText);
-		});
-	});
+				$link.text(originalText);
+			});
+		}
+	}
+
+	$(function() {
+		bindComingSoon()
+
+		$(window).on('resize', function () {
+			bindComingSoon()
+		})
+	})
 </script>

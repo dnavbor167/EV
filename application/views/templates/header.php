@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">
     <script src="<?= base_url('assets/js/jq/jquery-3.7.1.min.js'); ?>"></script>
     <script src="<?= base_url('assets/js/jq/jquery.animate-colors-min.js'); ?>"></script>
-    <script src="<?= base_url('assets/js/js/script.js'); ?>"></script>
     <script src="<?= base_url('assets/js/js/ajaxRequest.js'); ?>"></script>
 </head>
 
@@ -26,11 +25,11 @@
                         </span>
                     </div>
                     <ul>
-                        <?php 
-                        $is_home = current_url() == site_url('DashBoard') ? '#' : site_url('Dashboard'); 
-                        $is_logued = $this->session->userdata('is_logged_in') ? '#': site_url('Dashboard/login');
+                        <?php
+                        $is_home = current_url() == site_url('DashBoard') ? '#' : site_url('Dashboard');
+                        $is_logued = $this->session->userdata('is_logged_in') ? '#' : site_url('Dashboard/login');
                         ?>
-                        <li><a href="<?= $is_home ?>" class="ajax-link"><?= strtoupper($this->lang->line('home')); ?></a></li>
+                        <li><a href="<?= $is_home ?>"><?= strtoupper($this->lang->line('home')); ?></a></li>
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('eventsName')); ?></a></li>
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('createEvents')); ?></a></li>
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('createSongs')); ?></a></li>
@@ -45,9 +44,18 @@
 
 
         <!-- Logo -->
-        <div id="logo">
-            <a href="<?= $is_home ?>" class="ajax-link"><img src="<?= base_url('assets/img/icon/evLogo.svg'); ?>" alt="Icono EV" class="iconEv"></a>
+        <div id="logoGeneral">
+            <div class="logo" id="principalLogo">
+                <a href="<?= $is_home ?>"><img src="<?= base_url('assets/img/icon/evLogo.svg'); ?>" alt="Icono EV" class="iconEv"></a>
+            </div>
+            <div class="logo hide" id="titleLetter">
+                <a href="<?= $is_home ?>"><?= strtoupper($this->lang->line('title')); ?></a>
+            </div>
+            <div class="logo hide">
+                <a href="<?= $is_home ?>"><img src="<?= base_url('assets/img/icon/evLogo.svg'); ?>" alt="Icono EV" class="iconEv"></a>
+            </div>
         </div>
+
 
         <!-- user/Login -->
         <div id="login">
@@ -63,24 +71,24 @@
 
     <!-- Modal personalizado -->
     <div id="loginModal" class="custom-modal">
-            <div class="custom-modal-content">
-                <span class="custom-close">&times;</span>
-                <h3>
-                    <?= $this->lang->line('warningModalTitle'); ?>
-                </h3>
-                <p>
-                    <?= $this->lang->line('warningModalText'); ?>
-                </p>
-                <div style="text-align: right;">
-                    <a href="<?= base_url('registro') ?>" class="btn-custom success">
-                        <?= $this->lang->line('signIn'); ?>
-                    </a>
-                    <a href="<?= base_url('Dashboard/login') ?>" class="btn-custom primary">
-                        <?= $this->lang->line('logIn'); ?>
-                    </a>
-                </div>
+        <div class="custom-modal-content">
+            <span class="custom-close">&times;</span>
+            <h3>
+                <?= $this->lang->line('warningModalTitle'); ?>
+            </h3>
+            <p>
+                <?= $this->lang->line('warningModalText'); ?>
+            </p>
+            <div style="text-align: right;">
+                <a href="<?= base_url('registro') ?>" class="btn-custom success">
+                    <?= $this->lang->line('signIn'); ?>
+                </a>
+                <a href="<?= base_url('Dashboard/login') ?>" class="btn-custom primary">
+                    <?= $this->lang->line('logIn'); ?>
+                </a>
             </div>
         </div>
+    </div>
 
     <!--Hacemos el main o cuerpo-->
     <main id="principalMenu">

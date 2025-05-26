@@ -99,7 +99,7 @@ header::before {
 
 
 #menu-desplegable nav div {
-    margin-top: 1.35rem;
+    margin-top: 1.45rem;
 }
 
 #menu-desplegable nav ul,
@@ -127,9 +127,8 @@ nav span {
 
 main {
     margin-top: 108px;
-    margin-bottom: 1rem;
     padding: 1rem;
-    min-height: 70vh;
+    min-height: 85vh;
 }
 
 footer {
@@ -155,7 +154,7 @@ footer svg {
 
 }
 
-Footer>div {
+footer>div {
     flex: 0 0 100%;
     padding-left: 1.5rem;
 }
@@ -411,7 +410,7 @@ Footer>div {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    max-width: 450px; 
+    max-width: 450px;
     margin: 0 auto;
 }
 
@@ -507,4 +506,200 @@ Footer>div {
 #btnRecoverPass {
     background-color: #FF7300;
     color: #303030;
+}
+
+.hide {
+    display: none !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Tablet */
+@media(min-width: 768px) {
+    main {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    #homeElements {
+        width: 100%;
+    }
+
+    .principalElementsHome {
+        flex: 0 0 50%;
+        margin-top: 2rem;
+    }
+
+    .principalElementsHome div {
+        margin: 0;
+    }
+
+    .principalElementsHome:nth-child(3) {
+        margin-top: 2rem;
+    }
+
+    footer>div {
+        flex: 0 0 60%;
+    }
+
+    #evContact {
+        flex: 0 0 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    #socialMediaFooter {
+        flex: 0 0 20%;
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    #socialMediaFooter svg {
+        flex: 0 0 20%;
+    }
+
+    #socialMediaFooter svg:nth-child(n+3) {
+        margin-top: 1rem;
+    }
+
+    #homeServiceFooter p {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    #homeServiceFooter {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    #socialMediaFooter,
+    #homeServiceFooter {
+        margin-top: 3rem;
+    }
+
+    #subscribeFooter {
+        flex: 0 0 100%;
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    #privacyTerms {
+        flex: 0 0 30%;
+    }
+
+    #privacyTerms p {
+        font-size: 1rem !important;
+    }
+
+    #newsLetter {
+        flex: 0 0 70%;
+    }
+
+}
+
+/* Escritorio */
+@media(min-width: 1024px) {
+
+    #openMenu,
+    #closeMenu {
+        display: none !important;
+    }
+
+    .principalElementsHome:nth-child(3) {
+        margin-top: 0;
+    }
+
+    .principalElementsHome {
+        flex: 0 0 30%;
+        margin-top: 0;
+    }
+
+    #menu-desplegable nav {
+        position: fixed;
+        top: 108px;
+        left: 0;
+        display: inline;
+    }
+
+    #menu-desplegable>img,
+    #menu-desplegable nav>div {
+        display: none;
+    }
+
+    #login {
+        display: none;
+    }
+
+
+    .hide {
+        display: inline !important;
+    }
+
+    #logoGeneral {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    #titleLetter a {
+        color: #FF7300;
+        font-size: 5rem;
+        letter-spacing: .3rem;
+    }
+
+    #principalMenu {
+        margin-left: 284px;
+    }
+
+    .principalElementsHome a {
+        width: 12rem;
+        height: 16rem;
+    }
+
+    /* Footer */
+    footer div {
+        flex: 0 0 19% !important;
+        border: solid;
+    }
+
+    #evFooter h3 {
+        font-size: 2rem;
+        margin-top: 1.9rem;
+        margin-left: 1rem;
+        letter-spacing: .51rem;
+    }
+
+    #evFooter div h3#vibesFooter {
+        margin-top: -3rem;
+    }
+
+    #iconEvFooter {
+        width: 3.5rem;
+    }
+
+}
+
+@media(min-width: 1230px) {
+    .principalElementsHome a {
+        width: 14rem;
+        height: 18rem;
+    }
 }
