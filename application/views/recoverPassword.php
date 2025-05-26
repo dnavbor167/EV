@@ -16,7 +16,7 @@
     <?= $this->lang->line('recoverPass'); ?>
   </button>
 
-  <a href="<?= site_url('Dashboard/login') ?>" id="backToLogin" class="btn-back">
+  <a href="<?= site_url('Dashboard/login') ?>" id="backToLogin" class="btn-back ajax-link">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon-back">
       <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
       <path
