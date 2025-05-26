@@ -110,13 +110,13 @@ $(function () {
     });
 
     //Ver contraseña, Ocultar contraseá
-    $('#seePass').on('click', function () {
+    $(document).on('click', '#seePass', function () {
         $(this).hide()
         $(this).next().show()
         $('#userPassword').attr('type', 'text')
     })
 
-    $('#dontSeePass').on('click', function () {
+    $(document).on('click', '#dontSeePass', function () {
         $(this).hide()
         $(this).prev().show()
         $('#userPassword').attr('type', 'password')
