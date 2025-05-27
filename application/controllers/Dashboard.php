@@ -1,20 +1,12 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller
+class Dashboard extends MY_Controller
 {
 
 	public function __construct()
 	{
 		parent::__construct();
-		$lang_id = $this->session->userdata('language') ?? 1;
-		$lang_map = [
-			1 => 'spanish',
-			2 => 'english'
-		];
-		$language = isset($lang_map[$lang_id]) ? $lang_map[$lang_id] : 'spanish';
-
-		$this->lang->load('general', $language);
 	}
 
 
@@ -31,69 +23,5 @@ class Dashboard extends CI_Controller
 		// }
 
 		$this->loadViews("home");
-	}
-
-	public function login()
-	{
-		//form validation
-		$this->form_validation->set_rules('userEmail', $this->lang->line('email'), 'required|valid_email');
-		$this->form_validation->set_rules('userPassword', $this->lang->line('password'), 'required');
-
-		if ($this->form_validation->run() == FALSE) {
-			$this->loadViews("login");
-		} else {
-			$data['email'] = $this->input->post('userEmail');
-			$data['password'] = $this->input->post('userPassword');
-			$login = $this->User_model->loginUser($data);
-
-			if ($login) {
-				$array = array(
-					'language' => $login->lenguage
-				);
-				redirect(base_url('Dashboard'));
-			} else {
-				$data['error'] = true;
-				$this->loadViews("login", $data);
-				return;
-			}
-		}
-	}
-
-	public function logout()
-	{
-		$this->session->sess_destroy();
-		redirect(base_url("DashBoard/login"));
-	}
-
-
-	private function loadViews($view, $data = null)
-	{
-		//si la vista es login se redirige a la home
-		if ($this->session->userdata('is_logged_in') && $view == "login") {
-			redirect(base_url() . "DashBoard", "location");
-		}
-
-		if ($this->input->is_ajax_request()) {
-			$this->load->view($view, $data);
-		} else {
-			//si es una vista cualquiera se carga
-			$this->load->view('templates/header');
-			$this->load->view($view, $data);
-			$this->load->view('templates/footer');
-		}
-		
-	}
-
-	public function recoverPassword() {
-		//form validation
-		$this->form_validation->set_rules('userEmail', $this->lang->line('email'), 'required|valid_email');
-
-		if ($this->form_validation->run() == FALSE) {
-			$this->load->view('templates/header');
-			$this->load->view('recoverPassword');
-			$this->load->view('templates/footer');
-		} else {
-			
-		}
 	}
 }

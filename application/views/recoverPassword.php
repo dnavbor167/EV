@@ -1,7 +1,7 @@
 <div id="logInMain">
   <?php
   $attributes = array('id' => 'loginForm', 'class' => 'logSigin', 'method' => 'post');
-  echo form_open('DashBoard/recoverPassword', $attributes);
+  echo form_open('Auth/recoverPassword', $attributes);
   ?>
   <p>
     <?= $this->lang->line('logIn'); ?>
@@ -16,7 +16,7 @@
     <?= $this->lang->line('recoverPass'); ?>
   </button>
 
-  <a href="<?= site_url('Dashboard/login') ?>" id="backToLogin" class="btn-back ajax-link">
+  <a href="<?= site_url('Auth/login') ?>" id="backToLogin" class="btn-back ajax-link">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon-back">
       <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
       <path
@@ -25,3 +25,22 @@
   </a>
   <?= form_close(); ?>
 </div>
+
+<script>
+  //colors when click a button
+  $('.icon-back, #btnRecoverPass').on('mousedown mouseenter', function() {
+    if ($(this).hasClass('icon-back')) {
+      $(this).css('fill', '#C65900');
+    } else {
+      $(this).css('background-color', '#C65900');
+    }
+  });
+
+  $('.icon-back, #btnRecoverPass').on('mouseup mouseleave', function() {
+    if ($(this).hasClass('icon-back')) {
+      $(this).css('fill', '#FF7300');
+    } else {
+      $(this).css('background-color', '#FF7300');
+    }
+  });
+</script>

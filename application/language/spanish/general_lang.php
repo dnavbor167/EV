@@ -34,6 +34,8 @@ $lang['password']          = "contraseña";
 $lang['logInError']        = "Usuario o contraseña incorrectos";
 $lang['forgotPass']        = "¿Has olvidado tu contraseña?";
 $lang['recoverPass']       = "Recuperar Contraseña";
+$lang['userName']          = "Nombre de Usuario";
+$lang['haveAccount']       = "¿Ya tienes cuenta?";
 
 
 //Home
@@ -41,5 +43,7 @@ $lang['schedule']          = "Cuadrante";
 $lang['mainEvent']         = "Evento Principal";
 $lang['rehearsals']        = "Ensayos";
 $lang['comingSoon']        = "Muy Pronto";
+
+$lang['textPrivacyCondi']  = "Al crear una cuenta y suscribirte, confirmas que has leído la <a href='#'>Política de privacidad</a> y aceptas las <a href='#'>Condiciones de venta</a>.";
 
 ?>

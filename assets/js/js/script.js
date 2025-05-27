@@ -1,10 +1,10 @@
 $(function () {
-    //responsive
+    let lastScrollTop = 0
 
     //Menú desplegable
     let menuVisible;
     function toggleMenu(open) {
-        if ($(window).width() < 1024) {
+        if (window.innerWidth < 1024) {
             if (open) {
                 $("div#menu-desplegable nav").slideDown('fast')
                 $("#login, #principalLogo").fadeOut("fast")
@@ -14,6 +14,13 @@ $(function () {
             }
         }
     }
+
+    $('#menu-desplegable nav a').on('click', function () {
+        if (window.innerWidth < 1024) {
+            toggleMenu(false);
+            menuVisible = false;
+        }
+    });
 
     $('#openMenu').click(function () {
         toggleMenu(true);
@@ -30,7 +37,7 @@ $(function () {
     });
 
     $(window).on('click', function (e) {
-        if ($(window).width() < 1024 &&
+        if ($(window).width() < 950 &&
             menuVisible &&
             !$(e.target).closest('#menu-desplegable nav, #openMenu, #closeMenu').length) {
             toggleMenu(false);
@@ -84,7 +91,7 @@ $(function () {
     bindHoverOrTouchHome()
     $(window).on('resize', function () {
         bindHoverOrTouchHome()
-        if ($(window).width() >= 1024) {
+        if (window.innerWidth >= 1024) {
             $('#menu-desplegable nav').show();
         } else {
             $('#menu-desplegable nav').hide(); // Para evitar que quede abierto al pasar de desktop a móvil
@@ -136,7 +143,7 @@ $(function () {
 
     //Menu until the footer
     $(window).on("scroll resize load", function () {
-        if ($(window).width() >= 1024) {
+        if (window.innerWidth >= 1024) {
             const headerHeight = 108; // altura header fija
             const menu = $("#menu-desplegable nav");
             const footer = $("footer");

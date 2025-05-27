@@ -27,7 +27,7 @@
                     <ul>
                         <?php
                         $is_home = current_url() == site_url('DashBoard') ? '#' : site_url('Dashboard');
-                        $is_logued = $this->session->userdata('is_logged_in') ? '#' : site_url('Dashboard/login');
+                        $is_logued = $this->session->userdata('is_logged_in') ? '#' : site_url('Auth/login');
                         ?>
                         <li><a href="<?= $is_home ?>"><?= strtoupper($this->lang->line('home')); ?></a></li>
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('eventsName')); ?></a></li>

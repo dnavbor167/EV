@@ -1,11 +1,15 @@
 <div id="logInMain">
   <?php
   $attributes = array('id' => 'loginForm', 'class' => 'logSigin', 'method' => 'post');
-  echo form_open('Auth/login', $attributes);
+  echo form_open('Auth/signIn', $attributes);
   ?>
   <p><?= $this->lang->line('logIn'); ?></p>
+  <input placeholder="<?= ucfirst($this->lang->line('userName')); ?>" type="text" name="userName" id="userName" value="<?= set_value('userName'); ?>">
+  <span class="error"><?= form_error('userName') ?></span>
+  
   <input placeholder="<?= ucfirst($this->lang->line('email')); ?>" type="email" name="userEmail" id="userEmail" value="<?= set_value('userEmail'); ?>">
   <span class="error"><?= form_error('userEmail') ?></span>
+  
   <div>
     <input placeholder="<?= ucfirst($this->lang->line('password')); ?>" type="password" name="userPassword" id="userPassword">
     <div>
@@ -14,6 +18,24 @@
     </div>
   </div>
   <span class="error"><?= form_error('userPassword') ?></span>
+  
+  <label for="languageSelect" class="language-label">Idioma:</label>
+  <div class="custom-select-wrapper">
+    <select id="languageSelect" name="language" class="custom-select">
+      <option value="1" <?= set_value('language') == 1 ? 'selected' : '' ?>>Español</option>
+      <option value="2" <?= set_value('language') == 2 ? 'selected' : '' ?>>English</option>
+    </select>
+  </div>
+
+  <div id="promotions-container">
+    <input type="checkbox" name="promotions" id="promotions" value="1" <?= set_value('promotions') == 1 ? 'checked' : '' ?>>
+    <label for="promotions" id="labelPromotions">Recibir promociones, novedades y contenido personalizado</label>
+  </div>
+
+  <p class="textLight"><?= $this->lang->line('haveAccount') ?> <a href="<?= site_url('Auth/logIn') ?>" class="ajax-link"><?= $this->lang->line('logIn') ?></a></p>
+  
+  <p class="textLight"><?= $this->lang->line('textPrivacyCondi') ?></p>
+
   <?php 
   if ($error) {
   ?>
@@ -22,29 +44,18 @@
   }
   ?>
 
-  <button type="submit" id="btnLogIn" class="buttonOrange"><?= $this->lang->line('logIn'); ?></button>
-  <button type="submit" id="btnCreateAccount" class="ajax-link" data-href="<?= site_url('Auth/signIn') ?>"><?= $this->lang->line('createAccount'); ?></button>
+  <button id="btnCreateAccount" class="buttonOrange"><?= $this->lang->line('createAccount'); ?></button>
 
   <?= form_close(); ?>
-
-  <a href="<?= site_url('Auth/recoverPassword') ?>" id="forgotPass" class="ajax-link"><?= $this->lang->line('forgotPass'); ?></a>
 </div>
 
 <script>
   //colors when click a button
-  $('#btnLogIn').on('mousedown', function() {
+  $('.buttonOrange').on('mousedown', function() {
     $(this).css('background-color', '#C65900');
   });
 
-  $('#btnLogIn').on('mouseup mouseleave', function() {
+  $('.buttonOrange').on('mouseup mouseleave', function() {
       $(this).css('background-color', '#FF7300');
-  });
-
-  $('#btnCreateAccount').on('mousedown', function() {
-    $(this).css('background-color', '#C7C7C7');
-  });
-
-  $('#btnCreateAccount').on('mouseup mouseleave', function() {
-      $(this).css('background-color', '#FFFFFF');
   });
 </script>

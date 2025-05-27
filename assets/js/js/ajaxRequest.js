@@ -1,7 +1,9 @@
 $(function() {
-    $('a.ajax-link').on('click', function(e) {
+    $(document).on('click', '.ajax-link', function(e) {
         e.preventDefault()
-        const url = $(this).attr('href')
+        const url = $(this).attr('href') || $(this).data('href')
+
+        console.log(url)
 
         if (url == '#' || !url) {
             return

@@ -177,6 +177,7 @@ footer>div {
 
 #evContact h3 {
     font-size: 2rem;
+    cursor: pointer;
 }
 
 #evContact p {
@@ -184,6 +185,7 @@ footer>div {
     font-weight: lighter;
     margin-top: -2rem;
     letter-spacing: .3rem;
+    cursor: pointer;
 }
 
 #socialMediaFooter {
@@ -194,11 +196,13 @@ footer>div {
 
 #socialMediaFooter svg {
     margin-right: 2rem;
+    cursor: pointer;
 }
 
 #homeServiceFooter p {
     font-size: 2rem;
     margin-bottom: -2rem;
+    cursor: pointer;
 }
 
 #subscribeFooter {
@@ -209,6 +213,7 @@ footer>div {
     font-size: 1.5rem;
     font-weight: lighter;
     letter-spacing: .2rem;
+    cursor: pointer;
 }
 
 #newsLetter {
@@ -436,7 +441,7 @@ footer>div {
     padding-left: 1rem;
 }
 
-.error {
+#logInMain .error {
     color: red;
     width: 10rem;
     font-size: .8rem;
@@ -455,7 +460,7 @@ footer>div {
     font-size: 1rem;
 }
 
-#btnLogIn {
+.buttonOrange {
     margin-top: 2rem;
     background-color: #FF7300;
 }
@@ -500,7 +505,7 @@ footer>div {
     fill: #FF7300;
     width: 3em;
     height: auto;
-    margin-top: 5rem;
+    margin-top: 2rem;
 }
 
 #btnRecoverPass {
@@ -512,6 +517,65 @@ footer>div {
     display: none !important;
 }
 
+.language-label {
+    margin-top: 1rem;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  .custom-select-wrapper {
+    max-width: 220px;
+  }
+
+  .custom-select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23999' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px 16px;
+  }
+
+  .custom-select:focus {
+    border-color: #ff7300;
+    box-shadow: 0 0 0 3px rgba(255, 115, 0, 0.2);
+    outline: none;
+  }
+
+  #promotions-container {
+    display: flex;
+    flex-flow: row wrap;
+    margin-top: 1rem;
+  }
+
+  #promotions-container #promotions{
+    flex: 0 0 10%;
+    max-width: 1.5rem;
+  }
+
+  #promotions-container #labelPromotions{
+    margin-left: 1rem;
+    margin-top: -.1rem;
+    flex: 0 0 85%;
+  }
+
+  #logInMain .textLight {
+    margin-top: 2rem;
+    font-weight: lighter;
+  }
+
+  #logInMain .textLight a {
+    font-weight: bold;
+    text-decoration: underline;
+  }
 
 
 
@@ -611,6 +675,22 @@ footer>div {
         flex: 0 0 70%;
     }
 
+    #logInMain {
+        padding-bottom: 2rem;
+        border-radius: 10px;
+        background-color: #BDBDBD;
+        color: #303030;
+    }
+
+    #logInMain a {
+        color: #303030;
+    }
+
+    #logInMain span.error {
+        color: red;
+        width: 10rem;
+    }
+
 }
 
 /* Escritorio */
@@ -674,25 +754,109 @@ footer>div {
         height: 16rem;
     }
 
+}
+
+/* Escritorio Footer */
+@media(min-width: 1615px) {
+
     /* Footer */
+
+    #evFooter {
+        flex: 0 0 5% !important;
+    }
+
     footer div {
-        flex: 0 0 19% !important;
-        border: solid;
+        flex: 0 0 20% !important;
+        align-items: center;
     }
 
-    #evFooter h3 {
-        font-size: 2rem;
-        margin-top: 1.9rem;
-        margin-left: 1rem;
-        letter-spacing: .51rem;
+    footer div:nth-child(1) {
+        order: 0;
     }
 
-    #evFooter div h3#vibesFooter {
-        margin-top: -3rem;
+    footer div:nth-child(2) {
+        order: 1;
+    }
+
+    footer div:nth-child(3) {
+        order: 3;
+    }
+
+    footer div:nth-child(4) {
+        order: 2;
+    }
+
+    footer div:nth-child(5) {
+        order: 4;
+    }
+
+    #evFooter div {
+        display: none;
     }
 
     #iconEvFooter {
         width: 3.5rem;
+    }
+
+    #homeServiceFooter p {
+        font-size: 1rem;
+        flex: 0 0 10%;
+    }
+
+    #homeServiceFooter {
+        margin-top: 0rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #homeServiceFooter p:nth-child(3) {
+        min-width: 10rem;
+    }
+
+    #socialMediaFooter {
+        padding-left: 3rem;
+        margin-top: 0;
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    #socialMediaFooter svg {
+        flex: 0 0 10%;
+    }
+
+    #socialMediaFooter svg:nth-child(3),
+    #socialMediaFooter svg:nth-child(4) {
+        margin-top: 0;
+    }
+
+    #subscribeFooter {
+        margin-top: 0;
+        flex: 0 0 35% !important;
+    }
+
+    #privacyTerms {
+        flex: 0 0 100% !important;
+        order: 1;
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    #privacyTerms p {
+        font-size: .8rem !important;
+        flex: 0 0 50%;
+    }
+
+    #newsLetter {
+        flex: 0 0 100%;
+    }
+
+    #newsLetter input {
+        width: 23rem;
+    }
+
+    .principalElementsHome a {
+        width: 17rem !important;
+        height: 22.66rem !important;
     }
 
 }

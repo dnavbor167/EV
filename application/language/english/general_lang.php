@@ -34,11 +34,15 @@ $lang['password']          = "password";
 $lang['logInError']        = "Incorrect username or password";
 $lang['forgotPass']        = "Forgot your password?";
 $lang['recoverPass']       = "Recover Password";
+$lang['userName']          = "User Name";
+$lang['haveAccount']       = "Already have an account?";
 
 //Home
 $lang['schedule']          = "Schedule";
 $lang['mainEvent']         = "Main Event";
 $lang['rehearsals']        = "Rehearsals";
 $lang['comingSoon']        = "Coming Soon";
+
+$lang['textPrivacyCondi']  = "By creating an account and subscribing, you confirm that you have read the Privacy Policy and agree to the Terms of Sale.";
 
 ?>
