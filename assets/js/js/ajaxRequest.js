@@ -1,9 +1,8 @@
 $(function() {
     $(document).on('click', '.ajax-link', function(e) {
+        console.log('clickeado', this)
         e.preventDefault()
         const url = $(this).attr('href') || $(this).data('href')
-
-        console.log(url)
 
         if (url == '#' || !url) {
             return

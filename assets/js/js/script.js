@@ -15,7 +15,7 @@ $(function () {
         }
     }
 
-    $('#menu-desplegable nav a').on('click', function () {
+    $('#menu-desplegable nav li').on('click', function () {
         if (window.innerWidth < 1024) {
             toggleMenu(false);
             menuVisible = false;
@@ -130,7 +130,8 @@ $(function () {
     })
 
     //menu hover and click options
-    $('#menu-desplegable nav ul li').on('click, mouseenter', function () {
+    $('#menu-desplegable nav ul li').on('click mouseenter', function (e) {
+        console.log('hola')
         $(this).css('background-color', '#303030')
     }).on('mouseleave', function () {
         $(this).css('background-color', '#565656');
