@@ -24,4 +24,9 @@ class Dashboard extends MY_Controller
 
 		$this->loadViews("home");
 	}
+
+	public function paymentsPlans()
+	{
+		$this->loadViews('paymentsPlans');
+	}
 }

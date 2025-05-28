@@ -59,7 +59,7 @@
 
         <!-- user/Login -->
         <div id="login">
-            <a href="<?= $is_logued; ?>" class="ajax-link">
+            <a href="<?= $is_logued; ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                     <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                     <path
@@ -80,10 +80,10 @@
                 <?= $this->lang->line('warningModalText'); ?>
             </p>
             <div style="text-align: right;">
-                <a href="<?= base_url('registro') ?>" class="btn-custom success">
+                <a href="<?= site_url('registro') ?>" class="btn-custom success">
                     <?= $this->lang->line('signIn'); ?>
                 </a>
-                <a href="<?= base_url('Dashboard/login') ?>" class="btn-custom primary">
+                <a href="<?= site_url('Auth/login') ?>" class="btn-custom primary">
                     <?= $this->lang->line('logIn'); ?>
                 </a>
             </div>

@@ -37,15 +37,16 @@
             </svg>
         </div>
         <div id="homeServiceFooter">
-            <p><?= strtoupper($this->lang->line('home')); ?></p>
-            <p><?= strtoupper($this->lang->line('services')); ?></p>
-            <p><?= strtoupper($this->lang->line('about')); ?></p>
+            <p><a href="#"><?= strtoupper($this->lang->line('home')); ?></a></p>
+            <p><a href="<?= site_url('Dashboard/paymentsPlans'); ?>"><?= strtoupper($this->lang->line('plans')); ?></a></p>
+            <p><a href="#"><?= strtoupper($this->lang->line('services')); ?></a></p>
+            <p><a href="#"><?= strtoupper($this->lang->line('about')); ?></a></p>
         </div>
 
         <div id="subscribeFooter">
             <div id="privacyTerms">
-                <p><?= strtoupper($this->lang->line('privacyPolicy')); ?></p>
-                <p><?= strtoupper($this->lang->line('termsServices')); ?></p>
+                <p><a href="#"><?= strtoupper($this->lang->line('privacyPolicy')); ?></a></p>
+                <p><a href="#"><?= strtoupper($this->lang->line('termsServices')); ?></a></p>
             </div>
 
             <form action="#" method="post" id="newsLetter">
