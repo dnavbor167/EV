@@ -17,21 +17,27 @@ class MY_Controller extends CI_Controller
 		$this->lang->load('general', $language);
 	}
 
-    protected function loadViews($view, $data = null)
+	protected function loadViews($view, $data = null)
 	{
+		$data['is_home'] = current_url() == site_url('DashBoard') ? '#' : site_url('Dashboard');
+    	$data['is_logged'] = $this->session->userdata('is_logged_in') ? '#' : site_url('Auth/login');
+
 		//si la vista es login se redirige a la home
 		if ($this->session->userdata('is_logged_in') && $view == "login") {
 			redirect(base_url() . "DashBoard", "location");
+		}
+
+		if (!file_exists(APPPATH . 'views/' . $view . '.php')) {
+			show_404();
 		}
 
 		if ($this->input->is_ajax_request()) {
 			$this->load->view($view, $data);
 		} else {
 			//si es una vista cualquiera se carga
-			$this->load->view('templates/header');
+			$this->load->view('templates/header', $data);
 			$this->load->view($view, $data);
-			$this->load->view('templates/footer');
+			$this->load->view('templates/footer', $data);
 		}
-		
 	}
 }

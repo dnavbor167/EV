@@ -25,17 +25,13 @@
                         </span>
                     </div>
                     <ul>
-                        <?php
-                        $is_home = current_url() == site_url('DashBoard') ? '#' : site_url('Dashboard');
-                        $is_logued = $this->session->userdata('is_logged_in') ? '#' : site_url('Auth/login');
-                        ?>
                         <li><a href="<?= $is_home ?>"><?= strtoupper($this->lang->line('home')); ?></a></li>
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('eventsName')); ?></a></li>
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('createEvents')); ?></a></li>
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('createSongs')); ?></a></li>
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('songs')); ?></a></li>
 
-                        <li id="usuarioMenu"><a href="<?= $is_logued; ?>" class="ajax-link"><?= strtoupper($this->lang->line('user')); ?></a></li>
+                        <li id="usuarioMenu"><a href="<?= $is_logged; ?>" class="ajax-link"><?= strtoupper($this->lang->line('user')); ?></a></li>
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('infoWeb')); ?></a></li>
                     </ul>
                 </nav>
@@ -59,7 +55,7 @@
 
         <!-- user/Login -->
         <div id="login">
-            <a href="<?= $is_logued; ?>">
+            <a href="<?= $is_logged; ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                     <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                     <path

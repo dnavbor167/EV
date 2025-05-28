@@ -37,7 +37,7 @@
             </svg>
         </div>
         <div id="homeServiceFooter">
-            <p><a href="#"><?= strtoupper($this->lang->line('home')); ?></a></p>
+            <p><a href="<?= $is_home ?>"><?= strtoupper($this->lang->line('home')); ?></a></p>
             <p><a href="<?= site_url('Dashboard/paymentsPlans'); ?>"><?= strtoupper($this->lang->line('plans')); ?></a></p>
             <p><a href="#"><?= strtoupper($this->lang->line('services')); ?></a></p>
             <p><a href="#"><?= strtoupper($this->lang->line('about')); ?></a></p>
