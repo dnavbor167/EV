@@ -35,6 +35,9 @@
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('createSongs')); ?></a></li>
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('songs')); ?></a></li>
 
+                        <?php if ($this->session->userdata('is_logged_in')) { 
+                            $is_logged = site_url('Auth/configuration');
+                         } ?>
                         <li id="usuarioMenu"><a href="<?= $is_logged; ?>" class="ajax-link"><?= strtoupper($this->lang->line('user')); ?></a></li>
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('infoWeb')); ?></a></li>
                     </ul>

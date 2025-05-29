@@ -129,10 +129,11 @@ nav span {
     padding-bottom: .5rem;
     padding-top: .5rem;
     padding-left: 2rem;
+    font-size: 1.5rem;
 }
 
 #usuarioMenu {
-    margin-top: 4.2rem;
+    margin-top: auto;
 }
 
 main {
