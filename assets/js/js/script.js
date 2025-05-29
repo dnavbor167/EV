@@ -131,7 +131,6 @@ $(function () {
 
     //menu hover and click options
     $('#menu-desplegable nav ul li').on('click mouseenter', function (e) {
-        console.log('hola')
         $(this).css('background-color', '#303030')
     }).on('mouseleave', function () {
         $(this).css('background-color', '#565656');
@@ -180,5 +179,41 @@ $(function () {
             $("#menu-desplegable nav").removeAttr("style");
         }
     });
+
+    //Image from form
+    $(document).on('change', '#photo', function () {
+        let input = this;
+        let label = $('.photoFile');
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                label
+                    .css({
+                        'background-image': 'url(' + e.target.result + ')',
+                        'background-size': 'contain',
+                        'background-position': 'center center',
+                        'background-repeat': 'no-repeat',
+                        'border': 'none'
+                    })
+                    .addClass('has-image')
+                    .text('');  // Opcional: quitar texto si quieres solo la imagen
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            label
+                .css({
+                    'background-image': 'none',
+                    'background-size': '',
+                    'background-position': '',
+                    'background-repeat': '',
+                    'border': 'dashed 5px #303030'
+                })
+                .removeClass('has-image')
+                .text('Seleccionar imagen');
+        }
+    })
 
 });

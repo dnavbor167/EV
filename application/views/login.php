@@ -28,7 +28,7 @@
   <?= form_close(); ?>
 
   <a href="<?= site_url('Auth/recoverPassword') ?>" id="forgotPass" class="ajax-link"><?= $this->lang->line('forgotPass'); ?></a>
-</div>
+</>
 
 <script>
   //colors when click a button

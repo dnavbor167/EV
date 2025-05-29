@@ -71,9 +71,19 @@ header::before {
     width: 5rem;
 }
 
+#userImage {
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    margin: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
 #login {
     width: 2rem;
-    margin-right: 1rem;
+    margin-right: 3rem;
     fill: white;
 }
 
@@ -126,6 +136,10 @@ nav span {
 }
 
 main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
     margin-top: 108px;
     padding: 1rem;
     min-height: 85vh;
@@ -271,7 +285,8 @@ footer a {
     z-index: 105;
 }
 
-.custom-modal-content {
+.custom-modal-content,
+.custom-modal-content-signIn {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #fff;
     border-radius: 12px;
@@ -287,7 +302,8 @@ footer a {
     color: #2c3e50;
 }
 
-.custom-modal-content h3 {
+.custom-modal-content h3,
+.custom-modal-content-signIn h3 {
     margin-top: 0;
     margin-bottom: 15px;
     font-weight: 700;
@@ -295,14 +311,16 @@ footer a {
     letter-spacing: 0.03em;
 }
 
-.custom-modal-content p {
+.custom-modal-content p,
+.custom-modal-content-signIn p {
     font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 25px;
     color: #555;
 }
 
-.custom-close {
+.custom-close,
+.custom-close-signIn {
     position: absolute;
     top: 15px;
     right: 20px;
@@ -313,7 +331,8 @@ footer a {
     transition: color 0.2s ease;
 }
 
-.custom-close:hover {
+.custom-close:hover,
+.custom-close-signIn:hover {
     color: #e74c3c;
 }
 
@@ -522,17 +541,18 @@ footer a {
 }
 
 .language-label {
+    flex: 0 0 50% !important;
     margin-top: 1rem;
     margin-bottom: 8px;
     font-weight: bold;
 }
 
 .custom-select-wrapper {
-    max-width: 220px;
+    flex: 0 0 100%;
 }
 
 .custom-select {
-    width: 100%;
+    max-width: 60%;
     padding: 10px 14px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -709,9 +729,142 @@ footer a {
     background-color: #e6f0ff;
 }
 
+.photoFile {
+    width: 8rem !important;
+    height: 8rem;
+    margin-top: 3rem;
+    flex: 0 0 8rem !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: dashed 5px white;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
 
+input[type='file'] {
+    display: none;
+}
 
+.error {
+    margin-top: .5rem;
+}
 
+#configUser {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: absolute;
+    top: 108px;
+    right: 0;
+    background-color: #EDEDED;
+    width: 10rem;
+    display: none;
+}
+
+#configUser a {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    width: 10rem;
+    padding: .5rem 0;
+    padding-left: .7rem;
+    color: #303030;
+}
+
+#configUser p:nth-child(2) a {
+    color: red;
+}
+
+#configUser p:nth-child(2) a svg {
+    fill: red;
+}
+
+#configUser p:nth-child(2) {
+    border-top: 3px dotted #303030;
+}
+
+#configUser a svg {
+    margin-right: .4rem;
+    fill: #303030;
+}
+
+#configUser p {
+    margin: 0;
+    padding: 0;
+}
+
+.form-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #444;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.6);
+    width: 600px;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group .error {
+    color: red;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: .4rem;
+}
+
+.form-input,
+.form-select,
+.form-file {
+    width: 100%;
+    padding: .5rem;
+    border: none;
+    border-radius: 5px;
+    margin-top: .2rem;
+}
+
+.form-submit {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: .6rem;
+    background-color: #00aaff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.form-submit:hover {
+    background-color: #008ecc;
+}
+
+.current-image {
+    display: block;
+    margin-top: 1rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.current-image img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-top: .5rem;
+}
+
+#labelUpdatePhoto {
+    cursor: pointer;
+}
 
 
 
@@ -728,12 +881,6 @@ footer a {
 
 /* Tablet */
 @media(min-width: 768px) {
-    main {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-around;
-        align-items: center;
-    }
 
     #homeElements {
         width: 100%;
@@ -835,6 +982,11 @@ footer a {
 
     .plan-card:nth-child(3) {
         flex: 0 0 100%;
+    }
+
+    .photoFile {
+        border: dashed 5px #303030;
+        color: #303030;
     }
 
 }

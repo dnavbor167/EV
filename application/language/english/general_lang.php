@@ -36,6 +36,14 @@ $lang['forgotPass']        = "Forgot your password?";
 $lang['recoverPass']       = "Recover Password";
 $lang['userName']          = "User Name";
 $lang['haveAccount']       = "Already have an account?";
+$lang['errorUserCreate']   = "Existing user";
+$lang['pendingUserExists'] = "There's a pending registration for this email. Check your inbox.";
+$lang['errorInsert']       = "Error inserting user";
+$lang['signInSuccess']     = "You have registered successfully, please log in.";
+$lang['singInEmailSend']   = "We have sent you a confirmation email so you can confirm your email.";
+$lang['confirmRegister']   = "Confirm your registration";
+$lang['messageLinkEmail']  = "Hello {NOMBRE}, <br> You have 5 minutes to confirm your email <br> To do so, click here: {LINK}";
+$lang['promotions']        = "Receive promotions, news, and personalized content";
 
 //Home
 $lang['schedule']          = "Schedule";
@@ -46,6 +54,65 @@ $lang['comingSoon']        = "Coming Soon";
 $lang['textPrivacyCondi']  = "By creating an account and subscribing, you confirm that you have read the Privacy Policy and agree to the Terms of Sale.";
 
 //payments
-$lang['plans']             = "Plans";
+$lang['plans']             = "Planes";
+
+// Nombres de planes
+$lang['plans_free_title'] = "Free (limited)";
+$lang['plans_pro_title'] = "Pro";
+$lang['plans_premium_title'] = "Premium";
+
+// Precios
+$lang['plans_free_price'] = "Free";
+$lang['plans_free_price_note'] = "forever";
+
+$lang['plans_pro_price'] = "9,99€";
+$lang['per_month'] = "per month";
+$lang['plans_pro_price_year'] = "or 99,99€ per year";
+
+$lang['plans_premium_price'] = "19,99€";
+$lang['plans_premium_price_year'] = "o 199,99€ per year";
+
+// Características comunes
+$lang['plans_group'] = "1 group";
+
+// Características Free
+$lang['plans_free_members'] = "Up to 3 members";
+$lang['plans_free_songs'] = "Up to 5 songs (monthly)";
+$lang['plans_free_no_pdf'] = "No PDF downloads";
+
+// Características Pro
+$lang['plans_pro_members'] = "Up to 20 members";
+$lang['plans_pro_songs'] = "Up to 20 songs (monthly)";
+$lang['plans_pro_pdf'] = "Download songs in PDF";
+$lang['plans_pro_extra_price'] = "0.5€ per additional member<br />0.5€ per additional song";
+
+// Características Premium
+$lang['plans_premium_members'] = "Up to 50 members";
+$lang['plans_premium_songs'] = "Up to 100 songs (monthly)";
+$lang['plans_premium_pdf'] = "Download songs in PDF";
+$lang['plans_premium_extra_price'] = "0.4€ per additional member<br />0.4€ per additional song";
+
+// Botón seleccionar
+$lang['plans_select_button'] = "Select";
+
+// Aria-labels
+$lang['plans_aria_free'] = "Limited Free Plan";
+$lang['plans_aria_pro'] = "Pro Plan";
+$lang['plans_aria_premium'] = "Premium Plan";
+
+//file
+$lang['inputFile'] = "Image";
+
+//User
+$lang['config'] = 'Configuration';
+$lang['logOut'] = 'Log Out';
+$lang['name']   = 'Name:';
+$lang['language']   = 'Language:';
+$lang['selectLanguage']   = 'Select a language';
+$lang['profilePhoto']   = 'Profile photo';
+$lang['saveChanges']   = 'Save changes';
+$lang['editProfile']   = 'Edit Profile';
+$lang['selectAGroup']   = 'Groups';
+$lang['removeImage'] = "Select to delete image.";
 
 ?>

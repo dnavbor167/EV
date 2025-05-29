@@ -7,7 +7,7 @@ class MY_Controller extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$lang_id = $this->session->userdata('language') ?? 1;
+		$lang_id = $this->session->userdata('language') ?? 2;
 		$lang_map = [
 			1 => 'spanish',
 			2 => 'english'
@@ -15,12 +15,16 @@ class MY_Controller extends CI_Controller
 		$language = isset($lang_map[$lang_id]) ? $lang_map[$lang_id] : 'spanish';
 
 		$this->lang->load('general', $language);
+
+		// if ($this->session->userdata('is_logged_in') && !$this->session->userdata('grupos')) {
+		// 	redirect();
+		// }
 	}
 
 	protected function loadViews($view, $data = null)
 	{
 		$data['is_home'] = current_url() == site_url('DashBoard') ? '#' : site_url('Dashboard');
-    	$data['is_logged'] = $this->session->userdata('is_logged_in') ? '#' : site_url('Auth/login');
+		$data['is_logged'] = $this->session->userdata('is_logged_in') ? '#' : site_url('Auth/login');
 
 		//si la vista es login se redirige a la home
 		if ($this->session->userdata('is_logged_in') && $view == "login") {

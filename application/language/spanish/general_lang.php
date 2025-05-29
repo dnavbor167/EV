@@ -36,6 +36,14 @@ $lang['forgotPass']        = "¿Has olvidado tu contraseña?";
 $lang['recoverPass']       = "Recuperar Contraseña";
 $lang['userName']          = "Nombre de Usuario";
 $lang['haveAccount']       = "¿Ya tienes cuenta?";
+$lang['errorUserCreate']   = "Usuario existente";
+$lang['signInSuccess']     = "Se ha registrado correctamente, inicie sesión";
+$lang['errorInsert']       = "Error al insertar al usuario";
+$lang['pendingUserExists'] = "Hay un registro pendiente con este email. Revisa tu correo.";
+$lang['singInEmailSend']   = "Le hemos enviado un correo de confirmación para que confirme su email";
+$lang['confirmRegister']   = "Confirma tu registro";
+$lang['messageLinkEmail']  = "Hola {NOMBRE}, <br> Tiene 5 minutos para confirmar su email <br> Para ello haz click aquí: {LINK}";
+$lang['promotions']        = "Recibir promociones, novedades y contenido personalizado";
 
 
 //Home
@@ -59,11 +67,10 @@ $lang['plans_free_price'] = "Gratis";
 $lang['plans_free_price_note'] = "para siempre";
 
 $lang['plans_pro_price'] = "9,99€";
-$lang['plans_pro_price_note'] = "al mes";
+$lang['per_month'] = "al mes";
 $lang['plans_pro_price_year'] = "o 99,99€ al año";
 
 $lang['plans_premium_price'] = "19,99€";
-$lang['plans_premium_price_note'] = "al mes";
 $lang['plans_premium_price_year'] = "o 199,99€ al año";
 
 // Características comunes
@@ -72,21 +79,17 @@ $lang['plans_group'] = "1 grupo";
 // Características Free
 $lang['plans_free_members'] = "Hasta 3 miembros";
 $lang['plans_free_songs'] = "Hasta 5 canciones (mensuales)";
-$lang['plans_free_no_transposition'] = "Sin opción de transposición automática";
 $lang['plans_free_no_pdf'] = "Sin descargas en PDF";
 
 // Características Pro
 $lang['plans_pro_members'] = "Hasta 20 miembros";
 $lang['plans_pro_songs'] = "Hasta 20 canciones por mes";
-$lang['plans_pro_transposition'] = "Transposición automática de tonalidades";
 $lang['plans_pro_pdf'] = "Descarga de canciones en PDF";
-$lang['plans_pro_roles'] = "Gestión de roles (admin, colaborador, normal)";
 $lang['plans_pro_extra_price'] = "0.5€ por miembro adicional<br />0.5€ por canción adicional";
 
 // Características Premium
 $lang['plans_premium_members'] = "Hasta 50 miembros";
 $lang['plans_premium_songs'] = "Hasta 100 canciones por mes";
-$lang['plans_premium_transposition'] = "Transposición automática";
 $lang['plans_premium_pdf'] = "Descargas de canciones en PDF";
 $lang['plans_premium_extra_price'] = "0.4€ por miembro adicional<br />0.4€ por canción adicional";
 
@@ -97,5 +100,20 @@ $lang['plans_select_button'] = "Seleccionar";
 $lang['plans_aria_free'] = "Plan Free limitado";
 $lang['plans_aria_pro'] = "Plan Pro";
 $lang['plans_aria_premium'] = "Plan Premium";
+
+//file
+$lang['inputFile'] = "Imagen";
+
+//User
+$lang['config'] = 'Configuración';
+$lang['logOut'] = 'Cerrar sesión';
+$lang['name']   = 'Nombre:';
+$lang['language']   = 'Idioma:';
+$lang['selectLanguage']   = 'Selecciona un idioma';
+$lang['profilePhoto']   = 'Foto de perfil';
+$lang['saveChanges']   = 'Guardar cambios';
+$lang['editProfile']   = 'Editar Perfil';
+$lang['selectAGroup']   = 'Grupos';
+$lang['removeImage'] = "Selecciona para eliminar imagen.";
 
 ?>

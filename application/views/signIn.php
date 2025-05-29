@@ -1,11 +1,13 @@
 <div id="logInMain">
   <?php
-  $attributes = array('id' => 'loginForm', 'class' => 'logSigin', 'method' => 'post');
-  echo form_open('Auth/signIn', $attributes);
+  $attributes = array('id' => 'signIn', 'class' => 'logSigin', 'method' => 'post');
+  echo form_open_multipart('Auth/signIn', $attributes);
   ?>
   <p><?= $this->lang->line('logIn'); ?></p>
-  <input placeholder="<?= ucfirst($this->lang->line('userName')); ?>" type="text" name="userName" id="userName" value="<?= set_value('userName'); ?>">
-  <span class="error"><?= form_error('userName') ?></span>
+  <span class="error"><?= $errorUserCreate; ?></span>
+  <span class="error"><?= $errorInsert; ?></span>
+  <input placeholder="<?= ucfirst($this->lang->line('userName')); ?>" type="text" name="userNameSignIn" id="userNameSignIn" value="<?= set_value('userNameSignIn'); ?>">
+  <span class="error"><?= form_error('userNameSignIn') ?></span>
   
   <input placeholder="<?= ucfirst($this->lang->line('email')); ?>" type="email" name="userEmail" id="userEmail" value="<?= set_value('userEmail'); ?>">
   <span class="error"><?= form_error('userEmail') ?></span>
@@ -19,19 +21,25 @@
   </div>
   <span class="error"><?= form_error('userPassword') ?></span>
   
-  <label for="languageSelect" class="language-label">Idioma:</label>
+  <label for="languageSelect" class="language-label"><?= $this->lang->line('language'); ?></label>
+  
   <div class="custom-select-wrapper">
     <select id="languageSelect" name="language" class="custom-select">
-      <option value="" disabled selected>Selecciona un idioma</option>
-      <option value="1" <?= set_value('language') == 1 ? 'selected' : '' ?>>Español</option>
-      <option value="2" <?= set_value('language') == 2 ? 'selected' : '' ?>>English</option>
+      <option value="" disabled selected><?= $this->lang->line('SelectLanguage'); ?></option>
+      <option value="1" <?= set_value('language') == 1 ? 'selected' : '' ?>>🇪🇸 Español</option>
+      <option value="2" <?= set_value('language') == 2 ? 'selected' : '' ?>>🇬🇧 English</option>
     </select>
     <span class="error"><?= form_error('language') ?></span>
   </div>
 
+  <label for="photo" class="photoFile"><?= $this->lang->line('inputFile') ?></label>
+  <span class="error"><?= $upload_error; ?></span>
+  <input type="file" name="photo" id="photo">
+  
+
   <div id="promotions-container">
     <input type="checkbox" name="promotions" id="promotions" value="1" <?= set_value('promotions') == 1 ? 'checked' : '' ?>>
-    <label for="promotions" id="labelPromotions">Recibir promociones, novedades y contenido personalizado</label>
+    <label for="promotions" id="labelPromotions"><?= $this->lang->line('promotions'); ?></label>
   </div>
 
   <p class="textLight"><?= $this->lang->line('haveAccount') ?> <a href="<?= site_url('Auth/logIn') ?>" class="ajax-link"><?= $this->lang->line('logIn') ?></a></p>

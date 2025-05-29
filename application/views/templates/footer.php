@@ -81,6 +81,36 @@
 			});
 		<?php endif; ?>
 
+        <?php if($this->session->flashdata('successSignIn')) { ?>
+            $('#succesSignIn').fadeIn();
+
+            // Cerrar el modal al hacer clic en el botón de cierre
+			$('.custom-close-signIn').on('click', function () {
+				$('#succesSignIn').fadeOut();
+			});
+
+			// Cerrar el modal al hacer clic fuera del contenido
+			$(window).on('click', function (e) {
+				if ($(e.target).is('#succesSignIn')) {
+					$('#succesSignIn').fadeOut();
+				}
+			});
+        <?php } ?>
+
+        <?php if($this->session->userdata('is_logged_in')) { ?>
+            $('#login').on('click', function (e) {
+                e.preventDefault()
+                $('#configUser').stop(true, true).slideToggle(300);
+            })
+
+            $(window).on('resize', function() {
+                if ($('#configUser').is(':visible')) {
+                    $('#configUser').stop(true, true).slideUp(300);
+                }
+            });
+
+        <?php } ?>
+
         $('#btnNewsletter').on('mousedown', function() {
             $(this).css('background-color', '#C65900');
         });

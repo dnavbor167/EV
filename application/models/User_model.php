@@ -2,6 +2,28 @@
 class User_model extends CI_Model
 {
 
+    //update user
+    public function updateUser($user_id, $data) {
+        $this->db->where('usuario_id', $user_id);
+        return $this->db->update('Usuarios', $data);
+    }
+
+    public function userExists($email)
+    {
+        $this->db->from('Usuarios');
+        $this->db->where('email', $email);
+
+        return $this->db->count_all_results() > 0;
+    }
+
+    public function imageUserExists($img)
+    {
+        $this->db->from('Usuarios');
+        $this->db->where('img', $img);
+
+        return $this->db->count_all_results() > 0;
+    }
+
     public function loginUser($data)
     {
         $this->db->select("*");
@@ -10,9 +32,9 @@ class User_model extends CI_Model
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
-            $user = $query->row();
+            $user = $query->row_array();
 
-            if (password_verify($data['password'], $user->password)) {
+            if (password_verify($data['password'], $user['password'])) {
                 return $user;
             } else {
                 return NULL;
@@ -22,8 +44,71 @@ class User_model extends CI_Model
         return NULL;
     }
 
-    public function insertUser($data) {
-        //
+    public function insertUser($data)
+    {
+        return $this->db->insert('Usuarios', $data);
+    }
+
+    // Insertar usuario pendiente
+    public function insertPendingUser($data)
+    {
+        return $this->db->insert('pending_users', $data);
+    }
+
+    // Verificar si email pendiente existe
+    public function pendingUserExists($email)
+    {
+        $this->db->where('email', $email);
+        $query = $this->db->get('pending_users');
+        return $query->num_rows() > 0;
+    }
+
+    // Obtener usuario pendiente por token
+    public function getPendingUserByToken($token)
+    {
+        $this->db->where('token', $token);
+        $query = $this->db->get('pending_users');
+        return $query->row_array();
+    }
+
+    // Borrar usuario pendiente por token
+    public function deletePendingUser($token)
+    {
+        $this->db->where('token', $token);
+        return $this->db->delete('pending_users');
+    }
+
+    //Borrar usuarios fecha expirada
+    public function deleteExpiredPendingUser()
+    {
+        $this->db->where('created_at <', date('Y-m-d H:i:s', strtotime('-5 minutes')));
+        return $this->db->delete('pending_users');
+    }
+
+    public function userBelongGroup($id_user) {
+        $this->db->where('usuario_id', $id_user);
+        $query = $this->db->get('Usuarios_Grupos');
+        
+        return $query->result_array();
+    }
+
+    //Obtener los grupos dado un usuario
+    public function getGroups($array_id) {
+        $this->db->where_in('grupo_id', $array_id);
+        $query = $this->db->get('Grupos');
+        $result = $query->result_array();
+        
+        $groups_by_id = [];
+        foreach($result as $group) {
+            $groups_by_id[$group['grupo_id']] = [
+                'grupo_id' => $group['grupo_id'],
+                'name' => $group['nombre'],
+                'email' => $group['email'],
+                'photo' => $group['foto']
+            ];
+        }
+
+        return $groups_by_id;
     }
 
 
@@ -37,70 +122,11 @@ class User_model extends CI_Model
 
 
 
-    public function obtenerTonalidades() {
+    public function obtenerTonalidades()
+    {
         $this->db->select('*');
         $this->db->from('Tonalidades');
 
         return $this->db->get()->result();
-    }
-
-    public function getEmpleados()
-    {
-        $this->db->select("*");
-        $this->db->from("empleados");
-        $this->db->where("is_deleted", 0);
-
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        }
-        return NULL;
-    }
-
-    public function insertEmpleado()
-    {
-        $array = array(
-            "nombre" => $this->input->post("nombre_empleado"),
-            "apellido1" => $this->input->post("apellido1_empleado"),
-            "apellido2" => $this->input->post("apellido2_empleado"),
-            "direccion" => $this->input->post("direccion_empleado")
-        );
-        $this->db->insert("empleados", $array);
-    }
-
-    public function deleteEmpleado($id)
-    {
-        $array = array(
-            "is_deleted" => 1
-        );
-
-        $this->db->where("id_empleado", $id);
-        $this->db->update("empleados", $array);
-    }
-
-    public function getEmpleado($id)
-    {
-        return $this->db->get_where("empleados", ["id_empleado" => $id])->row();
-
-    }
-
-    public function updateEmpleado($id)
-    {
-        //Guardamos el empleado en una variable y posteriormente mirarmeos si el input se ha pasado
-        //vacío, si está vacío dejaremos los datos anteriores
-        $empleado = $this->db->get_where("empleados", ["id_empleado", $id])->row();
-
-        $array = array(
-            "nombre" => $this->input->post("nombre_empleado"),
-            "apellido1" => $this->input->post("apellido1_empleado"),
-            "apellido2" => $this->input->post("apellido2_empleado"),
-            "direccion" => $this->input->post("direccion_empleado")
-        );
-        print_r($array);
-
-        $this->db->where("id_empleado", $id);
-        $this->db->update("empleados", $array);
-
-        print_r($this->db->last_query());
     }
 }
