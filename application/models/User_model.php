@@ -8,10 +8,11 @@ class User_model extends CI_Model
         return $this->db->update('Usuarios', $data);
     }
 
-    public function userExists($email)
+    public function userExists($email, $deleted)
     {
         $this->db->from('Usuarios');
         $this->db->where('email', $email);
+        $this->db->where('deleted', $deleted);
 
         return $this->db->count_all_results() > 0;
     }
@@ -29,6 +30,7 @@ class User_model extends CI_Model
         $this->db->select("*");
         $this->db->from("Usuarios");
         $this->db->where("email", $data["email"]);
+        $this->db->where("deleted", 0);
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -46,7 +48,12 @@ class User_model extends CI_Model
 
     public function insertUser($data)
     {
-        return $this->db->insert('Usuarios', $data);
+        if ($this->userExists($data['email'], 1)) {
+            $this->db->where('email', $data['email']);
+            return $this->db->update('Usuarios', $data);
+        } else {
+            return $this->db->insert('Usuarios', $data);
+        }
     }
 
     // Insertar usuario pendiente

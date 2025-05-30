@@ -91,10 +91,11 @@ class Auth extends MY_Controller
 				'nombre' => $this->input->post('userNameSignIn'),
 				'email' => $this->input->post('userEmail'),
 				'password' => $passwordEncrypt,
-				'language' => $this->input->post('language')
+				'language' => $this->input->post('language'),
+				'deleted' => 0
 			];
 
-			if ($this->User_model->userExists($userData['email'])) {
+			if ($this->User_model->userExists($userData['email'], 0)) {
 				$data['errorUserCreate'] = $this->lang->line('errorUserCreate');
 				$this->loadViews("signIn", $data);
 				return;
@@ -186,6 +187,7 @@ class Auth extends MY_Controller
 			'password' => $pendingUser['password'],
 			'language' => $pendingUser['language'],
 			'img' => $pendingUser['img'],
+			'deleted' => $pendingUser['deleted']
 		];
 
 

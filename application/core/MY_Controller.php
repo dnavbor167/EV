@@ -19,6 +19,11 @@ class MY_Controller extends CI_Controller
 		// if ($this->session->userdata('is_logged_in') && !$this->session->userdata('grupos')) {
 		// 	redirect();
 		// }
+
+		if ($this->User_model->userExists($this->session->userdata('email'), 1)) {
+			$this->session->sess_destroy();
+			redirect('Dashboard');
+		}
 	}
 
 	protected function loadViews($view, $data = null)
