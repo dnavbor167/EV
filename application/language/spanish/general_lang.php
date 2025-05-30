@@ -44,6 +44,11 @@ $lang['singInEmailSend']   = "Le hemos enviado un correo de confirmación para q
 $lang['confirmRegister']   = "Confirma tu registro";
 $lang['messageLinkEmail']  = "Hola {NOMBRE}, <br> Tiene 5 minutos para confirmar su email <br> Para ello haz click aquí: {LINK}";
 $lang['promotions']        = "Recibir promociones, novedades y contenido personalizado";
+$lang['askDeleteUser']     = "¿Estás seguro de que desea eliminar este usuario?";
+$lang['cancel']            = "Cancelar";
+$lang['accept']            = "Aceptar";
+$lang['delete']            = "Borrar";
+$lang['deleteError']       = 'Error al eliminar el usuario';
 
 
 //Home
@@ -110,10 +115,22 @@ $lang['logOut'] = 'Cerrar sesión';
 $lang['name']   = 'Nombre:';
 $lang['language']   = 'Idioma:';
 $lang['selectLanguage']   = 'Selecciona un idioma';
+$lang['selectGroup']   = 'Selecciona un grupo';
 $lang['profilePhoto']   = 'Foto de perfil';
 $lang['saveChanges']   = 'Guardar cambios';
+$lang['deleteUser']   = 'Eliminar Usuario';
 $lang['editProfile']   = 'Editar Perfil';
 $lang['selectAGroup']   = 'Grupos';
 $lang['removeImage'] = "Selecciona para eliminar imagen.";
+
+//Info web
+$lang['infoWebText'] = 'es una plataforma dedicada a músicos y grupos que desean gestionar y compartir sus canciones y acordes de forma sencilla y colaborativa.
+<br><br>
+Aquí podrás crear grupos, añadir miembros, gestionar canciones con acordes y transponerlas automáticamente a la tonalidad que necesites para cada integrante.
+<br><br>
+Nuestro objetivo es que la música fluya sin barreras, ofreciendo herramientas para mejorar la práctica y presentación de tus canciones en vivo o estudio.
+<br><br>
+Si tienes dudas, sugerencias o quieres formar parte de esta comunidad, ¡no dudes en contactarnos!';
+$lang['rights'] = '2025 Eternals Vibes. Todos los derechos reservados.';
 
 ?>

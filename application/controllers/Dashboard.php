@@ -19,4 +19,8 @@ class Dashboard extends MY_Controller
 	{
 		$this->loadViews('paymentsPlans');
 	}
+
+	public function infoWeb() {
+		$this->loadViews('infoWeb');
+	}
 }

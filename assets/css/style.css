@@ -353,8 +353,17 @@ footer a {
     color: #fff;
 }
 
+.btn-custom.danger {
+    background-color: red;
+    color: #fff;
+}
+
 .btn-custom.primary:hover {
     background-color: #0056b3;
+}
+
+.btn-custom.danger:hover {
+    background-color: #D20000;
 }
 
 .btn-custom.success {
@@ -850,7 +859,7 @@ input[type='file'] {
 
 .current-image {
     display: block;
-    margin-top: 1rem;
+    margin: 1rem 0;
     text-align: center;
     cursor: pointer;
 }
@@ -867,6 +876,46 @@ input[type='file'] {
     cursor: pointer;
 }
 
+#deleteUser {
+    background-color: red;
+    color: white;
+}
+
+.eternals-vibes-info {
+    max-width: 700px;
+    background: #1e1e1e;
+    border-radius: 12px;
+    padding: 30px 40px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #f0f0f0;
+}
+
+.eternals-vibes-info>h1 {
+    text-align: center;
+    color: #FF7300;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.eternals-vibes-info>p {
+    line-height: 1.6;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.eternals-vibes-info>p .highlight {
+    color: #FF7300;
+    font-weight: 600;
+}
+
+.eternals-vibes-info>.footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #888;
+    font-size: 0.9rem;
+}
 
 
 
@@ -878,7 +927,12 @@ input[type='file'] {
 
 
 
-
+@media (max-width: 480px) {
+    .eternals-vibes-info {
+        margin: 20px;
+        padding: 20px;
+    }
+}
 
 /* Tablet */
 @media(min-width: 768px) {

@@ -12,6 +12,15 @@ class Auth extends MY_Controller
 		$this->User_model->deleteExpiredPendingUser();
 	}
 
+	public function deleteUser() {
+		$user_id = $this->session->userdata('user_id');
+		if ($this->User_model->deleteUser($user_id)) {
+			redirect('Dashboard');
+		} else {
+			show_error($this->lang->line('deleteError'));
+		}
+	}
+
 
 	public function login()
 	{
@@ -95,6 +104,8 @@ class Auth extends MY_Controller
 				'deleted' => 0
 			];
 
+			$userData['promotions'] = $this->input->post('promotions') == 1 ? 1 : 0;
+
 			if ($this->User_model->userExists($userData['email'], 0)) {
 				$data['errorUserCreate'] = $this->lang->line('errorUserCreate');
 				$this->loadViews("signIn", $data);
@@ -114,7 +125,7 @@ class Auth extends MY_Controller
 
 			$userData['token'] = $token;
 
-			$photoFileName = null;
+			$photoFileName = 'default_img';
 
 			if (!empty($_FILES['photo']['name'])) {
 				if (!$this->upload->do_upload('photo')) {
@@ -187,7 +198,8 @@ class Auth extends MY_Controller
 			'password' => $pendingUser['password'],
 			'language' => $pendingUser['language'],
 			'img' => $pendingUser['img'],
-			'deleted' => $pendingUser['deleted']
+			'deleted' => $pendingUser['deleted'],
+			'promotions' => $pendingUser['promotions']
 		];
 
 
@@ -216,7 +228,9 @@ class Auth extends MY_Controller
 		$this->form_validation->set_rules('language', $this->lang->line('language'), 'required');
 
 		if ($this->form_validation->run() == FALSE) {
-			$this->loadViews('user');
+			$data['imgUser'] = $this->session->userdata('img_user') == 'default_img' ? base_url('assets/img/img/default_img.webp') : base_url('uploads/') . $this->session->userdata('img_user');
+
+			$this->loadViews('user', $data);
 		} else {
 			$data['nombre'] = $this->input->post('nameUserUpdate');
 			$data['actual_group'] = $this->input->post('selectAGroup');
@@ -227,7 +241,7 @@ class Auth extends MY_Controller
 			$current_image = $this->session->userdata('img_user');
 
 			if ($remove_image) {
-				$data['img'] = NULL;
+				$data['img'] = 'default_img';
 
 				if ($current_image && file_exists('./uploads/' . $current_image)) {
 					unlink('./uploads/' . $current_image);

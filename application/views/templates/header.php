@@ -39,7 +39,7 @@
                             $is_logged = site_url('Auth/configuration');
                          } ?>
                         <li id="usuarioMenu"><a href="<?= $is_logged; ?>" class="ajax-link"><?= strtoupper($this->lang->line('user')); ?></a></li>
-                        <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('infoWeb')); ?></a></li>
+                        <li class="requires-login"><a href="<?= site_url('Dashboard/infoWeb'); ?>" class="ajax-link"><?= strtoupper($this->lang->line('infoWeb')); ?></a></li>
                     </ul>
                 </nav>
             </div>
@@ -64,7 +64,8 @@
         <div id="login">
             <a href="<?= $is_logged; ?>">
             <?php if($this->session->userdata('img_user')) { ?>
-                <img id="userImage" src="<?= base_url('uploads/') . $this->session->userdata('img_user') ?>" alt="user image">
+                <?php $imgUser = $this->session->userdata('img_user') == 'default_img' ? base_url('assets/img/img/default_img.webp') : base_url('uploads/') . $this->session->userdata('img_user');?>
+                <img id="userImage" src="<?= $imgUser ?>" alt="user image">
             <?php } else { ?>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                     <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->

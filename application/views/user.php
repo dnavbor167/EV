@@ -1,3 +1,24 @@
+<div id="deleteModal" class="custom-modal">
+        <div class="custom-modal-content">
+            <span class="custom-close">&times;</span>
+            <h3>
+                <?= $this->lang->line('warningModalTitle'); ?>
+            </h3>
+            <p>
+                <?= $this->lang->line('askDeleteUser'); ?>
+            </p>
+
+            <div style="text-align: right;">
+                <a href="#" class="btn-custom success delete-cancel">
+                    <?= $this->lang->line('cancel'); ?>
+                </a>
+                <a href="<?= site_url('Auth/deleteUser') ?>" class="btn-custom danger">
+                    <?= $this->lang->line('delete'); ?>
+                </a>
+            </div>
+        </div>
+</div>
+
 <div class="form-container">
     <h2><?= $this->lang->line('editProfile'); ?></h2>
     <?php 
@@ -14,6 +35,7 @@
         <div class="form-group">
             <label for="selectAGroup"><?= ucfirst($this->lang->line('selectAGroup')); ?>:</label>
             <select id="selectAGroup" name="selectAGroup" class="form-select">
+                <option value="" disabled selected><?= $this->lang->line('selectGroup') ?></option>
                 <?php foreach ($this->session->userdata('groups') as $group) { ?>
                 <option value="<?= $group['grupo_id']; ?>" <?= $this->session->userdata('actual_group') == $group['grupo_id'] ? 'selected' : '' ?>><?= $group['name'] ?></option>
                 <?php } ?>
@@ -37,7 +59,7 @@
 
         <?php if ($this->session->userdata('img_user')) { ?>
             <label for="imagenUpdate" class="current-image">
-                <img src="<?= base_url('uploads/' . $this->session->userdata('img_user')); ?>" alt="Imagen de usuario">
+                <img src="<?= $imgUser; ?>" id="previewImg" alt="Imagen de usuario">
             </label>
             <div>
                 <input type="checkbox" id="remove_image" name="remove_image" value="1">
@@ -46,6 +68,40 @@
         <?php } ?>
 
         <input type="submit" value="<?= $this->lang->line('saveChanges'); ?>" class="form-submit">
+        <input type="submit" value="<?= $this->lang->line('deleteUser'); ?>" class="form-submit" id="deleteUser">
 
     <?= form_close(); ?>
 </div>
+
+<script>
+
+    $('#imagenUpdate').on('change', function() {
+        const file = this.files[0]
+        if (!file) return;
+
+        const reader = new FileReader()
+
+        reader.onload = function(e) {
+            $('#previewImg').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(file);
+    })
+
+    $('#deleteUser').on('click', function(e) {
+        e.preventDefault()
+        $('#deleteModal').fadeIn();
+    })
+
+    // Cerrar el modal al hacer clic en el botón de cierre
+    $('.custom-close, .delete-cancel').on('click', function () {
+        $('#deleteModal').fadeOut();
+    });
+
+    // Cerrar el modal al hacer clic fuera del contenido
+    $(window).on('click', function (e) {
+        if ($(e.target).is('#deleteModal')) {
+            $('#deleteModal').fadeOut();
+        }
+    });
+</script>

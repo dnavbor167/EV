@@ -44,6 +44,11 @@ $lang['singInEmailSend']   = "We have sent you a confirmation email so you can c
 $lang['confirmRegister']   = "Confirm your registration";
 $lang['messageLinkEmail']  = "Hello {NOMBRE}, <br> You have 5 minutes to confirm your email <br> To do so, click here: {LINK}";
 $lang['promotions']        = "Receive promotions, news, and personalized content";
+$lang['askDeleteUser']     = "Are you sure you want to delete this user?";
+$lang['cancel']            = "Cancel";
+$lang['accept']            = "Accept";
+$lang['delete']            = "Delete";
+$lang['deleteError']       = 'Error deleting user';
 
 //Home
 $lang['schedule']          = "Schedule";
@@ -109,10 +114,22 @@ $lang['logOut'] = 'Log Out';
 $lang['name']   = 'Name:';
 $lang['language']   = 'Language:';
 $lang['selectLanguage']   = 'Select a language';
+$lang['selectGroup']   = 'Select a group';
 $lang['profilePhoto']   = 'Profile photo';
 $lang['saveChanges']   = 'Save changes';
+$lang['deleteUser']   = 'Delete user';
 $lang['editProfile']   = 'Edit Profile';
 $lang['selectAGroup']   = 'Groups';
 $lang['removeImage'] = "Select to delete image.";
+
+//Info web
+$lang['infoWebText'] = "is a platform dedicated to musicians and bands who want to manage and share their songs and chords in a simple and collaborative way.
+<br><br>
+Here you can create bands, add members, manage songs with chords, and automatically transpose them to the key you need for each member.
+<br><br>
+Our goal is to make music flow without barriers, offering tools to improve the practice and presentation of your songs live or in the studio.
+<br><br>
+If you have questions, suggestions, or want to be part of this community, don't hesitate to contact us!";
+$lang['rights'] = '2025 Eternals Vibes. All rights reserved.';
 
 ?>

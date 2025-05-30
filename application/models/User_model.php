@@ -8,6 +8,13 @@ class User_model extends CI_Model
         return $this->db->update('Usuarios', $data);
     }
 
+    //Delete user
+    public function deleteUser($user_id) {
+        $this->db->where('usuario_id', $user_id);
+        return $this->db->update('Usuarios', ['deleted' => 1]);
+    }
+
+    //Comprobar si usuario existe
     public function userExists($email, $deleted)
     {
         $this->db->from('Usuarios');

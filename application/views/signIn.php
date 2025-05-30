@@ -25,7 +25,7 @@
   
   <div class="custom-select-wrapper">
     <select id="languageSelect" name="language" class="custom-select">
-      <option value="" disabled selected><?= $this->lang->line('SelectLanguage'); ?></option>
+      <option value="" disabled selected><?= $this->lang->line('selectLanguage'); ?></option>
       <option value="1" <?= set_value('language') == 1 ? 'selected' : '' ?>>🇪🇸 Español</option>
       <option value="2" <?= set_value('language') == 2 ? 'selected' : '' ?>>🇬🇧 English</option>
     </select>

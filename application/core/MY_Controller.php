@@ -20,6 +20,7 @@ class MY_Controller extends CI_Controller
 		// 	redirect();
 		// }
 
+		//Si el usuario actual ha sido borrado se elimina la session y se redirge al home
 		if ($this->User_model->userExists($this->session->userdata('email'), 1)) {
 			$this->session->sess_destroy();
 			redirect('Dashboard');
