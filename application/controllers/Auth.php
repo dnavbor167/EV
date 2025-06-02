@@ -67,7 +67,7 @@ class Auth extends MY_Controller
 		//load libraries
 		$this->load->library('email');
 
-		$config['upload_path'] = './uploads/';
+		$config['upload_path'] = './uploads/user_img/';
 		$config['allowed_types'] = 'jpg|jpeg|png';
 		//$config['max_size'] = 2048;
 
@@ -215,7 +215,7 @@ class Auth extends MY_Controller
 	}
 
 
-	public function logout()
+	public function logOut()
 	{
 		$this->session->sess_destroy();
 		redirect('Auth/login');
@@ -228,7 +228,7 @@ class Auth extends MY_Controller
 		$this->form_validation->set_rules('language', $this->lang->line('language'), 'required');
 
 		if ($this->form_validation->run() == FALSE) {
-			$data['imgUser'] = $this->session->userdata('img_user') == 'default_img' ? base_url('assets/img/img/default_img.webp') : base_url('uploads/') . $this->session->userdata('img_user');
+			$data['imgUser'] = $this->session->userdata('img_user') == 'default_img' ? base_url('assets/img/img/default_img.webp') : base_url('uploads/user_img/') . $this->session->userdata('img_user');
 
 			$this->loadViews('user', $data);
 		} else {
@@ -243,11 +243,11 @@ class Auth extends MY_Controller
 			if ($remove_image) {
 				$data['img'] = 'default_img';
 
-				if ($current_image && file_exists('./uploads/' . $current_image)) {
-					unlink('./uploads/' . $current_image);
+				if ($current_image && file_exists('./uploads/user_img/' . $current_image)) {
+					unlink('./uploads/user_img/' . $current_image);
 				}
 			} else if ($new_image_uploaded) {
-				$config['upload_path'] = './uploads/';
+				$config['upload_path'] = './uploads/user_img/';
 				$config['allowed_types'] = 'jpg|jpeg|png';
 				//$config['max_size'] = 2048;
 
@@ -269,8 +269,8 @@ class Auth extends MY_Controller
 					$uploadData = $this->upload->data();
 					$photoFileName = $uploadData['file_name'];
 
-					if ($current_image && file_exists('./uploads/' . $current_image)) {
-						unlink('./uploads/' . $current_image);
+					if ($current_image && file_exists('./uploads/user_img/' . $current_image)) {
+						unlink('./uploads/user_img/' . $current_image);
 					}
 				}
 

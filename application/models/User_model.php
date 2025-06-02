@@ -3,13 +3,15 @@ class User_model extends CI_Model
 {
 
     //update user
-    public function updateUser($user_id, $data) {
+    public function updateUser($user_id, $data)
+    {
         $this->db->where('usuario_id', $user_id);
         return $this->db->update('Usuarios', $data);
     }
 
     //Delete user
-    public function deleteUser($user_id) {
+    public function deleteUser($user_id)
+    {
         $this->db->where('usuario_id', $user_id);
         return $this->db->update('Usuarios', ['deleted' => 1]);
     }
@@ -99,21 +101,23 @@ class User_model extends CI_Model
         return $this->db->delete('pending_users');
     }
 
-    public function userBelongGroup($id_user) {
+    public function userBelongGroup($id_user)
+    {
         $this->db->where('usuario_id', $id_user);
         $query = $this->db->get('Usuarios_Grupos');
-        
+
         return $query->result_array();
     }
 
     //Obtener los grupos dado un usuario
-    public function getGroups($array_id) {
+    public function getGroups($array_id)
+    {
         $this->db->where_in('grupo_id', $array_id);
         $query = $this->db->get('Grupos');
         $result = $query->result_array();
-        
+
         $groups_by_id = [];
-        foreach($result as $group) {
+        foreach ($result as $group) {
             $groups_by_id[$group['grupo_id']] = [
                 'grupo_id' => $group['grupo_id'],
                 'name' => $group['nombre'],

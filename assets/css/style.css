@@ -71,7 +71,7 @@ header::before {
     width: 5rem;
 }
 
-#userImage {
+.userImage {
     width: 3rem;
     height: 3rem;
     padding: 0;
@@ -79,12 +79,13 @@ header::before {
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
+    margin-left: .5rem;
 }
 
 #login {
     width: 2rem;
-    margin-right: 3rem;
     fill: white;
+    margin-right: 2rem;
 }
 
 #menu-desplegable nav {
@@ -375,18 +376,28 @@ footer a {
     background-color: #1e7e34;
 }
 
-#homeElements {
+#homeElements,
+#groupSelection {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
 }
 
-.principalElementsHome {
+.principalElementsHome,
+.principalElementsGroups {
     flex: 0 0 100%;
     text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
 }
 
-.principalElementsHome div {
+.principalElementsGroups:nth-child(1) div {
+    margin-top: 2rem;
+}
+
+.principalElementsHome div,
+.principalElementsGroups div {
     position: relative;
     display: inline-block;
     margin-bottom: 3rem;
@@ -427,7 +438,9 @@ footer a {
     z-index: 0;
 }
 
-.principalElementsHome a {
+.principalElementsHome a,
+.principalElementsGroups a,
+#principalMenu .createJoinGroup #signIn .headerCreateJoinGrou {
     position: relative;
     z-index: 1;
     color: #FF7300;
@@ -441,6 +454,16 @@ footer a {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.principalElementsGroups:nth-child(1) a {
+    background-image: url('../img/img/banda.webp');
+    background-size: cover;
+}
+
+.principalElementsGroups:nth-child(2) a {
+    background-image: url('../img/img/micro.webp');
+    background-size: cover;
 }
 
 #logInMain {
@@ -917,7 +940,91 @@ input[type='file'] {
     font-size: 0.9rem;
 }
 
+.groupSpan {
+    font-weight: bold;
+    color: #FF7300;
+}
 
+#principalMenu .createJoinGroup #signIn {
+    margin: 0;
+    margin-top: 2.5rem;
+    padding: 0 !important;
+    background-color: #B4B4B4;
+    justify-content: center;
+    color: #303030;
+    border-radius: 20px;
+}
+
+#principalMenu .createJoinGroup #signIn>div {
+    justify-content: center;
+}
+
+#principalMenu .createJoinGroup #signIn>div svg {
+    left: 8rem;
+}
+
+#principalMenu .createJoinGroup #signIn .headerCreateJoinGrou {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    height: 8rem;
+    vertical-align: middle;
+    text-align: center;
+    background-image: url('../img/img/partitura.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    overflow: hidden;
+}
+
+#principalMenu .createJoinGroup #signIn input,
+#principalMenu .createJoinGroup #signIn button {
+    background-color: #303030;
+    flex: 0 0 80%;
+    border: none;
+    border-radius: 10px;
+}
+
+#principalMenu .createJoinGroup #signIn input {
+    color: #FF7300;
+}
+
+#principalMenu .createJoinGroup #signIn input::placeholder,
+#principalMenu .createJoinGroup #signIn button {
+    color: #FF7300;
+}
+
+#principalMenu .createJoinGroup #signIn #seePass,
+#principalMenu .createJoinGroup #signIn #dontSeePass {
+    fill: #FF7300;
+}
+
+#principalMenu .createJoinGroup #signIn .photoFile {
+    border: dashed 5px #303030;
+    color: #303030;
+}
+
+#principalMenu .createJoinGroup #signIn .btn-back {
+    margin-left: 5rem;
+    margin-bottom: 1.5rem;
+}
+
+#principalMenu .createJoinGroup #signIn .icon-back {
+    width: 2rem;
+}
+
+
+#principalMenu .createJoinGroup #signIn #promotions-container label {
+    margin-top: -1.3rem;
+}
+
+.principalLogoHide {
+    display: none;
+}
 
 
 
@@ -937,11 +1044,17 @@ input[type='file'] {
 /* Tablet */
 @media(min-width: 768px) {
 
-    #homeElements {
+    #homeElements,
+    #groupSelection {
         width: 100%;
     }
 
-    .principalElementsHome {
+    .principalElementsGroups:nth-child(1) div {
+        margin-top: 0;
+    }
+
+    .principalElementsHome,
+    .principalElementsGroups {
         flex: 0 0 50%;
         margin-top: 2rem;
     }
@@ -1017,7 +1130,6 @@ input[type='file'] {
     #logInMain {
         padding-bottom: 2rem;
         border-radius: 10px;
-        background-color: #BDBDBD;
         color: #303030;
     }
 
@@ -1054,6 +1166,26 @@ input[type='file'] {
         display: none !important;
     }
 
+    .principalElementsGroups a {
+        height: 30rem;
+    }
+
+    .principalElementsGroups:nth-child(1) {
+        justify-content: end;
+    }
+
+    .principalElementsGroups:nth-child(1) a {
+        margin-right: 4rem;
+    }
+
+    .principalElementsGroups:nth-child(2) {
+        justify-content: start;
+    }
+
+    .principalElementsGroups:nth-child(2) a {
+        margin-left: 4rem;
+    }
+
     .principalElementsHome:nth-child(3) {
         margin-top: 0;
     }
@@ -1075,26 +1207,62 @@ input[type='file'] {
         display: none;
     }
 
-    #login {
-        display: none;
+    .principalLogoHide {
+        display: block;
+        margin-left: 2rem;
     }
 
+    #login .userImage {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    #login {
+        height: 108px;
+        width: 100% !important;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: start;
+        align-items: center;
+    }
+
+    #login>div:nth-child(1) {
+        height: 103px;
+        margin-bottom: 2rem;
+        background-color: red;
+    }
+
+    #login>div:nth-of-type(1) {
+        justify-self: start;
+        display: flex;
+        flex-flow: row wrap;
+        flex: 0 0 62.5%;
+        align-items: center;
+    }
+
+    #login>div:nth-of-type(2) {
+        margin-left: auto;
+    }
+
+    #login>div #titleLetter {
+        margin-left: auto;
+    }
+
+    .logoHide {
+        display: none;
+    }
 
     .hide {
         display: inline !important;
     }
 
     #logoGeneral {
-        width: 100%;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-around;
-        align-items: center;
+        display: none;
     }
 
     #titleLetter a {
         color: #FF7300;
-        font-size: 5rem;
+        font-size: 3rem;
         letter-spacing: .3rem;
     }
 

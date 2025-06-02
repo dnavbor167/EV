@@ -48,13 +48,7 @@
 
         <!-- Logo -->
         <div id="logoGeneral">
-            <div class="logo" id="principalLogo">
-                <a href="<?= $is_home ?>"><img src="<?= base_url('assets/img/icon/evLogo.svg'); ?>" alt="Icono EV" class="iconEv"></a>
-            </div>
-            <div class="logo hide" id="titleLetter">
-                <a href="<?= $is_home ?>"><?= strtoupper($this->lang->line('title')); ?></a>
-            </div>
-            <div class="logo hide">
+            <div class="logo logoHide" id="principalLogo">
                 <a href="<?= $is_home ?>"><img src="<?= base_url('assets/img/icon/evLogo.svg'); ?>" alt="Icono EV" class="iconEv"></a>
             </div>
         </div>
@@ -64,8 +58,21 @@
         <div id="login">
             <a href="<?= $is_logged; ?>">
             <?php if($this->session->userdata('img_user')) { ?>
-                <?php $imgUser = $this->session->userdata('img_user') == 'default_img' ? base_url('assets/img/img/default_img.webp') : base_url('uploads/') . $this->session->userdata('img_user');?>
-                <img id="userImage" src="<?= $imgUser ?>" alt="user image">
+                <div>
+                    <div class="logo principalLogoHide">
+                        <a href="<?= $is_home ?>"><img src="<?= base_url('assets/img/icon/evLogo.svg'); ?>" alt="Icono EV" class="iconEv"></a>
+                    </div>
+                    <div class="logo hide" id="titleLetter">
+                        <a href="<?= $is_home ?>"><?= strtoupper($this->lang->line('title')); ?></a>
+                    </div>
+                </div>
+                <div>
+                    <!-- IDEA PARA MOSTRAR CREAR GRUPOS, CUANDO PINCHE ARRIBA EN LA FOTO DEL GRUPO, QUE SALGA EL DESPLEGABLE PARA: CONFIGURATION Y CREATE A GROUP Y JOIN A GROUP -->
+                    <img class="userImage" src="<?= base_url('assets/img/img/default_img.webp') ?>" alt="user image">
+                    <?php $imgUser = $this->session->userdata('img_user') == 'default_img' ? base_url('assets/img/img/default_img.webp') : base_url('uploads/user_img/') . $this->session->userdata('img_user'); ?>
+                    <img class="userImage" src="<?= $imgUser ?>" alt="user image">
+                </div>
+                
             <?php } else { ?>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                     <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->

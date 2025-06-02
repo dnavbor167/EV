@@ -12,6 +12,7 @@ class Dashboard extends MY_Controller
 
 	public function index()
 	{
+		// var_dump($this->session->userdata());exit;
 		$this->loadViews("home");
 	}
 

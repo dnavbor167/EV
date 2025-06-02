@@ -49,6 +49,10 @@ $lang['cancel']            = "Cancel";
 $lang['accept']            = "Accept";
 $lang['delete']            = "Delete";
 $lang['deleteError']       = 'Error deleting user';
+$lang['joinCreateGroup']   = 'To use the features of this website, you must be in a <span class="groupSpan">linked group</span> or <span class="groupSpan">create one</span>. <br><br> Please close the modal and do one of the two options above.';
+$lang['joinGroup']         = 'Join a group';
+$lang['createGroup']       = 'Create a group';
+$lang['termsConditions']   = 'Accept the terms, conditions and payment policies';
 
 //Home
 $lang['schedule']          = "Schedule";
@@ -131,5 +135,12 @@ Our goal is to make music flow without barriers, offering tools to improve the p
 <br><br>
 If you have questions, suggestions, or want to be part of this community, don't hesitate to contact us!";
 $lang['rights'] = '2025 Eternals Vibes. All rights reserved.';
+
+
+
+//Group
+$lang['nameGroup']               = "Group name";
+$lang['emailGroup']              = "Group email";
+$lang['passwordGroup']           = "Group password";
 
 ?>

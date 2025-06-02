@@ -58,7 +58,7 @@
     </footer>
     <script src="<?= base_url('assets/js/js/script.js'); ?>"></script>
     <script>
-        //CAMBIAR PARA QUE SEA QUE ESTÉ LOGUEADO Y ESTE EN UN GRUPO O LO HAYA CREADO
+        var isLoggedIn = <?= $this->session->userdata('is_logged_in') ? 'true' : 'false'; ?>
 
         //Si no ha iniciado bloquear todas las funciones
         <?php if (!$this->session->userdata('is_logged_in')): ?>

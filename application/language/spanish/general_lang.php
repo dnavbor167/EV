@@ -49,6 +49,10 @@ $lang['cancel']            = "Cancelar";
 $lang['accept']            = "Aceptar";
 $lang['delete']            = "Borrar";
 $lang['deleteError']       = 'Error al eliminar el usuario';
+$lang['joinCreateGroup']   = 'Para poder utilizar las funcionalidades de esta web, ha de estar en un <span class="groupSpan">vinculado a un grupo</span> o <span class="groupSpan">crear un grupo</span>. <br><br> Por favor cierre la modal y haga una de las dos opciones anteriores.';
+$lang['joinGroup']         = 'Unirte a un grupo';
+$lang['createGroup']       = 'Crea una grupo';
+$lang['termsConditions']   = 'Acepta los términos, condiciones y políticas de pagos';
 
 
 //Home
@@ -132,5 +136,11 @@ Nuestro objetivo es que la música fluya sin barreras, ofreciendo herramientas p
 <br><br>
 Si tienes dudas, sugerencias o quieres formar parte de esta comunidad, ¡no dudes en contactarnos!';
 $lang['rights'] = '2025 Eternals Vibes. Todos los derechos reservados.';
+
+
+//Group
+$lang['nameGroup']               = "Nombre del grupo";
+$lang['emailGroup']              = "Email del grupo";
+$lang['passwordGroup']           = "Contraseña del grupo";
 
 ?>

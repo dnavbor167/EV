@@ -25,22 +25,3 @@
   </a>
   <?= form_close(); ?>
 </div>
-
-<script>
-  //colors when click a button
-  $('.icon-back, #btnRecoverPass').on('mousedown mouseenter', function() {
-    if ($(this).hasClass('icon-back')) {
-      $(this).css('fill', '#C65900');
-    } else {
-      $(this).css('background-color', '#C65900');
-    }
-  });
-
-  $('.icon-back, #btnRecoverPass').on('mouseup mouseleave', function() {
-    if ($(this).hasClass('icon-back')) {
-      $(this).css('fill', '#FF7300');
-    } else {
-      $(this).css('background-color', '#FF7300');
-    }
-  });
-</script>

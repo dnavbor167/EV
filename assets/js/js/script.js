@@ -72,18 +72,18 @@ $(function () {
 
     //hover from the principal event
     function bindHoverOrTouchHome() {
-        $(document).off('mouseenter mouseleave mousedown mouseup', '.principalElementsHome:nth-child(2) div');
+        $(document).off('mouseenter mouseleave mousedown mouseup', '.principalElementsHome:nth-child(2) div, .principalElementsGroups div');
 
         if (window.innerWidth >= 1024) {
-            $(document).on('mouseenter', '.principalElementsHome:nth-child(2) div', function () {
+            $(document).on('mouseenter', '.principalElementsHome:nth-child(2) div, .principalElementsGroups div', function () {
                 $(this).css('transform', 'scale(1.2)');
-            }).on('mouseleave', '.principalElementsHome:nth-child(2) div', function () {
+            }).on('mouseleave', '.principalElementsHome:nth-child(2) div, .principalElementsGroups div', function () {
                 $(this).css('transform', 'scale(1)');
             })
         } else {
-            $(document).on('mousedown', '.principalElementsHome:nth-child(2) div', function () {
+            $(document).on('mousedown', '.principalElementsHome:nth-child(2) div, .principalElementsGroups div', function () {
                 $(this).css('transform', 'scale(1.2)');
-            }).on('mouseup', '.principalElementsHome:nth-child(2) div', function () {
+            }).on('mouseup', '.principalElementsHome:nth-child(2) div, .principalElementsGroups div', function () {
                 $(this).css('transform', 'scale(1)');
             })
         }
@@ -142,9 +142,17 @@ $(function () {
     })
 
     //Menu until the footer
-    $(window).on("scroll resize load", function () {
+    $(window).on("scroll resize", function () {
+        ajustarMenu();
+    });
+
+    $(document).ready(function () {
+        ajustarMenu();
+    });
+
+    function ajustarMenu() {
         if (window.innerWidth >= 1024) {
-            const headerHeight = 108; // altura header fija
+            const headerHeight = 108;
             const menu = $("#menu-desplegable nav");
             const footer = $("footer");
 
@@ -154,11 +162,9 @@ $(function () {
             const footerTop = footer.offset().top;
             const menuHeight = windowHeight - headerHeight;
 
-            // Altura máxima que puede tener el menú sin pisar el footer
             const maxMenuHeight = footerTop - scrollTop - headerHeight;
 
             if (maxMenuHeight < menuHeight) {
-                // Si el footer está "cerca", limitar la altura para no superponer
                 menu.css({
                     position: "fixed",
                     top: headerHeight + "px",
@@ -166,7 +172,6 @@ $(function () {
                     overflowY: "auto"
                 });
             } else {
-                // Si el footer está lejos, menú ocupa toda la altura disponible
                 menu.css({
                     position: "fixed",
                     top: headerHeight + "px",
@@ -175,10 +180,9 @@ $(function () {
                 });
             }
         } else {
-            // Para pantallas menores a 1024, quita estilos inline para no interferir
             $("#menu-desplegable nav").removeAttr("style");
         }
-    });
+    }
 
     //Image from form
     $(document).on('change', '#photo', function () {
@@ -215,5 +219,33 @@ $(function () {
                 .text('Seleccionar imagen');
         }
     })
+
+    //Cambiar css si está logueado para el header
+    if (isLoggedIn) {
+        $('#login').css({
+            'width': '8rem',
+
+        })
+
+        $('#logoGeneral').css('margin-left', '2.5rem')
+    }
+
+    //boton back 
+    //colors when click a button
+  $(document).on('mousedown mouseenter', '.icon-back, #btnRecoverPass', function() {
+    if ($(this).hasClass('icon-back')) {
+      $(this).css('fill', '#C65900');
+    } else {
+      $(this).css('background-color', '#C65900');
+    }
+  });
+
+  $(document).on('mouseup mouseleave', '.icon-back, #btnRecoverPass', function() {
+    if ($(this).hasClass('icon-back')) {
+      $(this).css('fill', '#FF7300');
+    } else {
+      $(this).css('background-color', '#FF7300');
+    }
+  });
 
 });

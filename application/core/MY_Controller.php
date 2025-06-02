@@ -3,6 +3,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class MY_Controller extends CI_Controller
 {
+	protected $group_exceptions = [
+		'auth/login',
+		'auth/signIn',
+		'auth/verify_email',
+		'auth/logout',
+		'auth/configuration',
+		'auth/recoverpassword',
+		'groups/index',
+		'dashboard/paymentsplans',
+		'groups/creategroup'
+	];
 
 	public function __construct()
 	{
@@ -16,14 +27,40 @@ class MY_Controller extends CI_Controller
 
 		$this->lang->load('general', $language);
 
-		// if ($this->session->userdata('is_logged_in') && !$this->session->userdata('grupos')) {
-		// 	redirect();
-		// }
+		//Si está logueado ejecutamos la siguiente lógica
+		if ($this->session->userdata('is_logged_in')) {
+			//Si el usuario actual ha sido borrado se elimina la session y se redirge al home
+			if ($this->User_model->userExists($this->session->userdata('email'), 1)) {
+				$this->session->sess_destroy();
+				redirect('Dashboard');
+			}
 
-		//Si el usuario actual ha sido borrado se elimina la session y se redirge al home
-		if ($this->User_model->userExists($this->session->userdata('email'), 1)) {
-			$this->session->sess_destroy();
-			redirect('Dashboard');
+			//Verificar que la ruta actual no está en group_exceptions
+			$ruta_actual = strtolower($this->router->class . '/' . $this->router->method);
+
+			if (in_array($ruta_actual, $this->group_exceptions)) {
+				return;
+			}
+
+			//Si no tiene grupo asignado redireccionamos
+			$groups = $this->session->userdata('groups');
+			if (empty($groups)) {
+				$this->_handle_redirect('Groups');
+			}
+		}
+
+	}
+
+	protected function _handle_redirect($url)
+	{
+		if ($this->input->is_ajax_request()) {
+			echo json_encode([
+				'status' => 'redirect',
+				'url' => site_url('url')
+			]);
+			exit;
+		} else {
+			redirect($url);
 		}
 	}
 
@@ -34,7 +71,7 @@ class MY_Controller extends CI_Controller
 
 		//si la vista es login se redirige a la home
 		if ($this->session->userdata('is_logged_in') && $view == "login") {
-			redirect(base_url() . "DashBoard", "location");
+			redirect(site_url('Dashboard'));
 		}
 
 		if (!file_exists(APPPATH . 'views/' . $view . '.php')) {
