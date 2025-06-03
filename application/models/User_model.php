@@ -2,6 +2,56 @@
 class User_model extends CI_Model
 {
 
+    //get user by email
+    public function getUserByEmail($email)
+    {
+        $this->db->from('Usuarios');
+        $this->db->where('email', $email);
+
+        return $this->db->get()->row_array();
+    }
+
+    //Save token recover passwotd
+    public function save_reset_token($usuario_id, $plain_token)
+    {
+        $data = [
+            'usuario_id' => $usuario_id,
+            'token_hash' => password_hash($plain_token, PASSWORD_DEFAULT),
+            'expires_at' => date('Y-m-d H:i:s', strtotime('+5 minutes')),
+            'used' => 0
+        ];
+        $this->db->insert('reset_password_tokens', $data);
+    }
+
+    //validar token recover password
+    public function get_valid_token($token)
+    {
+        $query = $this->db->where('used', 0)
+            ->where('expires_at >=', date('Y-m-d H:i:s'))
+            ->get('reset_password_tokens');
+
+        foreach ($query->result_array() as $row) {
+            if (password_verify($token, $row['token_hash'])) {
+                return $row; // contiene usuario_id
+            }
+        }
+        return null;
+    }
+
+    // Marcar token como usado recover password
+    public function mark_token_used($id)
+    {
+        $this->db->where('id', $id)
+            ->update('reset_password_tokens', ['used' => 1]);
+    }
+
+    // Actualizar contraseña del usuario recover password
+    public function update_password($usuario_id, $hashed_password)
+    {
+        return $this->db->where('usuario_id', $usuario_id)
+            ->update('Usuarios', ['password' => $hashed_password]);
+    }
+
     //update user
     public function updateUser($user_id, $data)
     {
@@ -32,6 +82,26 @@ class User_model extends CI_Model
         $this->db->where('img', $img);
 
         return $this->db->count_all_results() > 0;
+    }
+
+    //Save token each login
+    public function save_token_user($user_id, $token)
+    {
+        $this->db->where('usuario_id', $user_id);
+        $this->db->update('Usuarios',['session_token' => $token]);
+    }
+
+    //Obtain token by user
+    public function get_user_token($user_id) 
+    {
+        $this->db->select('session_token');
+        $this->db->from('Usuarios');
+        $this->db->where('usuario_id', $user_id);
+        $query = $this->db->get();
+
+        $row = $query->row_array();
+
+        return $row ? $row['session_token'] : null;
     }
 
     public function loginUser($data)

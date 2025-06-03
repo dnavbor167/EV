@@ -3,7 +3,7 @@
   $attributes = array('id' => 'signIn', 'class' => 'logSigin', 'method' => 'post');
   echo form_open_multipart('Auth/signIn', $attributes);
   ?>
-  <p><?= $this->lang->line('logIn'); ?></p>
+  <p><?= $this->lang->line('createAccount'); ?></p>
   <span class="error"><?= $errorUserCreate; ?></span>
   <span class="error"><?= $errorInsert; ?></span>
   <input placeholder="<?= ucfirst($this->lang->line('userName')); ?>" type="text" name="userNameSignIn" id="userNameSignIn" value="<?= set_value('userNameSignIn'); ?>">

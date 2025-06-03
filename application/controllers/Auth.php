@@ -10,9 +10,25 @@ class Auth extends MY_Controller
 
 		//borramos usuarios de pending users que no han sido accedidos
 		$this->User_model->deleteExpiredPendingUser();
+
+		$usuario_id = $this->session->userdata('user_id');
+		$session_token = $this->session->userdata('session_token');
+		if ($usuario_id && $session_token) {
+			$token_db = $this->User_model->get_user_token($usuario_id);
+			if ($token_db !== $session_token) {
+				$this->session->sess_destroy();
+				redirect('login');
+			}
+		}
 	}
 
-	public function deleteUser() {
+	public function index()
+	{
+		$this->login();
+	}
+
+	public function deleteUser()
+	{
 		$user_id = $this->session->userdata('user_id');
 		if ($this->User_model->deleteUser($user_id)) {
 			redirect('Dashboard');
@@ -36,6 +52,14 @@ class Auth extends MY_Controller
 			$login = $this->User_model->loginUser($data);
 
 			if ($login) {
+				if (!empty($login['session_token'])) {
+					$this->session->set_flashdata('globalModal', $this->lang->line('activeSession'));
+					redirect('auth/login');	
+				}
+
+				$token = uniqid('sess_', true);
+				$this->User_model->save_token_user($login['usuario_id'], $token);
+
 				$array = array(
 					'user_id' => $login['usuario_id'],
 					'user_name' => $login['nombre'],
@@ -44,7 +68,8 @@ class Auth extends MY_Controller
 					'img_user' => $login['img'],
 					'is_logged_in' => true,
 					'is_in_any_group' => $this->User_model->userBelongGroup($login['usuario_id']),
-					'actual_group' => $login['actual_group']
+					'actual_group' => $login['actual_group'],
+					'session_token' => $token
 				);
 
 				if ($array['is_in_any_group']) {
@@ -217,6 +242,11 @@ class Auth extends MY_Controller
 
 	public function logOut()
 	{
+		$usuario_id = $this->session->userdata('user_id');
+		if ($usuario_id) {
+			$this->User_model->save_token_user($usuario_id, null);
+		}
+
 		$this->session->sess_destroy();
 		redirect('Auth/login');
 	}
@@ -235,6 +265,10 @@ class Auth extends MY_Controller
 			$data['nombre'] = $this->input->post('nameUserUpdate');
 			$data['actual_group'] = $this->input->post('selectAGroup');
 			$data['language'] = $this->input->post('language');
+			$password = $this->input->post('userPassword');
+			if ($password) {
+				$data['password'] = password_hash($password, PASSWORD_DEFAULT);
+			}
 
 			$remove_image = $this->input->post('remove_image') == 1;
 			$new_image_uploaded = !empty($_FILES['imagenUpdate']['name']);
@@ -294,13 +328,70 @@ class Auth extends MY_Controller
 
 	public function recoverPassword()
 	{
+		//load libraries
+		$this->load->library('email');
+
 		//form validation
 		$this->form_validation->set_rules('userEmail', $this->lang->line('email'), 'required|valid_email');
 
 		if ($this->form_validation->run() == FALSE) {
 			$this->loadViews('recoverPassword');
 		} else {
+			$email = $this->input->post('userEmail', TRUE);
+			$user = $this->User_model->getUserByEmail($email);
 
+			if ($user) {
+				$token = bin2hex(random_bytes(32));
+				$this->User_model->save_reset_token($user['usuario_id'], $token); // Guarda token y expiración
+
+				$reset_link = site_url("auth/reset_password/$token");
+				// Enviar email de confirmación
+				$this->email->from('daniel2004navas@gmail.com', 'Eternals Vibes');
+				$this->email->to($user['email']);
+				$this->email->subject($this->lang->line('changePassword'));
+				$messageText = $this->lang->line('messageLinkRecoverPass');
+				$message = str_replace(['{NOMBRE}', '{LINK}'], [$user['nombre'], $reset_link], $messageText);
+				$this->email->message($message);
+
+				if (!$this->email->send()) {
+					$data['errorInsert'] = "No se pudo enviar el email.";
+					$this->loadViews("logIn", $data);
+					return;
+				}
+			}
+
+			$this->session->set_flashdata('globalModal', $this->lang->line('messageRecoverPass'));
+			redirect('auth/login');
+		}
+	}
+
+	public function reset_password($token)
+	{
+		if (!$token) {
+			show_error();
+		}
+
+		$token_data = $this->User_model->get_valid_token($token);
+
+		if (!$token_data) {
+			show_error($this->lang->line('invalid_or_expired_token'));
+		}
+
+		$this->form_validation->set_rules('newPassword', $this->lang->line('password'), 'required');
+
+		if ($this->form_validation->run() == FALSE) {
+			$data['token'] = $token;
+			$this->loadViews('resetPassword', $data);
+		} else {
+			$new_password = $this->input->post('newPassword');
+			$hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+
+			// Actualiza la contraseña
+			$this->User_model->update_password($token_data['usuario_id'], $hashed_password);
+			$this->User_model->mark_token_used($token_data['id']);
+
+			$this->session->set_flashdata('globalModal', $this->lang->line('password_updated_successfully'));
+			redirect('auth/login');
 		}
 	}
 }

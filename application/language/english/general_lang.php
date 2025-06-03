@@ -42,7 +42,9 @@ $lang['errorInsert']       = "Error inserting user";
 $lang['signInSuccess']     = "You have registered successfully, please log in.";
 $lang['singInEmailSend']   = "We have sent you a confirmation email so you can confirm your email.";
 $lang['confirmRegister']   = "Confirm your registration";
+$lang['changePassword']    = "Reset password";
 $lang['messageLinkEmail']  = "Hello {NOMBRE}, <br> You have 5 minutes to confirm your email <br> To do so, click here: {LINK}";
+$lang['messageLinkRecoverPass']  = "Hola {NOMBRE}, <br> You have 5 minutes to enter the link and change your password.<br> Para ello haz click aquí: {LINK}";
 $lang['promotions']        = "Receive promotions, news, and personalized content";
 $lang['askDeleteUser']     = "Are you sure you want to delete this user?";
 $lang['cancel']            = "Cancel";
@@ -53,6 +55,12 @@ $lang['joinCreateGroup']   = 'To use the features of this website, you must be i
 $lang['joinGroup']         = 'Join a group';
 $lang['createGroup']       = 'Create a group';
 $lang['termsConditions']   = 'Accept the terms, conditions and payment policies';
+$lang['messageRecoverPass']= 'You will receive an email with instructions on how to change your password.';
+$lang['invalid_or_expired_token'] = 'Invalid or expired token, please request password again.';
+$lang['password_updated_successfully'] = 'Password updated successfully, please log in.';
+$lang['activeSession']     = "You're already logged in on another device. To use it, please log out on the other device.";
+$lang['errorInitPayment']  = 'Error initiating payment.';
+$lang['errorConexion']     = 'Connection error.';
 
 //Home
 $lang['schedule']          = "Schedule";
@@ -142,5 +150,12 @@ $lang['rights'] = '2025 Eternals Vibes. All rights reserved.';
 $lang['nameGroup']               = "Group name";
 $lang['emailGroup']              = "Group email";
 $lang['passwordGroup']           = "Group password";
+$lang['groupPhoto']              = "Group Image";
+$lang['groupPromotions']         = "Terms, conditions and payments";
+$lang['notPlanSelected']         = "You must select at least one plan to create a group.";
+$lang['errorGroupPhoto']         = "You must select an image";
+$lang['createGroupAgain']        = "When you exited the group creation section, the data was lost. Please return to the form to create a group.";
+$lang['userNameRepeated']        = "Username in use.";
+$lang['emailRepeated']           = "Email in use.";
 
 ?>

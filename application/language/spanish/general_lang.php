@@ -42,7 +42,9 @@ $lang['errorInsert']       = "Error al insertar al usuario";
 $lang['pendingUserExists'] = "Hay un registro pendiente con este email. Revisa tu correo.";
 $lang['singInEmailSend']   = "Le hemos enviado un correo de confirmación para que confirme su email";
 $lang['confirmRegister']   = "Confirma tu registro";
+$lang['changePassword']    = "Restablecer contraseña";
 $lang['messageLinkEmail']  = "Hola {NOMBRE}, <br> Tiene 5 minutos para confirmar su email <br> Para ello haz click aquí: {LINK}";
+$lang['messageLinkRecoverPass']  = "Hola {NOMBRE}, <br> Tiene 5 minutos para entrar al enlace y cambiar su contraseña<br> Para ello haz click aquí: {LINK}";
 $lang['promotions']        = "Recibir promociones, novedades y contenido personalizado";
 $lang['askDeleteUser']     = "¿Estás seguro de que desea eliminar este usuario?";
 $lang['cancel']            = "Cancelar";
@@ -53,6 +55,13 @@ $lang['joinCreateGroup']   = 'Para poder utilizar las funcionalidades de esta we
 $lang['joinGroup']         = 'Unirte a un grupo';
 $lang['createGroup']       = 'Crea una grupo';
 $lang['termsConditions']   = 'Acepta los términos, condiciones y políticas de pagos';
+$lang['messageRecoverPass']= 'Le llegará un correo con indicaciones para poder cambiar la contraseña.';
+$lang['invalid_or_expired_token'] = 'Token inválido o expirado, por favor vuelva a solicitar la contraseña';
+$lang['password_updated_successfully'] = 'Contraseña actualizada con éxito, inicia sesión';
+$lang['activeSession']     = 'Ya has iniciado sesión en otro dispositivo, para poder utilizarla cierra sessión en el otro dispositivo.';
+$lang['errorInitPayment']  = 'Error al iniciar el pago.';
+$lang['errorConexion']     = 'Error de conexión.';
+
 
 
 //Home
@@ -142,5 +151,12 @@ $lang['rights'] = '2025 Eternals Vibes. Todos los derechos reservados.';
 $lang['nameGroup']               = "Nombre del grupo";
 $lang['emailGroup']              = "Email del grupo";
 $lang['passwordGroup']           = "Contraseña del grupo";
+$lang['groupPhoto']              = "Imagen del grupo";
+$lang['groupPromotions']         = "Términos, condiciones y pagos";
+$lang['notPlanSelected']         = "Debe seleccionar al menos un plan para crear un grupo.";
+$lang['errorGroupPhoto']         = "Debe seleccionar una imagen";
+$lang['createGroupAgain']        = "Al salirse del apartado de crear grupos, los datos se han perdido, por favor si desea crear un grupo vuelve al formulario para ello.";
+$lang['userNameRepeated']        = "Nombre de usuario en uso.";
+$lang['emailRepeated']           = "Email en uso.";
 
 ?>

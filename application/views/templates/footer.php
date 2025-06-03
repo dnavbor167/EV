@@ -60,6 +60,23 @@
     <script>
         var isLoggedIn = <?= $this->session->userdata('is_logged_in') ? 'true' : 'false'; ?>
 
+        //Modal global
+        <?php if($this->session->flashdata('globalModal')) { ?>
+            $('#globalModal').fadeIn();
+
+            // Cerrar el modal al hacer clic en el botón de cierre
+			$('.custom-close-global').on('click', function () {
+				$('#globalModal').fadeOut();
+			});
+
+			// Cerrar el modal al hacer clic fuera del contenido
+			$(window).on('click', function (e) {
+				if ($(e.target).is('#globalModal')) {
+					$('#globalModal').fadeOut();
+				}
+			});
+        <?php } ?>
+
         //Si no ha iniciado bloquear todas las funciones
         <?php if (!$this->session->userdata('is_logged_in')): ?>
 			// Mostrar modal al hacer clic en enlaces que requieren login
@@ -110,6 +127,27 @@
             });
 
         <?php } ?>
+
+        //Si no está en ningún grupo bloquear todas las funciones
+        <?php if (empty($this->session->userdata('groups'))): ?>
+            // Mostrar modal al hacer clic en enlaces que requieren login
+            $('.requires-login').on('click', function (e) {
+                e.preventDefault();
+                $('#joinCreateModal').fadeIn();
+            });
+
+            // Cerrar el modal al hacer clic en el botón de cierre
+            $('.custom-close').on('click', function () {
+                $('#joinCreateModal').fadeOut();
+            });
+
+            // Cerrar el modal al hacer clic fuera del contenido
+            $(window).on('click', function (e) {
+                if ($(e.target).is('#joinCreateModal')) {
+                    $('#joinCreateModal').fadeOut();
+                }
+            });
+        <?php endif; ?>
 
         $('#btnNewsletter').on('mousedown', function() {
             $(this).css('background-color', '#C65900');

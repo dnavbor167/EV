@@ -3,6 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class MY_Controller extends CI_Controller
 {
+
+	protected $creating_group = [
+		'groups/creategroup'
+	];
+
 	protected $group_exceptions = [
 		'auth/login',
 		'auth/signIn',
@@ -10,8 +15,10 @@ class MY_Controller extends CI_Controller
 		'auth/logout',
 		'auth/configuration',
 		'auth/recoverpassword',
+		'auth/reset_password',
 		'groups/index',
 		'dashboard/paymentsplans',
+		'dashboard/infoweb',
 		'groups/creategroup'
 	];
 
@@ -38,8 +45,13 @@ class MY_Controller extends CI_Controller
 			//Verificar que la ruta actual no está en group_exceptions
 			$ruta_actual = strtolower($this->router->class . '/' . $this->router->method);
 
-			if (in_array($ruta_actual, $this->group_exceptions)) {
+			if (in_array($ruta_actual, $this->group_exceptions) || in_array($ruta_actual, $this->creating_group)) {
 				return;
+			}
+
+			if ($this->session->userdata('registro_grupo')) {
+				$this->session->set_flashdata('globalModal', $this->lang->line('createGroupAgain'));
+				$this->session->unset_userdata('registro_grupo');
 			}
 
 			//Si no tiene grupo asignado redireccionamos
@@ -47,6 +59,7 @@ class MY_Controller extends CI_Controller
 			if (empty($groups)) {
 				$this->_handle_redirect('Groups');
 			}
+
 		}
 
 	}

@@ -39,7 +39,7 @@
                             $is_logged = site_url('Auth/configuration');
                          } ?>
                         <li id="usuarioMenu"><a href="<?= $is_logged; ?>" class="ajax-link"><?= strtoupper($this->lang->line('user')); ?></a></li>
-                        <li class="requires-login"><a href="<?= site_url('Dashboard/infoWeb'); ?>" class="ajax-link"><?= strtoupper($this->lang->line('infoWeb')); ?></a></li>
+                        <li><a href="<?= site_url('Dashboard/infoWeb'); ?>" class="ajax-link"><?= strtoupper($this->lang->line('infoWeb')); ?></a></li>
                     </ul>
                 </nav>
             </div>
@@ -57,7 +57,6 @@
         <!-- user/Login -->
         <div id="login">
             <a href="<?= $is_logged; ?>">
-            <?php if($this->session->userdata('img_user')) { ?>
                 <div>
                     <div class="logo principalLogoHide">
                         <a href="<?= $is_home ?>"><img src="<?= base_url('assets/img/icon/evLogo.svg'); ?>" alt="Icono EV" class="iconEv"></a>
@@ -66,6 +65,7 @@
                         <a href="<?= $is_home ?>"><?= strtoupper($this->lang->line('title')); ?></a>
                     </div>
                 </div>
+            <?php if($this->session->userdata('img_user')) { ?>
                 <div>
                     <!-- IDEA PARA MOSTRAR CREAR GRUPOS, CUANDO PINCHE ARRIBA EN LA FOTO DEL GRUPO, QUE SALGA EL DESPLEGABLE PARA: CONFIGURATION Y CREATE A GROUP Y JOIN A GROUP -->
                     <img class="userImage" src="<?= base_url('assets/img/img/default_img.webp') ?>" alt="user image">
@@ -128,6 +128,31 @@
             </h3>
             <p>
                 <?= $this->session->flashdata('successSignIn') ?>
+            </p>
+        </div>
+    </div>
+
+    <div id="globalModal" class="custom-modal">
+        <div class="custom-modal-content-global">
+        <span class="custom-close-global">&times;</span>
+            <h3>
+                <?= $this->lang->line('warningModalTitle'); ?>
+            </h3>
+            <p>
+                <?= $this->session->flashdata('globalModal') ?>
+            </p>
+        </div>
+    </div>
+
+    <!-- Modal por si no está en ningún grupo  -->
+    <div id="joinCreateModal" class="custom-modal">
+        <div class="custom-modal-content">
+            <span class="custom-close">&times;</span>
+            <h3>
+                <?= $this->lang->line('warningModalTitle'); ?>
+            </h3>
+            <p>
+                <?= $this->lang->line('joinCreateGroup'); ?>
             </p>
         </div>
     </div>

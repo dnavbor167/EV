@@ -230,22 +230,37 @@ $(function () {
         $('#logoGeneral').css('margin-left', '2.5rem')
     }
 
+    //si no está logueado poner un flex distinto al logo
+    //esta variable está definida en el footer
+    if (!isLoggedIn) {
+        function ajustarFlexHeader() {
+            if ($(window).width() >= 1180) {
+                $('#login > div:nth-of-type(1)').css('flex', '0 0 63%');
+            } else if ($(window).width() >= 1024) {
+                $('#login > div:nth-of-type(1)').css('flex', '0 0 70%');
+            }
+        }
+
+        // Ejecutar al cargar y al cambiar tamaño
+        $(window).on('load resize', ajustarFlexHeader);
+    }
+
     //boton back 
     //colors when click a button
-  $(document).on('mousedown mouseenter', '.icon-back, #btnRecoverPass', function() {
-    if ($(this).hasClass('icon-back')) {
-      $(this).css('fill', '#C65900');
-    } else {
-      $(this).css('background-color', '#C65900');
-    }
-  });
+    $(document).on('mousedown mouseenter', '.icon-back, #btnRecoverPass', function () {
+        if ($(this).hasClass('icon-back')) {
+            $(this).css('fill', '#C65900');
+        } else {
+            $(this).css('background-color', '#C65900');
+        }
+    });
 
-  $(document).on('mouseup mouseleave', '.icon-back, #btnRecoverPass', function() {
-    if ($(this).hasClass('icon-back')) {
-      $(this).css('fill', '#FF7300');
-    } else {
-      $(this).css('background-color', '#FF7300');
-    }
-  });
+    $(document).on('mouseup mouseleave', '.icon-back, #btnRecoverPass', function () {
+        if ($(this).hasClass('icon-back')) {
+            $(this).css('fill', '#FF7300');
+        } else {
+            $(this).css('background-color', '#FF7300');
+        }
+    });
 
 });

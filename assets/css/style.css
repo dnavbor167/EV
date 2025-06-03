@@ -288,7 +288,8 @@ footer a {
 }
 
 .custom-modal-content,
-.custom-modal-content-signIn {
+.custom-modal-content-signIn,
+.custom-modal-content-global {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #fff;
     border-radius: 12px;
@@ -305,16 +306,22 @@ footer a {
 }
 
 .custom-modal-content h3,
-.custom-modal-content-signIn h3 {
+.custom-modal-content-signIn h3,
+.custom-modal-content-global,
+h3 {
     margin-top: 0;
     margin-bottom: 15px;
     font-weight: 700;
     font-size: 1.8rem;
     letter-spacing: 0.03em;
+    color: #ff7300;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid gray;
 }
 
 .custom-modal-content p,
-.custom-modal-content-signIn p {
+.custom-modal-content-signIn p,
+.custom-modal-content-global p {
     font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 25px;
@@ -322,7 +329,8 @@ footer a {
 }
 
 .custom-close,
-.custom-close-signIn {
+.custom-close-signIn,
+.custom-close-global {
     position: absolute;
     top: 15px;
     right: 20px;
@@ -334,7 +342,8 @@ footer a {
 }
 
 .custom-close:hover,
-.custom-close-signIn:hover {
+.custom-close-signIn:hover,
+.custom-close-global:hover {
     color: #e74c3c;
 }
 
@@ -477,6 +486,7 @@ footer a {
 
 #logInMain form>p {
     font-weight: 900;
+    color: white;
 }
 
 #logInMain form {
@@ -551,6 +561,8 @@ footer a {
 
 #forgotPass {
     text-decoration: underline;
+    color: white !important;
+    text-align: center;
 }
 
 .btn-back {
@@ -578,6 +590,7 @@ footer a {
     margin-top: 1rem;
     margin-bottom: 8px;
     font-weight: bold;
+    color: white;
 }
 
 .custom-select-wrapper {
@@ -1026,6 +1039,53 @@ input[type='file'] {
     display: none;
 }
 
+#configurationPassUser {
+    margin-bottom: 0;
+}
+
+#configurationPassUser div {
+    width: 1.2rem;
+    position: relative;
+    top: -1.5rem;
+    left: 90%;
+}
+
+#configurationPassUser div svg:nth-child(2) {
+    display: none;
+}
+
+.errorGroup {
+    margin-left: 6rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1151,7 +1211,7 @@ input[type='file'] {
         flex: 0 0 100%;
     }
 
-    .photoFile {
+    #principalMenu .createJoinGroup #signIn .photoFile {
         border: dashed 5px #303030;
         color: #303030;
     }
@@ -1275,8 +1335,32 @@ input[type='file'] {
         height: 16rem;
     }
 
+    #login svg {
+        width: 3rem;
+        margin-left: auto;
+    }
+
     .plan-card {
         flex: 0 0 30% !important;
+    }
+
+    #logInMain form {
+        border-radius: 10px;
+        background-color: #D6D6D6;
+    }
+
+    #logInMain form>p,
+    #logInMain form #forgotPass,
+    #logInMain form label {
+        color: #303030 !important;
+    }
+
+    #principalMenu .createJoinGroup #signIn .headerCreateJoinGrou {
+        color: #FF7300 !important;
+    }
+
+    #logInMain form label.photoFile {
+        border: dashed #303030;
     }
 
 }
