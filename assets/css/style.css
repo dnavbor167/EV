@@ -167,7 +167,6 @@ footer svg {
 #evFooter {
     display: flex;
     flex-flow: row wrap;
-
 }
 
 footer>div {
@@ -180,6 +179,7 @@ footer>div {
     margin-top: 1.9rem;
     margin-left: 1rem;
     letter-spacing: 1rem;
+    border: none;
 }
 
 #iconEvFooter {
@@ -187,13 +187,14 @@ footer>div {
 }
 
 #evFooter div h3#vibesFooter {
-    margin-top: -6rem;
+    margin-top: -3.5rem;
     margin-bottom: 0;
 }
 
 #evContact h3 {
     font-size: 2rem;
     cursor: pointer;
+    border: none;
 }
 
 #evContact p {
@@ -361,6 +362,10 @@ h3 {
 .btn-custom.primary {
     background-color: #007bff;
     color: #fff;
+}
+
+#btnDeleteUserGroup {
+    font-size: 1rem;
 }
 
 .btn-custom.danger {
@@ -797,7 +802,8 @@ input[type='file'] {
     margin-top: .5rem;
 }
 
-#configUser {
+#configUser,
+#configGroup {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     position: absolute;
     top: 108px;
@@ -807,7 +813,8 @@ input[type='file'] {
     display: none;
 }
 
-#configUser a {
+#configUser a,
+#configGroup a {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -817,26 +824,33 @@ input[type='file'] {
     color: #303030;
 }
 
-#configUser p:nth-child(2) a {
-    color: red;
+a.beCareful {
+    color: red !important;
 }
 
-#configUser p:nth-child(2) a svg {
-    fill: red;
+a.beCareful svg {
+    fill: red !important;
 }
 
 #configUser p:nth-child(2) {
     border-top: 3px dotted #303030;
 }
 
-#configUser a svg {
+#configUser a svg,
+#configGroup a svg {
     margin-right: .4rem;
     fill: #303030;
 }
 
-#configUser p {
+#configUser p,
+#configGroup p {
     margin: 0;
     padding: 0;
+}
+
+#configUser p:hover,
+#configGroup p:hover {
+    background-color: #bdbdbd;
 }
 
 .form-container {
@@ -1056,6 +1070,37 @@ input[type='file'] {
 
 .errorGroup {
     margin-left: 6rem;
+}
+
+.search-container {
+    width: 300px;
+    padding: 20px;
+    border-radius: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 2rem;
+}
+
+
+.search-container .select2-container .select2-selection--single {
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    font-size: 16px;
+}
+
+.search-container .select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 8px;
+    right: 8px;
+}
+
+.search-container .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 26px;
+}
+
+.select2-container--default .select2-results__option {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #303030 !important;
 }
 
 
@@ -1289,7 +1334,6 @@ input[type='file'] {
     #login>div:nth-child(1) {
         height: 103px;
         margin-bottom: 2rem;
-        background-color: red;
     }
 
     #login>div:nth-of-type(1) {
@@ -1336,8 +1380,12 @@ input[type='file'] {
     }
 
     #login svg {
-        width: 3rem;
+        width: 2rem;
+    }
+
+    #not_login {
         margin-left: auto;
+        margin-top: -1.5rem;
     }
 
     .plan-card {

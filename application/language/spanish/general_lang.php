@@ -7,6 +7,8 @@ $lang['eventsName']       = "Eventos";
 $lang['createEvents']     = "Crear Eventos";
 $lang['createSongs']      = "Crear Canciones";
 $lang['songs']            = "Canciones";
+$lang['groupUsers']       = "Usuarios del grupo";
+$lang['groupNewUsers']    = "Nuevos Usuarios";
 $lang['user']             = "Usuario";
 $lang['infoWeb']          = "Info Web";
 
@@ -40,6 +42,8 @@ $lang['errorUserCreate']   = "Usuario existente";
 $lang['signInSuccess']     = "Se ha registrado correctamente, inicie sesión";
 $lang['errorInsert']       = "Error al insertar al usuario";
 $lang['pendingUserExists'] = "Hay un registro pendiente con este email. Revisa tu correo.";
+$lang['errorInsPendUser']  = "Error guardando usuario pendiente.";
+$lang['errorInsPendGroup'] = "Error guardando grupo pendiente.";
 $lang['singInEmailSend']   = "Le hemos enviado un correo de confirmación para que confirme su email";
 $lang['confirmRegister']   = "Confirma tu registro";
 $lang['changePassword']    = "Restablecer contraseña";
@@ -53,7 +57,7 @@ $lang['delete']            = "Borrar";
 $lang['deleteError']       = 'Error al eliminar el usuario';
 $lang['joinCreateGroup']   = 'Para poder utilizar las funcionalidades de esta web, ha de estar en un <span class="groupSpan">vinculado a un grupo</span> o <span class="groupSpan">crear un grupo</span>. <br><br> Por favor cierre la modal y haga una de las dos opciones anteriores.';
 $lang['joinGroup']         = 'Unirte a un grupo';
-$lang['createGroup']       = 'Crea una grupo';
+$lang['createGroup']       = 'Crea un grupo';
 $lang['termsConditions']   = 'Acepta los términos, condiciones y políticas de pagos';
 $lang['messageRecoverPass']= 'Le llegará un correo con indicaciones para poder cambiar la contraseña.';
 $lang['invalid_or_expired_token'] = 'Token inválido o expirado, por favor vuelva a solicitar la contraseña';
@@ -61,7 +65,15 @@ $lang['password_updated_successfully'] = 'Contraseña actualizada con éxito, in
 $lang['activeSession']     = 'Ya has iniciado sesión en otro dispositivo, para poder utilizarla cierra sessión en el otro dispositivo.';
 $lang['errorInitPayment']  = 'Error al iniciar el pago.';
 $lang['errorConexion']     = 'Error de conexión.';
-
+$lang['errorEmail']        = 'No se pudo enviar el email.';
+$lang['errorActivGroup']   = 'Error al crear el grupo, inténtelo de nuevo, si persiste pongase en contacto con el soporte.';
+$lang['messageExitGroup']  = '¿Seguro desea salirse del grupo? <br><br> Si quieres volver acceder al grupo tendrás que volver a unirte al grupo y esperar a que el administrador le acepte.';
+$lang['exit']              = 'Salirse';
+$lang['imposibleExitGroup']= 'No puede salirser del grupo porque solo está usted como administrador, para poder salirse del grupo, por favor ponga a alguien como administrador.';
+$lang['errorJoinSelect']   = 'Debe elegir un grupo al que adherirse';
+$lang['joinSubmited']      = '¡Petición enviada con éxito! <br><br> Espere a que el administrador del grupo lo acepte o lo rechace.';
+$lang['joinSubmitedError'] = 'Error al unirse, inténtelo de nuevo.';
+$lang['joinSubmitedSuccess'] = 'Has sido aceptado en el grupo <i>{NOMBRE}</i>.';
 
 
 //Home
@@ -125,6 +137,7 @@ $lang['inputFile'] = "Imagen";
 //User
 $lang['config'] = 'Configuración';
 $lang['logOut'] = 'Cerrar sesión';
+$lang['exitActualGroup'] = 'Salir del grupo';
 $lang['name']   = 'Nombre:';
 $lang['language']   = 'Idioma:';
 $lang['selectLanguage']   = 'Selecciona un idioma';
@@ -148,6 +161,7 @@ $lang['rights'] = '2025 Eternals Vibes. Todos los derechos reservados.';
 
 
 //Group
+$lang['group']                   = "Grupo";
 $lang['nameGroup']               = "Nombre del grupo";
 $lang['emailGroup']              = "Email del grupo";
 $lang['passwordGroup']           = "Contraseña del grupo";
@@ -158,5 +172,7 @@ $lang['errorGroupPhoto']         = "Debe seleccionar una imagen";
 $lang['createGroupAgain']        = "Al salirse del apartado de crear grupos, los datos se han perdido, por favor si desea crear un grupo vuelve al formulario para ello.";
 $lang['userNameRepeated']        = "Nombre de usuario en uso.";
 $lang['emailRepeated']           = "Email en uso.";
+$lang['searchGroup']             = "Busca un grupo...";
+$lang['requestJoin']             = "Solicitar unirme";
 
 ?>

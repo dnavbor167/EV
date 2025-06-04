@@ -7,6 +7,8 @@ $lang['eventsName']       = "Events";
 $lang['createEvents']     = "Create Events";
 $lang['createSongs']      = "Create Songs";
 $lang['songs']            = "Songs";
+$lang['groupUsers']       = "Group users";
+$lang['groupNewUsers']    = "New Users";
 $lang['user']             = "User";
 $lang['infoWeb']          = "Web Info";
 
@@ -38,6 +40,8 @@ $lang['userName']          = "User Name";
 $lang['haveAccount']       = "Already have an account?";
 $lang['errorUserCreate']   = "Existing user";
 $lang['pendingUserExists'] = "There's a pending registration for this email. Check your inbox.";
+$lang['errorInsPendUser']  = "Error saving pending user.";
+$lang['errorInsPendGroup'] = "Error saving pending group.";
 $lang['errorInsert']       = "Error inserting user";
 $lang['signInSuccess']     = "You have registered successfully, please log in.";
 $lang['singInEmailSend']   = "We have sent you a confirmation email so you can confirm your email.";
@@ -61,6 +65,16 @@ $lang['password_updated_successfully'] = 'Password updated successfully, please 
 $lang['activeSession']     = "You're already logged in on another device. To use it, please log out on the other device.";
 $lang['errorInitPayment']  = 'Error initiating payment.';
 $lang['errorConexion']     = 'Connection error.';
+$lang['errorEmail']        = 'The email could not be sent.';
+$lang['errorActivGroup']   = 'Error creating group, please try again. If the error persists, please contact support.';
+$lang['messageExitGroup']  = "Are you sure you want to leave the group? <br><br> If you want to re-enter the group, you'll have to rejoin it and wait for the administrator to accept you.";
+$lang['exit']              = 'Get out';
+$lang['imposibleExitGroup']= "You can't leave the group because you are the only one who is the administrator. To leave the group, please make someone an administrator.";
+$lang['errorJoinSelect']   = 'You must choose a group to join';
+$lang['joinSubmited']      = 'Request sent successfully! <br><br> Please wait for the group administrator to accept or reject it.';
+$lang['joinSubmitedError'] = 'Failed to join, please try again.';
+$lang['joinSubmitedSuccess'] = 'You have been accepted into the group <i>{NOMBRE}</i>.';
+
 
 //Home
 $lang['schedule']          = "Schedule";
@@ -123,6 +137,7 @@ $lang['inputFile'] = "Image";
 //User
 $lang['config'] = 'Configuration';
 $lang['logOut'] = 'Log Out';
+$lang['exitActualGroup'] = 'Exit Group';
 $lang['name']   = 'Name:';
 $lang['language']   = 'Language:';
 $lang['selectLanguage']   = 'Select a language';
@@ -147,6 +162,7 @@ $lang['rights'] = '2025 Eternals Vibes. All rights reserved.';
 
 
 //Group
+$lang['group']                   = "Group";
 $lang['nameGroup']               = "Group name";
 $lang['emailGroup']              = "Group email";
 $lang['passwordGroup']           = "Group password";
@@ -157,5 +173,7 @@ $lang['errorGroupPhoto']         = "You must select an image";
 $lang['createGroupAgain']        = "When you exited the group creation section, the data was lost. Please return to the form to create a group.";
 $lang['userNameRepeated']        = "Username in use.";
 $lang['emailRepeated']           = "Email in use.";
+$lang['searchGroup']             = "Search a group...";
+$lang['requestJoin']             = "Request join";
 
 ?>

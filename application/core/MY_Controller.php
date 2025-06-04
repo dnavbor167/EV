@@ -4,13 +4,24 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class MY_Controller extends CI_Controller
 {
 
+	protected $not_login = [
+		'auth/login',
+		'auth/signin',
+		'auth/verify_email',
+		'auth/logout',
+		'auth/recoverpassword',
+		'dashboard/paymentsplans',
+		'dashboard/infoweb',
+		'dashboard/index'
+	];
+
 	protected $creating_group = [
 		'groups/creategroup'
 	];
 
 	protected $group_exceptions = [
 		'auth/login',
-		'auth/signIn',
+		'auth/signin',
 		'auth/verify_email',
 		'auth/logout',
 		'auth/configuration',
@@ -19,7 +30,9 @@ class MY_Controller extends CI_Controller
 		'groups/index',
 		'dashboard/paymentsplans',
 		'dashboard/infoweb',
-		'groups/creategroup'
+		'groups/creategroup',
+		'groups/joingroup',
+		'groups/paymentsplans'
 	];
 
 	public function __construct()
@@ -31,11 +44,54 @@ class MY_Controller extends CI_Controller
 			2 => 'english'
 		];
 		$language = isset($lang_map[$lang_id]) ? $lang_map[$lang_id] : 'spanish';
-
 		$this->lang->load('general', $language);
 
 		//Si está logueado ejecutamos la siguiente lógica
 		if ($this->session->userdata('is_logged_in')) {
+
+			//Controlar que si el token que tiene es el mismo que en el de la base de datos constantemente
+			$usuario_id = $this->session->userdata('user_id');
+			$session_token = $this->session->userdata('session_token');
+			if ($usuario_id && $session_token) {
+				$token_db = $this->User_model->get_user_token($usuario_id);
+				if ($token_db !== $session_token) {
+					$this->session->sess_destroy();
+					redirect('auth/login');
+				}
+			}
+
+			//Mirar si en algún grupo ha sido aceptado
+			$actualUserBelongGroup = $this->User_model->userBelongGroup($this->session->userdata('user_id'));
+			$actualUserBelongLen = count($actualUserBelongGroup);
+			$groupsInSession = $this->session->userdata('is_in_any_group') ?? [];
+
+			if ($actualUserBelongLen > count($this->session->userdata('is_in_any_group'))) {
+				$gruposAnterioresIDs = array_column($groupsInSession, 'grupo_id');
+				$gruposActualesIDs = array_column($actualUserBelongGroup, 'grupo_id');
+
+				//Nuevo grupo
+				$gruposNuevosIDs = array_diff($gruposActualesIDs, $gruposAnterioresIDs);
+
+				if (!empty($gruposNuevosIDs)) {
+					$ultimoGrupoAceptadoID = end($gruposNuevosIDs);
+					$ultimoGrupoAceptado = $this->User_model->getGroupById($ultimoGrupoAceptadoID);
+
+					// Actualizar sesión
+					$data = [
+						'is_in_any_group' => $actualUserBelongGroup,
+						'groups' => $this->User_model->getGroups($gruposActualesIDs)
+					];
+
+					$this->session->set_userdata($data);
+					$message = str_replace('{NOMBRE}', $ultimoGrupoAceptado['nombre'], $this->lang->line('joinSubmitedSuccess'));
+					$this->session->set_flashdata('globalModal', $message);
+					redirect('Dashboard');
+				}
+			}
+
+			//Mirar inactividad
+			$this->check_inactivity();
+
 			//Si el usuario actual ha sido borrado se elimina la session y se redirge al home
 			if ($this->User_model->userExists($this->session->userdata('email'), 1)) {
 				$this->session->sess_destroy();
@@ -60,6 +116,11 @@ class MY_Controller extends CI_Controller
 				$this->_handle_redirect('Groups');
 			}
 
+		} else {
+			//Si no está logueado redirigir siempre a Dashboard
+			if (!in_array(strtolower($this->router->class . '/' . $this->router->method), $this->not_login)) {
+				redirect('Dashboard');
+			}
 		}
 
 	}
@@ -74,6 +135,20 @@ class MY_Controller extends CI_Controller
 			exit;
 		} else {
 			redirect($url);
+		}
+	}
+
+	//chequear inactividad
+	private function check_inactivity()
+	{
+		$timeout = 300;
+		$last_activity = $this->session->userdata('last_activity');
+
+		if ($last_activity && (time() - $last_activity > $timeout)) {
+			$this->session->sess_destroy();
+			redirect('Auth/login');
+		} else {
+			$this->session->set_userdata('last_activity', time());
 		}
 	}
 

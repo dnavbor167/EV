@@ -1,7 +1,7 @@
 <div id="groupSelection">
 	<div class="principalElementsGroups">
 		<div class="joinCreateGroup">
-			<a href="#">
+			<a href="<?= site_url('Groups/joinGroup') ?>" >
 				<?= strtoupper($this->lang->line('joinGroup')); ?>
 			</a>
 		</div>

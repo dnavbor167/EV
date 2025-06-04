@@ -10,16 +10,6 @@ class Auth extends MY_Controller
 
 		//borramos usuarios de pending users que no han sido accedidos
 		$this->User_model->deleteExpiredPendingUser();
-
-		$usuario_id = $this->session->userdata('user_id');
-		$session_token = $this->session->userdata('session_token');
-		if ($usuario_id && $session_token) {
-			$token_db = $this->User_model->get_user_token($usuario_id);
-			if ($token_db !== $session_token) {
-				$this->session->sess_destroy();
-				redirect('login');
-			}
-		}
 	}
 
 	public function index()
@@ -52,11 +42,6 @@ class Auth extends MY_Controller
 			$login = $this->User_model->loginUser($data);
 
 			if ($login) {
-				if (!empty($login['session_token'])) {
-					$this->session->set_flashdata('globalModal', $this->lang->line('activeSession'));
-					redirect('auth/login');	
-				}
-
 				$token = uniqid('sess_', true);
 				$this->User_model->save_token_user($login['usuario_id'], $token);
 
@@ -69,13 +54,16 @@ class Auth extends MY_Controller
 					'is_logged_in' => true,
 					'is_in_any_group' => $this->User_model->userBelongGroup($login['usuario_id']),
 					'actual_group' => $login['actual_group'],
-					'session_token' => $token
+					'session_token' => $token,
+					'last_activity' => time()
 				);
 
 				if ($array['is_in_any_group']) {
 					$groups_ids = array_column($array['is_in_any_group'], 'grupo_id');
 					$array['groups'] = $this->User_model->getGroups($groups_ids);
 				}
+
+				$array['rol'] = $this->User_model->actualRol($array['user_id'], $array['actual_group']);
 
 				$this->session->set_userdata($array);
 				redirect(base_url('Dashboard'));
@@ -166,7 +154,7 @@ class Auth extends MY_Controller
 			$userData['img'] = $photoFileName;
 
 			if (!$this->User_model->insertPendingUser($userData)) {
-				$data['errorInsert'] = "Error guardando usuario pendiente.";
+				$data['errorInsert'] = $this->lang->line('errorInsPendUser');
 				$this->loadViews("signIn", $data);
 				return;
 			}
@@ -181,7 +169,8 @@ class Auth extends MY_Controller
 			$this->email->message($message);
 
 			if (!$this->email->send()) {
-				$data['errorInsert'] = "No se pudo enviar el email de confirmación.";
+				$data['errorInsert'] = $this->lang->line('errorEmail');
+				$this->User_model->deletePendingUser($token);
 				$this->loadViews("signIn", $data);
 				return;
 			}
@@ -194,6 +183,7 @@ class Auth extends MY_Controller
 
 	public function verify_email()
 	{
+		$group = $this->input->get('group') == 1 ? $this->input->get('group') : false;
 		$token = $this->input->get('token');
 
 		if (!$token) {
@@ -216,27 +206,45 @@ class Auth extends MY_Controller
 			return;
 		}
 
-		// Crear usuario definitivo
-		$userData = [
-			'nombre' => $pendingUser['nombre'],
-			'email' => $pendingUser['email'],
-			'password' => $pendingUser['password'],
-			'language' => $pendingUser['language'],
-			'img' => $pendingUser['img'],
-			'deleted' => $pendingUser['deleted'],
-			'promotions' => $pendingUser['promotions']
-		];
+		if ($group) {
+			$this->load->model('Group_model');
+			// Crear usuario definitivo
+			$userData = [
+				'nombre' => $pendingUser['nombre'],
+				'email' => $pendingUser['email'],
+				'password' => $pendingUser['password'],
+				'termsConditions' => $pendingUser['termsConditions'],
+				'deleted' => $pendingUser['deleted'],
+			];
 
 
-		if ($this->User_model->insertUser($userData)) {
-			// Borrar usuario pendiente
-			$this->User_model->deletePendingUser($token);
+			redirect('Dashboard/paymentsPlans');
 
-			// Mostrar mensaje de éxito o redirigir al login
-			redirect('Auth/login');
 		} else {
-			show_error('Error al activar usuario, intenta de nuevo.');
+			// Crear usuario definitivo
+			$userData = [
+				'nombre' => $pendingUser['nombre'],
+				'email' => $pendingUser['email'],
+				'password' => $pendingUser['password'],
+				'language' => $pendingUser['language'],
+				'img' => $pendingUser['img'],
+				'deleted' => $pendingUser['deleted'],
+				'promotions' => $pendingUser['promotions']
+			];
+
+
+			if ($this->User_model->insertUser($userData)) {
+				// Borrar usuario pendiente
+				$this->User_model->deletePendingUser($token);
+
+				// Mostrar mensaje de éxito o redirigir al login
+				redirect('Auth/login');
+			} else {
+				$this->User_model->deletePendingUser($token);
+				show_error('Error al activar usuario, intenta de nuevo.');
+			}
 		}
+
 	}
 
 
@@ -319,6 +327,8 @@ class Auth extends MY_Controller
 					'language' => $data['language'],
 					'img_user' => $data['img']
 				];
+
+				$array['rol'] = $this->User_model->actualRol($this->session->userdata('user_id'), $array['actual_group']);
 				$this->session->set_userdata($array);
 
 				redirect(current_url());
@@ -354,7 +364,7 @@ class Auth extends MY_Controller
 				$this->email->message($message);
 
 				if (!$this->email->send()) {
-					$data['errorInsert'] = "No se pudo enviar el email.";
+					$data['errorInsert'] = $this->lang->line('errorEmail');
 					$this->loadViews("logIn", $data);
 					return;
 				}

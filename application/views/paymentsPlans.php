@@ -54,21 +54,34 @@
 
 
 <script>
+    const csrfName = '<?= $this->security->get_csrf_token_name(); ?>';
+    const csrfHash = '<?= $this->security->get_csrf_hash(); ?>';
+
+
     $('.plan-card, .btn-select').on('click', function () {
         const planId = $(this).closest('.plan-card').data('id')
+        console.log(planId)
 
         $.ajax({
-            url: '<?= base_url("Groups/paymentsPlans/") ?>' + planId,
+            data: {
+                plan: planId,
+                [csrfName]: csrfHash // incluimos el token OBLIGATORIO SINO NO FUNCIONA EL POST
+            },
+            url: '<?= site_url("Groups/paymentsPlans") ?>',
             method: 'POST',
             dataType: 'json',
             success: function (response) {
+                console.log(response)
                 if (response.success && response.url) {
                     window.location.href = response.url;
                 } else {
                     alert(response.message || '<?= $this->lang->line('errorInitPayment'); ?>');
                 }
             },
-            error: function () {
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+                console.error('Error AJAX:', status, error);
+                console.error('Respuesta servidor:', xhr.responseText);
                 alert('<?= $this->lang->line('errorConexion'); ?>');
             }
         });

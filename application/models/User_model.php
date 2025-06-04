@@ -1,6 +1,32 @@
 <?php
 class User_model extends CI_Model
 {
+    //Obtener rol actual dado un grupo
+    public function actualRol($user, $actual_group) {
+        $this->db->select('rol');
+        $this->db->from('Usuarios_Grupos');
+        $this->db->where('usuario_id', $user);
+        $this->db->where('grupo_id', $actual_group);
+        $query = $this->db->get();
+
+        $result = $query->row_array();
+
+        return $result ? $result['rol'] : null;
+    }
+
+    //Actualizar última actividad
+    public function update_last_activity($user_id)
+    {
+        $this->db->where('usuario_id', $user_id);
+        $this->db->update('Usuarios', ['last_activity' => time()]);
+    }
+
+    //Limpiamos la ultima actividad
+    public function clear_user_token($user_id)
+    {
+        $this->db->where('usuario_id', $user_id);
+        $this->db->update('Usuarios', ['session_token' => null]);
+    }
 
     //get user by email
     public function getUserByEmail($email)
@@ -88,11 +114,11 @@ class User_model extends CI_Model
     public function save_token_user($user_id, $token)
     {
         $this->db->where('usuario_id', $user_id);
-        $this->db->update('Usuarios',['session_token' => $token]);
+        $this->db->update('Usuarios', ['session_token' => $token]);
     }
 
     //Obtain token by user
-    public function get_user_token($user_id) 
+    public function get_user_token($user_id)
     {
         $this->db->select('session_token');
         $this->db->from('Usuarios');
@@ -173,6 +199,7 @@ class User_model extends CI_Model
 
     public function userBelongGroup($id_user)
     {
+        $this->db->where('estado', 'activo');
         $this->db->where('usuario_id', $id_user);
         $query = $this->db->get('Usuarios_Grupos');
 
@@ -192,11 +219,19 @@ class User_model extends CI_Model
                 'grupo_id' => $group['grupo_id'],
                 'name' => $group['nombre'],
                 'email' => $group['email'],
-                'photo' => $group['foto']
+                'img' => $group['img']
             ];
         }
 
         return $groups_by_id;
+    }
+
+    public function getGroupById($group_id) {
+        $this->db->select('nombre, email, img');
+        $this->db->where('grupo_id', $group_id);
+        $query = $this->db->get('Grupos');
+        
+        return $query->row_array();
     }
 
 
