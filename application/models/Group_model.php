@@ -41,9 +41,9 @@ class Group_model extends CI_Model
             if (!empty($groups)) {
                 $newGroupSelected = reset($groups);
                 $newGroupId = $newGroupSelected['grupo_id'];
-                var_dump($groups);exit;
 
                 $this->session->set_userdata('actual_group', $newGroupId);
+                $this->User_model->updateUser($user, ['actual_group' => $newGroupId]);
             } else {
                 $this->session->unset_userdata('actual_group');
                 $this->User_model->updateUser($user, ['actual_group' => NULL]);
