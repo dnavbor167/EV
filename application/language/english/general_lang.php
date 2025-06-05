@@ -85,7 +85,7 @@ $lang['comingSoon']        = "Coming Soon";
 $lang['textPrivacyCondi']  = "By creating an account and subscribing, you confirm that you have read the Privacy Policy and agree to the Terms of Sale.";
 
 //payments
-$lang['plans']             = "Planes";
+$lang['plans']             = "Plans";
 
 // Nombres de planes
 $lang['plans_free_title'] = "Free (limited)";
