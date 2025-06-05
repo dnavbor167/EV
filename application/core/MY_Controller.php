@@ -99,6 +99,12 @@ class MY_Controller extends CI_Controller
 				}
 			}
 
+			//Marcamos si hay alguna petición nueva de usuario
+			$this->load->model('Admin_model');
+			$this->load->vars([
+				'countNewPetitionsUsers' => $this->Admin_model->getUserPetitions()
+			]);
+
 			//Verificar que la ruta actual no está en group_exceptions
 			$ruta_actual = strtolower($this->router->class . '/' . $this->router->method);
 
@@ -142,7 +148,7 @@ class MY_Controller extends CI_Controller
 	//chequear inactividad
 	private function check_inactivity()
 	{
-		$timeout = 300;
+		$timeout = 900;
 		$last_activity = $this->session->userdata('last_activity');
 
 		if ($last_activity && (time() - $last_activity > $timeout)) {

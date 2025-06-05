@@ -38,8 +38,9 @@
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('songs')); ?></a></li>
                         <?php if ($this->session->userdata('groups') && $this->session->userdata('rol') == 'admin') { ?>
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('createSongs')); ?></a></li>
-                        <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('groupUsers')); ?></a></li>
-                        <li class="requires-login"><a href="<?= site_url('AdminUsersGroup'); ?>" class="ajax-link"><?= strtoupper($this->lang->line('groupNewUsers')); ?></a></li>
+                        <li class="requires-login"><a href="<?= site_url('AdminUsersGroup/groupUsers'); ?>" class="ajax-link"><?= strtoupper($this->lang->line('groupUsers')); ?></a></li>
+                        <li class="requires-login"><a href="<?= site_url('AdminUsersGroup'); ?>" class="ajax-link"><?= strtoupper($this->lang->line('groupNewUsers')) . 
+                            ($countNewPetitionsUsers != 0 ? ' <span class="numeroPeticiones">' . $countNewPetitionsUsers . '</span>' : ''); ?></a></li>
                         <?php } ?>
 
                         <?php if ($this->session->userdata('is_logged_in')) { 

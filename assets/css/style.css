@@ -71,7 +71,8 @@ header::before {
     width: 5rem;
 }
 
-.userImage {
+.userImage,
+.imgUserGroup {
     width: 3rem;
     height: 3rem;
     padding: 0;
@@ -1104,20 +1105,114 @@ a.beCareful svg {
 }
 
 .tableUsers {
-    width: 90%; 
+    width: 90%;
     margin: 0 auto;
     margin-bottom: auto;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 
+/* responsive-table.css */
+.table-responsive-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
 
+.rechazar {
+    background-color: #D20000;
+    margin-right: .5rem;
+}
 
+.aceptar {
+    background-color: #28a745;
+    margin-top: 1rem;
+}
 
+.aceptar:active {
+    background-color: #1d7932;
+}
 
+.rechazar:active {
+    background-color: #940000;
+}
 
+.rechazar,
+.aceptar {
+    border: none;
+    padding: .7rem;
+    border-radius: 15px;
+    color: white;
+    font-weight: bold;
+}
 
+.numeroPeticiones {
+    background-color: #28a745;
+    padding: 0.4rem 0.7rem;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+    display: inline-block;
+    min-width: 1.5rem;
+    text-align: center;
+    line-height: 1.5rem;
+}
 
+.selectRol {
+    padding: 6px 12px;
+    border: 1.8px solid #4a90e2;
+    /* azul suave */
+    border-radius: 6px;
+    background-color: #f0f6ff;
+    color: #1a1a1a;
+    font-weight: 500;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    outline: none;
+    min-width: 140px;
+}
+
+.selectRol:hover {
+    border-color: #357ABD;
+    box-shadow: 0 0 8px rgba(53, 122, 189, 0.4);
+}
+
+.selectRol:focus {
+    border-color: #1a5fb4;
+    box-shadow: 0 0 10px rgba(26, 95, 180, 0.6);
+    background-color: #e6f0ff;
+}
+
+.firstRowImg {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.imgUserGroup {
+    margin-bottom: .5rem;
+}
+
+.firstRowImg {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.firstRowImg p {
+    margin: 0;
+    padding: 0;
+    flex: 0 0 100%;
+    text-align: center;
+}
+
+.imgUserGroup {
+    margin-bottom: .5rem;
+}
 
 
 
@@ -1147,6 +1242,12 @@ a.beCareful svg {
     .eternals-vibes-info {
         margin: 20px;
         padding: 20px;
+    }
+}
+
+@media (min-width: 707px) {
+    .aceptar {
+        margin-top: 0;
     }
 }
 
@@ -1413,6 +1514,14 @@ a.beCareful svg {
 
     #logInMain form label.photoFile {
         border: dashed #303030;
+    }
+
+    .aceptar:hover {
+        background-color: #1d7932;
+    }
+
+    .rechazar:hover {
+        background-color: #940000;
     }
 
 }

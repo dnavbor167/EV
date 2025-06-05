@@ -179,6 +179,12 @@ $lang['requestJoin']             = "Solicitar unirme";
 //users groups admin
 $lang['nameAdmin']               = "Nombre";
 $lang['statusAdmin']             = "Estado";
+$lang['rolAdmin']                = "Rol";
 $lang['actionsAdmin']            = "Acciones";
+$lang['declineUsers']            = "Rechazar";
+$lang['acceptUsers']             = "Aceptar";
+$lang['userAdmin']               = "Admin";
+$lang['userColaborador']         = "Colaborador";
+$lang['userNormal']              = "Normal";
 
 ?>

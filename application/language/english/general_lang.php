@@ -180,6 +180,12 @@ $lang['requestJoin']             = "Request join";
 //users groups admin
 $lang['nameAdmin']               = "Name";
 $lang['statusAdmin']             = "Status";
+$lang['rolAdmin']                = "Rol";
 $lang['actionsAdmin']            = "Actions";
+$lang['declineUsers']            = "Decline";
+$lang['acceptUsers']             = "Accept";
+$lang['userAdmin']               = "Admin";
+$lang['userColaborador']         = "Collaborator";
+$lang['userNormal']              = "Normal";
 
 ?>
