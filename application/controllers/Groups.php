@@ -13,7 +13,6 @@ class Groups extends MY_Controller
 
 	public function index()
 	{
-
 		$this->loadViews('joinCreateGroup');
 	}
 
@@ -32,18 +31,20 @@ class Groups extends MY_Controller
 					'grupo_id' => $this->input->post('grupo_id')
 				];
 
+				$redirect = count($this->session->userdata('is_in_any_group')) <= 0 ? 'Groups' : 'Dashboard';
+
 				if ($this->Group_model->insert_usuario_grupos($data)) {
 					$this->session->set_flashdata('globalModal', $this->lang->line('joinSubmited'));
-					redirect('Dashboard');
+					redirect($redirect);
 					return;
 				} else {
 					$this->session->set_flashdata('globalModal', $this->lang->line('joinSubmitedError'));
-					redirect('Dashboard');
+					redirect($redirect);
 				}
 			}
 		}
 		//Obtener todos los grupos
-		$allGroups = $this->Group_model->getAllGroups();
+		$allGroups = $this->Group_model->getGroupsNotRequired();
 
 		$groups = [];
 		foreach ($allGroups as $group) {
@@ -237,6 +238,7 @@ class Groups extends MY_Controller
 		}
 	}
 
+	//Salirse del grupo
 	public function exitActualGroup()
 	{
 		$user_id = $this->session->userdata('user_id');
@@ -275,7 +277,8 @@ class Groups extends MY_Controller
 			'usuario_id' => $this->session->userdata('user_id'),
 			'grupo_id' => $grupo_id,
 			'rol' => 'admin',
-			'estado' => 'activo'
+			'estado' => 'activo',
+			'fecha_ingreso' => Date('Y-m-d')
 		];
 
 		if ($this->Group_model->insert_usuario_grupos($data)) {

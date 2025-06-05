@@ -39,7 +39,7 @@
                         <?php if ($this->session->userdata('groups') && $this->session->userdata('rol') == 'admin') { ?>
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('createSongs')); ?></a></li>
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('groupUsers')); ?></a></li>
-                        <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('groupNewUsers')); ?></a></li>
+                        <li class="requires-login"><a href="<?= site_url('AdminUsersGroup'); ?>" class="ajax-link"><?= strtoupper($this->lang->line('groupNewUsers')); ?></a></li>
                         <?php } ?>
 
                         <?php if ($this->session->userdata('is_logged_in')) { 
@@ -74,7 +74,9 @@
             <?php if($this->session->userdata('img_user')) { ?>
                 <div>
                     <!-- IDEA PARA MOSTRAR CREAR GRUPOS, CUANDO PINCHE ARRIBA EN LA FOTO DEL GRUPO, QUE SALGA EL DESPLEGABLE PARA: CONFIGURATION Y CREATE A GROUP Y JOIN A GROUP -->
-                    <img id="configGroupImg" class="userImage" src="<?= $this->session->has_userdata('groups') ? base_url('uploads/group_img/') . $this->session->userdata('groups')[$this->session->userdata('actual_group')]['img'] : base_url('assets/img/img/default_group.webp') ?>" alt="user image">
+                    <img id="configGroupImg" class="userImage" src="<?= (!empty($this->session->userdata('groups')) && isset($this->session->userdata('groups')[$this->session->userdata('actual_group')]['img']))
+                                                                        ? base_url('uploads/group_img/') . $this->session->userdata('groups')[$this->session->userdata('actual_group')]['img']
+                                                                        : base_url('assets/img/img/default_group.webp') ?>" alt="group image">
                     <?php $imgUser = $this->session->userdata('img_user') == 'default_img' ? base_url('assets/img/img/default_img.webp') : base_url('uploads/user_img/') . $this->session->userdata('img_user'); ?>
                     <img id="confiUserImg" class="userImage" src="<?= $imgUser ?>" alt="user image">
                 </div>

@@ -176,4 +176,10 @@ $lang['emailRepeated']           = "Email in use.";
 $lang['searchGroup']             = "Search a group...";
 $lang['requestJoin']             = "Request join";
 
+
+//users groups admin
+$lang['nameAdmin']               = "Name";
+$lang['statusAdmin']             = "Status";
+$lang['actionsAdmin']            = "Actions";
+
 ?>

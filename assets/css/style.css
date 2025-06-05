@@ -1103,8 +1103,12 @@ a.beCareful svg {
     color: #303030 !important;
 }
 
-
-
+.tableUsers {
+    width: 90%; 
+    margin: 0 auto;
+    margin-bottom: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 
 

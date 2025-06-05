@@ -175,4 +175,10 @@ $lang['emailRepeated']           = "Email en uso.";
 $lang['searchGroup']             = "Busca un grupo...";
 $lang['requestJoin']             = "Solicitar unirme";
 
+
+//users groups admin
+$lang['nameAdmin']               = "Nombre";
+$lang['statusAdmin']             = "Estado";
+$lang['actionsAdmin']            = "Acciones";
+
 ?>

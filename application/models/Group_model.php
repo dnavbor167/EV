@@ -64,6 +64,33 @@ class Group_model extends CI_Model
 
     }
 
+    //Obtener todos los grupos que no he solicitado unirme
+    public function getGroupsNotRequired()
+    {
+        //Obtenemos los id de los grupos donde no hay ningún registro de user_id
+        $this->db->select('grupo_id');
+        $this->db->from('Usuarios_Grupos');
+        $this->db->where('usuario_id', $this->session->userdata('user_id'));
+        $query = $this->db->get();
+        $result = $query->result_array();
+
+        //array plano
+        $groups_ids = array_column($result, 'grupo_id');
+
+        //Obtenemos los grupos
+        $this->db->select('*');
+        $this->db->from('Grupos');
+
+        if (!empty($groups_ids)) {
+            // Si tiene grupos, excluimos esos grupos
+            $this->db->where_not_in('grupo_id', $groups_ids);
+        }
+
+        $query2 = $this->db->get();
+
+        return $query2->result_array();
+    }
+
     //Mirar si existe la imagen para no tener duplicados en la base de datos de nombres
     public function imageGroupExists($img)
     {

@@ -60,6 +60,15 @@ class MY_Controller extends CI_Controller
 				}
 			}
 
+			//Mirar inactividad
+			$this->check_inactivity();
+
+			//Si el usuario actual ha sido borrado se elimina la session y se redirge al home
+			if ($this->User_model->userExists($this->session->userdata('email'), 1)) {
+				$this->session->sess_destroy();
+				redirect('Dashboard');
+			}
+
 			//Mirar si en algún grupo ha sido aceptado
 			$actualUserBelongGroup = $this->User_model->userBelongGroup($this->session->userdata('user_id'));
 			$actualUserBelongLen = count($actualUserBelongGroup);
@@ -85,17 +94,9 @@ class MY_Controller extends CI_Controller
 					$this->session->set_userdata($data);
 					$message = str_replace('{NOMBRE}', $ultimoGrupoAceptado['nombre'], $this->lang->line('joinSubmitedSuccess'));
 					$this->session->set_flashdata('globalModal', $message);
+					
 					redirect('Dashboard');
 				}
-			}
-
-			//Mirar inactividad
-			$this->check_inactivity();
-
-			//Si el usuario actual ha sido borrado se elimina la session y se redirge al home
-			if ($this->User_model->userExists($this->session->userdata('email'), 1)) {
-				$this->session->sess_destroy();
-				redirect('Dashboard');
 			}
 
 			//Verificar que la ruta actual no está en group_exceptions
