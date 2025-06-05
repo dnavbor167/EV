@@ -13,25 +13,34 @@
 			foreach ($newUsers as $value) {
 				$id_empleado = $value['usuario_id'];
 				$nombre = $value['nombre'];
-				$email = $value['email'];
-				$estado = $value['estado'];
-			?>
+                $email = $value['email'];
+                $estado = $value['estado']
+				?>
 				<tr id="rowNewUsers<?php echo $id_empleado ?>">
-					<td><?= $nombre; ?></td>
-					<td><?= $email; ?></td>
-					<td><?= $estado; ?></td>
+					<td>
+						<?= $nombre; ?>
+					</td>
+					<td>
+						<?= $email; ?>
+					</td>
+					<td>
+						<?= $estado; ?>
+					</td>
 					<td>
 						<button id="<?php echo $nombre . "-" . $id_empleado ?>" name="btnEditar"
-							class="btn-editar" data-target="#myModal">Editar</button>
+							class="btn btn-success btn-sm editar" data-target="#myModal"> Editar
+						</button>
 						<button id="<?php echo $nombre . "-" . $id_empleado ?>"
-							class="btn-eliminar" data-target="#myModal">Eliminar</button>
+							class="btn btn-success btn-sm eliminar-empleado" data-target="#myModal"
+							style="background: red;"> Eliminar </button>
 					</td>
 				</tr>
-			<?php } ?>
+				<?php
+			}
+			?>
 		</tbody>
 	</table>
 </div>
-
 
 <script>
 
