@@ -31,11 +31,39 @@ class AdminUsersGroup extends MY_Controller
 		$user_id = $this->input->post('idUser');
 		$acceptDecline = $this->input->post('acceptDecline');
 
-		//Si se actualiza bien devolvemos json
-		if ($this->Admin_model->acceptDeclineUsers($user_id, $acceptDecline)) {
-			echo json_encode(['success' => true]);
+		$grupoActual = $this->session->userdata('actual_group');
+		$grupo = $this->session->userdata('groups')[$grupoActual];
+
+		//Obtenemos el plan
+		switch ($grupo['plan_id']) {
+			case 1:
+				$plan = 3;
+				break;
+			case 2:
+				$plan = 20;
+				break;
+			case 3:
+				$plan = 50;
+				break;
+			case 4:
+				$plan = true;
+				break;
+		}
+
+		//Miramos si su plan le permite añadir más usuarios
+		if ($plan === true || count($this->Admin_model->getUsersAcceptedByGroup()) + 1 <= $plan) {
+			//Si se actualiza bien devolvemos json
+			if ($this->Admin_model->acceptDeclineUsers($user_id, $acceptDecline)) {
+				echo json_encode(['success' => true]);
+			} else {
+				echo json_encode(['success' => false]);
+			}
 		} else {
-			echo json_encode(['success' => false]);
+			$this->session->set_flashdata('globalModal', $this->lang->line('errorInsertUser'));
+			echo json_encode([
+				'success' => false,
+				'redirect' => site_url('Dashboard/paymentsPlans')
+			]);
 		}
 	}
 

@@ -216,6 +216,7 @@ class User_model extends CI_Model
         $groups_by_id = [];
         foreach ($result as $group) {
             $groups_by_id[$group['grupo_id']] = [
+                'plan_id' => $group['plan_id'],
                 'grupo_id' => $group['grupo_id'],
                 'name' => $group['nombre'],
                 'email' => $group['email'],

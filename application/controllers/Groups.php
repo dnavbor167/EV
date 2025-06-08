@@ -201,6 +201,11 @@ class Groups extends MY_Controller
 		} else {
 			\Stripe\Stripe::setApiKey('sk_test_TU_CLAVE'); // Sustituye por tu clave real
 
+			$prices = [
+				2 => 'prod_SReItLTC8MBJkL',
+				3 => 'prod_SReJvxRqG7ktuh',
+			];
+
 			$precio = 0;
 			switch ($plan) {
 				case 2:
@@ -215,14 +220,10 @@ class Groups extends MY_Controller
 
 			$session = \Stripe\Checkout\Session::create([
 				'payment_method_types' => ['card'],
-				'mode' => 'payment',
+				'mode' => 'subscription',
 				'line_items' => [
 					[
-						'price_data' => [
-							'currency' => 'eur',
-							'product_data' => ['name' => 'Plan ' . ucfirst($plan)],
-							'unit_amount' => $precio,
-						],
+						'price' => [$prices[$plan]],
 						'quantity' => 1,
 					]
 				],

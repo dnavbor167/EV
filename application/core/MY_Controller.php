@@ -99,11 +99,44 @@ class MY_Controller extends CI_Controller
 				}
 			}
 
+			if ($actualUserBelongLen < count($groupsInSession)) {
+				$gruposAnterioresIDs = array_column($groupsInSession, 'grupo_id');
+				$gruposActualesIDs = array_column($actualUserBelongGroup, 'grupo_id');
+			
+				// Grupos eliminados
+				$gruposEliminadosIDs = array_diff($gruposAnterioresIDs, $gruposActualesIDs);
+			
+				if (!empty($gruposEliminadosIDs)) {
+					// Actualizar sesión
+					$data = [
+						'is_in_any_group' => $actualUserBelongGroup,
+						'groups' => $this->User_model->getGroups($gruposActualesIDs)
+					];
+					$this->session->set_userdata($data);
+					$this->session->set_flashdata('globalModal', $this->lang->line('removedFromGroup'));
+					
+					// Si fue eliminado del grupo actual, forzar cambio
+					if (in_array($this->session->userdata('actual_group'), $gruposEliminadosIDs)) {
+						$this->session->unset_userdata('actual_group');
+						redirect('Groups');
+					}
+				}
+			}
+
 			//Marcamos si hay alguna petición nueva de usuario
 			$this->load->model('Admin_model');
 			$this->load->vars([
 				'countNewPetitionsUsers' => $this->Admin_model->getUserPetitions()
 			]);
+
+			//actualizamos la session de rol por si se ha cambiado
+			$rol = $this->User_model->actualRol($this->session->userdata('user_id'), $this->session->userdata('actual_group'));
+			$this->session->set_userdata('rol', $rol);
+
+			//Si ha sido actualizado el rol y está en algun apartado del rol que se valla
+			if ($rol != 'admin' && (current_url() == site_url('AdminUsersGroup/groupUsers') || current_url() == site_url('AdminUsersGroup'))) {
+				redirect('Dashboard');
+			}
 
 			//Verificar que la ruta actual no está en group_exceptions
 			$ruta_actual = strtolower($this->router->class . '/' . $this->router->method);

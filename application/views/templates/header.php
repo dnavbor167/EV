@@ -32,12 +32,8 @@
                     <ul>
                         <li><a href="<?= $is_home ?>"><?= strtoupper($this->lang->line('home')); ?></a></li>
                         <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('eventsName')); ?></a></li>
+                        <li class="requires-login"><a href="<?= site_url('Songs'); ?>" class="ajax-link"><?= strtoupper($this->lang->line('songs')); ?></a></li>
                         <?php if ($this->session->userdata('groups') && $this->session->userdata('rol') == 'admin') { ?>
-                        <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('createEvents')); ?></a></li>
-                        <?php } ?>
-                        <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('songs')); ?></a></li>
-                        <?php if ($this->session->userdata('groups') && $this->session->userdata('rol') == 'admin') { ?>
-                        <li class="requires-login"><a href="#" class="ajax-link"><?= strtoupper($this->lang->line('createSongs')); ?></a></li>
                         <li class="requires-login"><a href="<?= site_url('AdminUsersGroup/groupUsers'); ?>" class="ajax-link"><?= strtoupper($this->lang->line('groupUsers')); ?></a></li>
                         <li class="requires-login"><a href="<?= site_url('AdminUsersGroup'); ?>" class="ajax-link"><?= strtoupper($this->lang->line('groupNewUsers')) . 
                             ($countNewPetitionsUsers != 0 ? ' <span class="numeroPeticiones">' . $countNewPetitionsUsers . '</span>' : ''); ?></a></li>

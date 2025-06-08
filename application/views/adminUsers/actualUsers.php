@@ -47,7 +47,7 @@
 					?>
 					<tr id="rowusersGroup<?php echo $id_usuario ?>">
 						<td class="firstRowImg">
-							<img class="imgUserGroup" src="<?= base_url('uploads/user_img/') . $value['img'] ?>"
+							<img class="imgUserGroup" src="<?= $value['img'] == 'default_img' ? base_url('assets/img/img/default_img.webp') : base_url('uploads/user_img/') . $value['img'] ?>"
 								alt="imagen de usuario del grupo">
 							<p><?= $nombre; ?></p>
 						</td>

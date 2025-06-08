@@ -1215,6 +1215,146 @@ a.beCareful svg {
 }
 
 
+/* PRUEBA */
+#songsList {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    margin-bottom: auto;
+    display: flex;
+    flex-flow: row wrap;
+    color: #FF7300;
+}
+
+.song-item {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    flex: 0 0 50%;
+}
+
+.song-item img {
+    height: 10rem;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.song-item p {
+    flex: 0 0 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+#buscadorSongs {
+    flex: 0 0 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: end;
+    margin-bottom: 3rem;
+    transition: transform 0.2s ease;
+}
+
+#buscadorSongs input {
+    border: solid white;
+    border-radius: 15px;
+    background-color: #303030;
+    padding-left: 2.9rem;
+    padding-bottom: .8rem;
+    padding-top: .8rem;
+    color: white;
+}
+
+#buscadorSongs input::placeholder {
+    color: white;
+}
+
+#buscadorSongs svg {
+    width: 1.5rem;
+    position: relative;
+    left: 2.5rem;
+    top: .1rem;
+    fill: white;
+}
+
+#addSong {
+    background: linear-gradient(to top right, #7E7F83, #ffffff);
+    font-size: 5rem;
+    height: 10rem;
+    width: 10rem;
+    color: #303030;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+#addSong a {
+    color: #303030;
+}
+
+.song-item:hover {
+    transform: scale(1.05);
+}
+
+#logInMain #btnCrtSongContainer {
+    display: flex;
+    justify-content: center;
+}
+
+#logInMain #btnCrtSongContainer #btnCreateSong {
+    border-radius: 15px;
+    flex: 0 0 30%;
+    cursor: pointer;
+}
+
+#logInMain #btnCrtSongContainer {
+    margin-bottom: 3rem;
+}
+
+#search-tone {
+    flex: 0 0 30% !important;
+}
+
+#search-tone .select2-container--default .select2-selection--single {
+    min-height: 48px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1364,6 +1504,10 @@ a.beCareful svg {
     #principalMenu .createJoinGroup #signIn .photoFile {
         border: dashed 5px #303030;
         color: #303030;
+    }
+
+    .song-item {
+        flex: 0 0 33%;
     }
 
 }
@@ -1523,6 +1667,43 @@ a.beCareful svg {
     .rechazar:hover {
         background-color: #940000;
     }
+
+    .song-item {
+        flex: 0 0 25%;
+    }
+
+    .inputCreateSong {
+        background-color: #303030;
+        border: none;
+        border-radius: 15px;
+    }
+
+    .inputCreateSong::placeholder {
+        color: #FF7300;
+
+    }
+
+    #search-tone .select2-container--default .select2-selection--single {
+        background-color: #303030 !important;
+        border: 1px solid #555;
+        color: #FF7300;
+    }
+
+    #search-tone .select2-container--default .select2-selection--single .select2-selection__placeholder {
+        color: #FF7300 !important;
+        opacity: 1;
+    }
+
+    #search-tone .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: #FF7300 !important;
+    }
+
+    #search-tone .select2-container--default .select2-selection--single .select2-selection__clear {
+        color: #FF7300 !important;
+    }
+
+
+
 
 }
 

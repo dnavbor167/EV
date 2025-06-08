@@ -74,6 +74,7 @@ $lang['errorJoinSelect']   = 'Debe elegir un grupo al que adherirse';
 $lang['joinSubmited']      = '¡Petición enviada con éxito! <br><br> Espere a que el administrador del grupo lo acepte o lo rechace.';
 $lang['joinSubmitedError'] = 'Error al unirse, inténtelo de nuevo.';
 $lang['joinSubmitedSuccess'] = 'Has sido aceptado en el grupo <i>{NOMBRE}</i>.';
+$lang['errorInsertUser']     = 'Has alcanzado el máximo de usuarios permitidos para tu plan, si deseas puedes mejorar tu plan actual.';
 
 
 //Home
@@ -186,5 +187,14 @@ $lang['acceptUsers']             = "Aceptar";
 $lang['userAdmin']               = "Admin";
 $lang['userColaborador']         = "Colaborador";
 $lang['userNormal']              = "Normal";
+
+//Create a song
+$lang['nameSong']                = "Nombre de la canción";
+$lang['nameArtist']              = "Nombre del artista";
+$lang['tone']                    = "Tonalidad";
+$lang['createSong']                  = "Crear canción";
+
+
+
 
 ?>

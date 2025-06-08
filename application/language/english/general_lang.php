@@ -74,6 +74,7 @@ $lang['errorJoinSelect']   = 'You must choose a group to join';
 $lang['joinSubmited']      = 'Request sent successfully! <br><br> Please wait for the group administrator to accept or reject it.';
 $lang['joinSubmitedError'] = 'Failed to join, please try again.';
 $lang['joinSubmitedSuccess'] = 'You have been accepted into the group <i>{NOMBRE}</i>.';
+$lang['errorInsertUser']     = "You've reached the maximum number of users allowed for your plan. If you'd like, you can upgrade your current plan.";
 
 
 //Home
@@ -187,5 +188,11 @@ $lang['acceptUsers']             = "Accept";
 $lang['userAdmin']               = "Admin";
 $lang['userColaborador']         = "Collaborator";
 $lang['userNormal']              = "Normal";
+
+//Create a song
+$lang['nameSong']                = "Song name";
+$lang['nameArtist']              = "Artist name";
+$lang['tone']                    = "Tone";
+$lang['createSong']              = "Create song";
 
 ?>
