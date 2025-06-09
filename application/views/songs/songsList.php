@@ -56,7 +56,8 @@
             $('.song-menu').hide();
         });
 
-        $('.delete-song').on('click', function () {
+        $('.delete-song').on('click', function (e) {
+            e.stopPropagation()
             const songId = $(this).data('id')
             const songItem = $(this).closest('.song-item');
 
@@ -80,8 +81,8 @@
             })
         })
 
-        $('.song-item').on('click', function () {
-            const songId = $(this).data('id')
+        $('.song-item img, .song-item .song-text').on('click', function () {
+            const songId = $(this).closest('.song-item').data('id')
 
             $.ajax({
                 url: '<?= site_url('Songs/song'); ?>',

@@ -64,6 +64,7 @@ class Auth extends MY_Controller
 				}
 
 				$array['rol'] = $this->User_model->actualRol($array['user_id'], $array['actual_group']);
+				$array['tonalidades_acordes'] = $this->User_model->getAllTonesAndChords();
 
 				$this->session->set_userdata($array);
 				redirect(base_url('Dashboard'));

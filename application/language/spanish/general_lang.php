@@ -78,6 +78,8 @@ $lang['errorInsertUser']     = 'Has alcanzado el máximo de usuarios permitidos 
 $lang['selectAnOption']      = 'Selecciona una opción';
 $lang['errorSelectTone']     = 'Debe elegir un tono para la canción.';
 $lang['errorInsertSong']     = 'Has alcanzado el máximo de canciones permitidos para tu plan, si deseas puedes mejorar tu plan actual.';
+$lang['addStructure']        = 'Estructura';
+$lang['addStructureText']    = 'Añadir estructura a esta parte de la canción';
 
 
 //Home
@@ -195,7 +197,13 @@ $lang['userNormal']              = "Normal";
 $lang['nameSong']                = "Nombre de la canción";
 $lang['nameArtist']              = "Nombre del artista";
 $lang['tone']                    = "Tonalidad";
-$lang['createSong']                  = "Crear canción";
+$lang['createSong']              = "Crear canción";
+$lang['compasSong']              = "Compás de la canción";
+$lang['genderSong']              = "Género de la canción";
+$lang['tempoSong']               = "Tempo";
+$lang['validFormatCompas']       = 'Formato válido: número/número, por ejemplo 4/4 o 6/8';
+$lang['compass']                 = "Compás";
+$lang['numberSong']              = 'Número de canción';
 
 
 

@@ -74,15 +74,4 @@ class Songs_model extends CI_Model
     {
         return $this->db->insert('Canciones', $data) ? $this->db->insert_id() : false;
     }
-
-    public function getChordsByTone($tone)
-    {
-
-    }
-
-    //obtenemos los acordes de cada tonalidad
-    public function getChordsAndTones()
-    {
-
-    }
 }

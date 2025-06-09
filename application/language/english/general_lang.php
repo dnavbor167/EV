@@ -78,6 +78,8 @@ $lang['errorInsertUser']     = "You've reached the maximum number of users allow
 $lang['selectAnOption']      = 'Select an option';
 $lang['errorSelectTone']     = 'You must choose a tone for the song.';
 $lang['errorInsertSong']     = "You've reached the maximum number of songs allowed for your plan. If you wish, you can upgrade your current plan.";
+$lang['addStructure']        = 'Structure';
+$lang['addStructureText']    = 'Add structure to this part of the song';
 
 
 //Home
@@ -197,5 +199,11 @@ $lang['nameSong']                = "Song name";
 $lang['nameArtist']              = "Artist name";
 $lang['tone']                    = "Tone";
 $lang['createSong']              = "Create song";
+$lang['compasSong']              = "Beat of the song";
+$lang['genderSong']              = "Genre of the song";
+$lang['tempoSong']               = "Tempo";
+$lang['validFormatCompas']       = 'Valid format: number/number, for example 4/4 or 6/8';
+$lang['compass']                 = "Compass";
+$lang['numberSong']              = 'Number of Song';
 
 ?>

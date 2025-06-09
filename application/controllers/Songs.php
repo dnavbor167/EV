@@ -61,6 +61,10 @@ class Songs extends MY_Controller
 			//Form validation
 			$this->form_validation->set_rules('nameSong', $this->lang->line('nameSong'), 'required');
 			$this->form_validation->set_rules('tones_id', $this->lang->line('tone'), 'required');
+			$this->form_validation->set_rules('compasSong', $this->lang->line('compasSong'), 'required|regex_match[/^([1-9]\d*)\/([1-9]\d*)$/]');
+			$this->form_validation->set_rules('genderSong', $this->lang->line('genderSong'), 'required');
+			$this->form_validation->set_rules('tempoSong', $this->lang->line('tempoSong'), 'required|number|greater_than[0]');
+			$this->form_validation->set_rules('numberSong', $this->lang->line('numberSong'), 'required|number|greater_than[0]');
 
 			if ($this->input->method() == 'post') {
 				if ($this->form_validation->run() == FALSE && $this->input->post('tones_id') == "") {
@@ -72,6 +76,10 @@ class Songs extends MY_Controller
 					$songData['titulo'] = $this->input->post('nameSong');
 					$songData['autor'] = $this->input->post('nameArtist') == "" ? NULL : $this->input->post('nameArtist');
 					$songData['tonalidad_id'] = $this->input->post('tones_id');
+					$songData['compas'] = $this->input->post('compasSong');
+					$songData['genero'] = $this->input->post('genderSong');
+					$songData['tempo'] = $this->input->post('tempoSong');
+					$songData['numero'] = $this->input->post('numberSong');
 
 					$photoFileName = 'fotoCancionPorDefecto';
 

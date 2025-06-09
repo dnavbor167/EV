@@ -183,6 +183,11 @@ class MY_Controller extends CI_Controller
 	{
 		$timeout = 900;
 		$last_activity = $this->session->userdata('last_activity');
+		$current_controller = strtolower($this->router->class);
+
+		if ($current_controller === 'songs') {
+			return;
+		}
 
 		if ($last_activity && (time() - $last_activity > $timeout)) {
 			$this->session->sess_destroy();

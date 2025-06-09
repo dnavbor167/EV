@@ -2,7 +2,8 @@
 class User_model extends CI_Model
 {
     //Obtener rol actual dado un grupo
-    public function actualRol($user, $actual_group) {
+    public function actualRol($user, $actual_group)
+    {
         $this->db->select('rol');
         $this->db->from('Usuarios_Grupos');
         $this->db->where('usuario_id', $user);
@@ -227,30 +228,45 @@ class User_model extends CI_Model
         return $groups_by_id;
     }
 
-    public function getGroupById($group_id) {
+    public function getGroupById($group_id)
+    {
         $this->db->select('nombre, email, img');
         $this->db->where('grupo_id', $group_id);
         $query = $this->db->get('Grupos');
-        
+
         return $query->row_array();
     }
 
 
-
-
-
-
-
-
-
-
-
-
-    public function obtenerTonalidades()
+    //Obtenemos todas las tonalidades y acordes dado una tonalidad
+    public function getAllTonesAndChords()
     {
-        $this->db->select('*');
+        $this->db->select('Tonalidades.tonalidad_id as tonalidad_id, Tonalidades.nombre as tonalidad_nombre, Acordes.acorde_id as acorde_id, Acordes.nombre as acorde_nombre');
         $this->db->from('Tonalidades');
+        $this->db->join('Acordes_Tonalidades', 'Tonalidades.tonalidad_id = Acordes_Tonalidades.tonalidad_id');
+        $this->db->join('Acordes', 'Acordes_Tonalidades.acorde_id = Acordes.acorde_id');
+        $this->db->order_by('Tonalidades.tonalidad_id, Acordes_Tonalidades.grado');
+        $query = $this->db->get();
+        $result = $query->result_array();
 
-        return $this->db->get()->result();
+        // Agrupar por tonalidad
+        $agrupado = [];
+        foreach ($result as $fila) {
+            $tid = $fila['tonalidad_id'];
+            if (!isset($agrupado[$tid])) {
+                $agrupado[$tid] = [
+                    'tonalidad_id' => $fila['tonalidad_id'],
+                    'tonalidad_nombre' => $fila['tonalidad_nombre'],
+                    'acordes' => []
+                ];
+            }
+
+            $agrupado[$tid]['acordes'][] = [
+                'acorde_id' => $fila['acorde_id'],
+                'acorde_nombre' => $fila['acorde_nombre']
+            ];
+        }
+
+        return $agrupado;
     }
 }
