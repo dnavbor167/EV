@@ -13,46 +13,6 @@
     <div id="cancionLetraAcordes">
         <div id="estructuraCancion"></div>
         <div id="letrasAcordes">
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
-            <div>prueba</div>
         </div>
 
     </div>
