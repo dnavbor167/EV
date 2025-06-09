@@ -8,17 +8,30 @@
         <input type="search" placeholder="Buscar...">
     </div>
 
-    <div class="song-item" data-id="1">
+    <div class="song-item">
         <span id="addSong"><a href="<?= site_url('Songs/createSong') ?>">+</a></span>
     </div>
-    <div class="song-item" data-id="2">
-        <img src="<?= base_url('assets/img/img/fotoCancionPorDefecto.webp'); ?>" alt="Foto por defecto">
-        <p>Holy forever - <strong>Tonalidad</strong></p>
-    </div>
-    <div class="song-item" data-id="3">
-        <img src="<?= base_url('assets/img/img/fotoCancionPorDefecto.webp'); ?>" alt="Foto por defecto">
-        <p>In name of Jesus - <strong>Tonalidad</strong></p>
-    </div>
+
+    <?php foreach ($songs as $song) { ?>
+        <div class="song-item" data-id="<?= $song['cancion_id']; ?>" style="position: relative;">
+            <img src="<?= $song['photo'] == 'fotoCancionPorDefecto' ? base_url('assets/img/img/fotoCancionPorDefecto.webp') : site_url('./uploads/songs_img/') . $song['photo']; ?>"
+                alt="Foto por defecto">
+            <div class="song-text" data-id="<?= $song['tonalidad_id']; ?>">
+                <?= $song['titulo']; ?> - <strong>
+                    <?= $song['nombre']; ?>
+                </strong> <svg class="menu-trigger" xmlns="http://www.w3.org/2000/svg" height="24px"
+                    viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+                    <path
+                        d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z" />
+                </svg>
+                <div class="song-menu delete-song-menu">
+                    <button class="delete-song" data-id="<?= $song['cancion_id']; ?>">
+                        <?= $this->lang->line('delete'); ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
 </div>
 
 
@@ -28,34 +41,66 @@
             const search = $(this).val().toLowerCase();
 
             $('.song-item').each(function () {
-                const p = $(this).find('p');
-
-                if (p.length) {
-                    const text = p.text().toLowerCase();
-                    $(this).toggle(text.includes(search));
-                } else {
-                    $(this).show();
-                }
+                const text = $(this).text().toLocaleLowerCase();
+                $(this).toggle(text.includes(search));
             });
         });
 
-        // $('#principalMenu').on('click', '#addSong', function () {
-        //     $.ajax({
-        //         url: '<?= site_url('Songs/createSongView') ?>',
-        //         method: 'GET',
-        //         dataType: 'html',
-        //         success: function (data) {
-        //             $('#principalMenu').html(data);
-        //             $('#buscador').select2({
-        //                 placeholder: "<?= $this->lang->line('nameArtist'); ?>",
-        //                 allowClear: true,
-        //                 width: '100%'
-        //             });
-        //         },
-        //         error: function () {
-        //             $('#principalMenu').html('<p>Error al cargar el contenido. Intenta recargar la página.</p>');
-        //         }
-        //     })
-        // })
+        $('.menu-trigger').on('click', function (e) {
+            e.stopPropagation()
+
+            $(this).siblings('.song-menu').show()
+        })
+
+        $(document).on('click', function () {
+            $('.song-menu').hide();
+        });
+
+        $('.delete-song').on('click', function () {
+            const songId = $(this).data('id')
+            const songItem = $(this).closest('.song-item');
+
+            $.ajax({
+                url: '<?= site_url('Songs/deleteSong'); ?>',
+                method: 'POST',
+                data: { song_id: songId },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        songItem.fadeOut(300, function () {
+                            $(this).remove();
+                        });
+                    } else {
+                        console.log('error deliting')
+                    }
+                },
+                error: function () {
+                    console.log('error in ajax petition')
+                }
+            })
+        })
+
+        $('.song-item').on('click', function () {
+            const songId = $(this).data('id')
+
+            $.ajax({
+                url: '<?= site_url('Songs/song'); ?>',
+                method: 'POST',
+                data: { song_id: songId },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        $('#principalMenu').html(response.html)
+                    } else {
+                        console.log('error accessing')
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('error in ajax petition')
+                }
+            })
+        })
+
+
     })
 </script>

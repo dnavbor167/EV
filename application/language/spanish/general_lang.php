@@ -75,6 +75,9 @@ $lang['joinSubmited']      = '¡Petición enviada con éxito! <br><br> Espere a 
 $lang['joinSubmitedError'] = 'Error al unirse, inténtelo de nuevo.';
 $lang['joinSubmitedSuccess'] = 'Has sido aceptado en el grupo <i>{NOMBRE}</i>.';
 $lang['errorInsertUser']     = 'Has alcanzado el máximo de usuarios permitidos para tu plan, si deseas puedes mejorar tu plan actual.';
+$lang['selectAnOption']      = 'Selecciona una opción';
+$lang['errorSelectTone']     = 'Debe elegir un tono para la canción.';
+$lang['errorInsertSong']     = 'Has alcanzado el máximo de canciones permitidos para tu plan, si deseas puedes mejorar tu plan actual.';
 
 
 //Home

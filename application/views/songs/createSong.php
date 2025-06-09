@@ -1,7 +1,7 @@
 <div id="logInMain">
   <?php
   $attributes = array('id' => 'signIn', 'class' => 'logSigin', 'method' => 'post');
-  echo form_open_multipart('Songs/createSongForm', $attributes);
+  echo form_open_multipart('Songs/createSong', $attributes);
   ?>
   <p><?= $this->lang->line('createSong'); ?></p>
   <input placeholder="<?= ucfirst($this->lang->line('nameSong')); ?>" type="text" name="nameSong" id="nameSong" class="inputCreateSong" value="<?= set_value('nameSong'); ?>">
@@ -12,14 +12,14 @@
   <span class="error"><?= form_error('nameArtist') ?></span>
 
   <div id="search-tone">
-    <select id="buscador" name="grupo_id" style="width: 100%;">
-      <option value="">Selecciona una opción</option>
+    <select id="buscador" name="tones_id" style="width: 100%;">
+      <option value=""></option>
       <?php foreach($tonalidades as $tonalidad) {?>
         <option value="<?= $tonalidad['tonalidad_id'] ?>"><?= $tonalidad['nombre'] ?></option>
       <?php }?>
     </select>
   </div>
-  <span class="error"><?= form_error('tone') ?></span>
+  <span class="error"><?= $error_tone ?></span>
 
   <label for="photo" class="photoFile"><?= $this->lang->line('inputFile') ?></label>
   <span class="error"><?= $upload_error; ?></span>

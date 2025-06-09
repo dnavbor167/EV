@@ -16,7 +16,7 @@
 
   <div class="search-container">
     <select id="buscador" name="grupo_id" style="width: 100%;">
-      <option value="">Selecciona una opción</option>
+      <option value=""><?= $this->lang->line('selectAnOption'); ?></option>
       <?php foreach($groups as $group) {?>
         <option value="<?= $group['id'] ?>"><?= $group['name'] ?></option>
       <?php }?>

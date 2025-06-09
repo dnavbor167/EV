@@ -1230,6 +1230,7 @@ a.beCareful svg {
     flex-flow: row wrap;
     justify-content: center;
     flex: 0 0 50%;
+    margin-bottom: 3rem;
 }
 
 .song-item img {
@@ -1238,10 +1239,14 @@ a.beCareful svg {
     cursor: pointer;
 }
 
-.song-item p {
+.song-item .song-text {
+    margin-top: 1rem;
     flex: 0 0 100%;
-    text-align: center;
     cursor: pointer;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 #buscadorSongs {
@@ -1322,6 +1327,152 @@ a.beCareful svg {
     box-sizing: border-box;
 }
 
+.delete-song-menu {
+    display: none;
+    position: absolute;
+    background: red;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    z-index: 100;
+    top: 0;
+}
+
+.delete-song {
+    color: #303030;
+    font-weight: bold;
+    border: none;
+    background-color: red;
+    cursor: pointer;
+}
+
+.delete-song-menu:hover,
+.delete-song-menu:active,
+.delete-song-menu:hover .delete-song,
+.delete-song-menu:active .delete-song{
+    background-color: rgb(161, 0, 0);
+}
+
+#songPdf {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #303030;
+    background-color: #D6D6D6;
+    width: 595px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+#headerSong {
+    flex: 0 0 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+    max-height: 2.5rem;
+}
+
+#headerSong div {
+    background-color: white;
+    padding: 1rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+#headerSong div:nth-child(1),
+#headerSong div:nth-child(3) {
+    flex: 0 0 20%;
+}
+
+#headerSong div:nth-child(2) {
+    flex: 0 0 50%;
+    font-weight: bold;
+}
+
+#footerSong {
+    margin-top: auto;
+    flex: 0 0 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    font-family: "fuenteEv", serif;
+    color: #FF7300;
+}
+
+#footerSongLogo {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+#footerSongLogo p {
+    letter-spacing: .1rem;
+    flex: 0 0 100%;
+    text-align: center;
+
+}
+
+#footerSongLogo img {
+    width: 3rem;
+}
+
+#footerSong svg {
+    fill: #303030;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+}
+
+#infoSong {
+    flex: 0 0 100%;
+    display: flex;
+    flex-flow: row wrap;
+    max-height: 2.5rem;
+    align-self: initial;
+    margin-left: 1rem;
+    margin-top: 2rem;
+}
+
+#infoSong div:nth-child(1) {
+    flex: 0 0 15%;
+}
+
+#infoSong div:nth-child(2) {
+    flex: 0 0 27%;
+}
+
+#infoSong div:nth-child(3) {
+    flex: 0 0 24%;
+}
+
+#infoSong span {
+    color: #FF7300;
+}
+
+#cancionLetraAcordes {
+    flex: 0 0 100%;
+    height: 60%;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#estructuraCancion {
+    flex: 0 0 15%;
+}
+
+#letrasAcordes {
+    flex: 0 0 80%;
+    border: solid;
+    text-align: center;
+}
+
+#letrasAcordes div {
+    padding-top: .2rem;
+    padding-bottom: 1rem;
+}
 
 
 
@@ -1673,6 +1824,7 @@ a.beCareful svg {
     }
 
     .inputCreateSong {
+        color: #FF7300;
         background-color: #303030;
         border: none;
         border-radius: 15px;
