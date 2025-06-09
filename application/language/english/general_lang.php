@@ -205,5 +205,6 @@ $lang['tempoSong']               = "Tempo";
 $lang['validFormatCompas']       = 'Valid format: number/number, for example 4/4 or 6/8';
 $lang['compass']                 = "Compass";
 $lang['numberSong']              = 'Number of Song';
+$lang['saveSong']                = 'Save';
 
 ?>

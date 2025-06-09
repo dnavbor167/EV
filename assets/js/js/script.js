@@ -262,5 +262,9 @@ $(function () {
             $(this).css('background-color', '#FF7300');
         }
     });
-
 });
+
+//Función para cambiar los acordes de tonalidades
+function changeChordsTone(tonalidad_id) {
+    
+}

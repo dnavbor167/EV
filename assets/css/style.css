@@ -1349,7 +1349,7 @@ a.beCareful svg {
 .delete-song-menu:hover,
 .delete-song-menu:active,
 .delete-song-menu:hover .delete-song,
-.delete-song-menu:active .delete-song{
+.delete-song-menu:active .delete-song {
     background-color: rgb(161, 0, 0);
 }
 
@@ -1359,7 +1359,7 @@ a.beCareful svg {
     background-color: #D6D6D6;
     width: 595px;
     display: flex;
-    flex-flow: row wrap;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
 }
@@ -1392,7 +1392,8 @@ a.beCareful svg {
 }
 
 #footerSong {
-    margin-top: auto;
+    margin-top: 2rem;
+    bottom: 0;
     flex: 0 0 100%;
     display: flex;
     flex-flow: row wrap;
@@ -1400,6 +1401,7 @@ a.beCareful svg {
     align-items: center;
     font-family: "fuenteEv", serif;
     color: #FF7300;
+    max-height: 100px;
 }
 
 #footerSongLogo {
@@ -1469,6 +1471,9 @@ a.beCareful svg {
 
 #cancionLetraAcordes div.impar {
     color: #FF7300;
+    min-height: 1rem;
+    border: solid;
+    position: relative;
 }
 
 #cancionLetraAcordes div.par {
@@ -1480,10 +1485,6 @@ a.beCareful svg {
     cursor: pointer;
     position: relative;
     border: solid;
-}
-
-.impar {
-    min-height: 1rem;
 }
 
 .par:hover {
@@ -1499,11 +1500,70 @@ a.beCareful svg {
     font-weight: bold;
 }
 
+#guardarCanción {
+    margin-top: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
 
+.fullscreen-active {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background: white;
+    width: 90vw;
+    height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
 
+.bocadillo {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    width: 180px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+}
 
+.bocadillo-content {
+    text-align: center;
+}
 
+.bocadillo-arrow {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid white;
+}
 
+.hidden {
+
+}
+
+.ok-span {
+    position: absolute;
+    background: #ff7300;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-size: 14px;
+    pointer-events: none;
+}
 
 
 
@@ -1680,6 +1740,17 @@ a.beCareful svg {
 
     .song-item {
         flex: 0 0 33%;
+    }
+
+    #guardarCanción {
+        width: 595px;
+    }
+
+    #containerGuardarCancion {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        flex: 0 0 100%;
     }
 
 }

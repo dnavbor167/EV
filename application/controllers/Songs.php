@@ -132,6 +132,10 @@ class Songs extends MY_Controller
 
 	public function song($cancion_id = false)
 	{
+		$grupoActual = $this->session->userdata('actual_group');
+		$grupo = $this->session->userdata('groups')[$grupoActual];
+		$data['plan_actual'] = $grupo['plan_id'];
+
 		if ($this->input->is_ajax_request()) {
 			$songId = $this->input->post('song_id');
 			$data['song'] = $this->Songs_model->getASong($songId);
@@ -148,5 +152,10 @@ class Songs extends MY_Controller
 			$data['tono'] = $this->Songs_model->getATone($tone);
 			$this->loadViews('songs/song', $data);
 		}
+	}
+
+	public function keep_alive() {
+		$this->session->set_userdata('last_activity', time());
+		echo json_encode(['success' => '200']);
 	}
 }
