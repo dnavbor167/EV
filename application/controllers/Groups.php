@@ -195,48 +195,49 @@ class Groups extends MY_Controller
 		}
 
 		$this->session->set_userdata('registro_grupo', $registro);
+		$this->insertGroup($plan);
 
-		if ($plan == 1) {
-			$this->insertGroup($plan);
-		} else {
-			\Stripe\Stripe::setApiKey('sk_test_TU_CLAVE'); // Sustituye por tu clave real
+		// if ($plan == 1) {
+		// 	$this->insertGroup($plan);
+		// } else {
+		// 	\Stripe\Stripe::setApiKey('sk_test_TU_CLAVE'); // Sustituye por tu clave real
 
-			$prices = [
-				2 => 'prod_SReItLTC8MBJkL',
-				3 => 'prod_SReJvxRqG7ktuh',
-			];
+		// 	$prices = [
+		// 		2 => 'prod_SReItLTC8MBJkL',
+		// 		3 => 'prod_SReJvxRqG7ktuh',
+		// 	];
 
-			$precio = 0;
-			switch ($plan) {
-				case 2:
-					$precio = 1000; // 10 EUR en céntimos
-					break;
-				case 3:
-					$precio = 2000; // 20 EUR en céntimos
-					break;
-				default:
-					show_error('Plan no válido');
-			}
+		// 	$precio = 0;
+		// 	switch ($plan) {
+		// 		case 2:
+		// 			$precio = 1000; // 10 EUR en céntimos
+		// 			break;
+		// 		case 3:
+		// 			$precio = 2000; // 20 EUR en céntimos
+		// 			break;
+		// 		default:
+		// 			show_error('Plan no válido');
+		// 	}
 
-			$session = \Stripe\Checkout\Session::create([
-				'payment_method_types' => ['card'],
-				'mode' => 'subscription',
-				'line_items' => [
-					[
-						'price' => [$prices[$plan]],
-						'quantity' => 1,
-					]
-				],
-				'success_url' => base_url('grupo/registro_exitoso'),
-				'cancel_url' => base_url('grupo/createGroup'),
-			]);
+		// 	$session = \Stripe\Checkout\Session::create([
+		// 		'payment_method_types' => ['card'],
+		// 		'mode' => 'subscription',
+		// 		'line_items' => [
+		// 			[
+		// 				'price' => [$prices[$plan]],
+		// 				'quantity' => 1,
+		// 			]
+		// 		],
+		// 		'success_url' => base_url('grupo/registro_exitoso'),
+		// 		'cancel_url' => base_url('grupo/createGroup'),
+		// 	]);
 
-			// Enviar la URL como JSON para manejarla con JS
-			echo json_encode([
-				'success' => true,
-				'url' => $session->url
-			]);
-		}
+		// 	// Enviar la URL como JSON para manejarla con JS
+		// 	echo json_encode([
+		// 		'success' => true,
+		// 		'url' => $session->url
+		// 	]);
+		// }
 	}
 
 	//Salirse del grupo
