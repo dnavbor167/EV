@@ -205,6 +205,8 @@ $lang['validFormatCompas']       = 'Formato válido: número/número, por ejempl
 $lang['compass']                 = "Compás";
 $lang['numberSong']              = 'Número de canción';
 $lang['saveSong']                = 'Guardar';
+$lang['chords']                  = 'Acordes';
+$lang['deleteChord']             = 'Eliminar Acorde';
 
 
 

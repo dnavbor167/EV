@@ -1362,6 +1362,8 @@ a.beCareful svg {
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
+    height: auto;
+    overflow: visible;
 }
 
 #headerSong {
@@ -1436,10 +1438,11 @@ a.beCareful svg {
     align-self: initial;
     margin-left: 1rem;
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 #infoSong div:nth-child(1) {
-    flex: 0 0 15%;
+    flex: 0 0 20%;
 }
 
 #infoSong div:nth-child(2) {
@@ -1462,6 +1465,7 @@ a.beCareful svg {
     min-height: 100px;
     font-size: .60rem;
     font-weight: bold;
+    position: relative;
 }
 
 #cancionLetraAcordes div {
@@ -1472,19 +1476,16 @@ a.beCareful svg {
 #cancionLetraAcordes div.impar {
     color: #FF7300;
     min-height: 1rem;
-    border: solid;
     position: relative;
+    cursor: pointer;
 }
 
 #cancionLetraAcordes div.par {
     margin-bottom: 1rem;
     text-align: center;
-}
-
-.par {
     cursor: pointer;
     position: relative;
-    border: solid;
+    border: solid 1px;
 }
 
 .par:hover {
@@ -1498,9 +1499,10 @@ a.beCareful svg {
     position: absolute;
     left: 0;
     font-weight: bold;
+    border: solid;
 }
 
-#guardarCanción {
+#guardarCancion {
     margin-top: 1rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
@@ -1524,45 +1526,67 @@ a.beCareful svg {
     flex-direction: column;
 }
 
-.bocadillo {
-    position: absolute;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
-    width: 180px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    z-index: 999;
+#tonoCancion {
+    cursor: pointer;
 }
 
-.bocadillo-content {
+#tonoCancion:hover,
+#tonoCancion:active {
+    color: #9e4802;
+}
+
+#toneModal .custom-modal-content #tonesFlex,
+#chordsFlex {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#tonesFlex p {
+    border: solid 1px #303030;
+    flex: 0 0 20%;
+    margin-right: .5rem;
     text-align: center;
+    cursor: pointer;
 }
 
-.bocadillo-arrow {
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid white;
+#tonesFlex p:hover,
+#tonesFlex p:active {
+    background-color: #a9a9a9;
 }
 
-.hidden {
-
+#chordsFlex p {
+    flex: 0 0 30%;
+    border: solid 1px #303030;
+    text-align: center;
+    margin-right: .5rem;
 }
 
-.ok-span {
-    position: absolute;
-    background: #ff7300;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 5px;
-    font-size: 14px;
-    pointer-events: none;
+#chordsFlex p:hover,
+#chordsFlex p:active {
+    background-color: #FF7300;
+}
+
+.addPart {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    font-size: 5rem;
+    font-weight: lighter;
+    cursor: pointer;
+}
+
+.chord-container {
+    position: 'absolute' !important;
+    transform: 'translate(-50%, 0)';
+}
+
+.chord-container span {
+    background: 'none';
+    color: '#FF7300';
+    padding: '2px 6px';
+    border-radius: '4px';
+    font-size: '12px';
+    white-space: 'nowrap';
 }
 
 

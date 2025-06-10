@@ -241,7 +241,7 @@ class User_model extends CI_Model
     //Obtenemos todas las tonalidades y acordes dado una tonalidad
     public function getAllTonesAndChords()
     {
-        $this->db->select('Tonalidades.tonalidad_id as tonalidad_id, Tonalidades.nombre as tonalidad_nombre, Acordes.acorde_id as acorde_id, Acordes.nombre as acorde_nombre');
+        $this->db->select('Tonalidades.tonalidad_id as tonalidad_id, Tonalidades.nombre as tonalidad_nombre, Acordes.acorde_id as acorde_id, Acordes.nombre as acorde_nombre, Acordes_Tonalidades.grado');
         $this->db->from('Tonalidades');
         $this->db->join('Acordes_Tonalidades', 'Tonalidades.tonalidad_id = Acordes_Tonalidades.tonalidad_id');
         $this->db->join('Acordes', 'Acordes_Tonalidades.acorde_id = Acordes.acorde_id');
@@ -263,7 +263,8 @@ class User_model extends CI_Model
 
             $agrupado[$tid]['acordes'][] = [
                 'acorde_id' => $fila['acorde_id'],
-                'acorde_nombre' => $fila['acorde_nombre']
+                'acorde_nombre' => $fila['acorde_nombre'],
+                'grado' => $fila['grado']
             ];
         }
 

@@ -87,27 +87,27 @@
                 })
             })
 
-            $('.song-item img, .song-item .song-text').on('click', function () {
-                const songId = $(this).closest('.song-item').data('id')
-
-                $.ajax({
-                    url: '<?= site_url('Songs/song'); ?>',
-                    method: 'POST',
-                    data: { song_id: songId },
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.success) {
-                            $('#principalMenu').html(response.html)
-                        } else {
-                            console.log('error accessing')
-                        }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log('error in ajax petition')
-                    }
-                })
-            })
         <?php } ?>
+        $('.song-item img, .song-item .song-text').on('click', function () {
+            const songId = $(this).closest('.song-item').data('id')
+
+            $.ajax({
+                url: '<?= site_url('Songs/song'); ?>',
+                method: 'POST',
+                data: { song_id: songId },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        $('#principalMenu').html(response.html)
+                    } else {
+                        console.log('error accessing')
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('error in ajax petition')
+                }
+            })
+        })
 
         //actualizamos el last_activity
         setInterval(function () {

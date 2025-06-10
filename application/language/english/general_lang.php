@@ -206,5 +206,7 @@ $lang['validFormatCompas']       = 'Valid format: number/number, for example 4/4
 $lang['compass']                 = "Compass";
 $lang['numberSong']              = 'Number of Song';
 $lang['saveSong']                = 'Save';
+$lang['chords']                  = 'Chords';
+$lang['deleteChord']             = 'Delete Chord';
 
 ?>

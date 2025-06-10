@@ -1,4 +1,4 @@
-<div id="addStructure" class="custom-modal">
+<!-- <div id="addStructure" class="custom-modal">
     <div class="custom-modal-content">
         <span class="custom-close">&times;</span>
         <h3>
@@ -18,12 +18,63 @@
             </a>
         </div>
     </div>
+</div> -->
+
+<div id="cancelarAcorde" class="custom-modal">
+    <div class="custom-modal-content">
+        <span class="custom-close">&times;</span>
+        <h3>
+            <?= $this->lang->line('deleteChord'); ?>
+        </h3>
+
+        <div style="text-align: right;">
+            <a href="#" class="btn-custom success cancelar">
+                <?= $this->lang->line('cancel'); ?>
+            </a>
+            <a href="#" class="btn-custom danger confirmarEliminar">
+                <?= $this->lang->line('delete'); ?>
+            </a>
+        </div>
+    </div>
 </div>
 
-<div id="bocadillo-modal" class="bocadillo hidden">
-    <div class="bocadillo-content">
+<div id="toneModal" class="custom-modal">
+    <div class="custom-modal-content">
+        <span class="custom-close">&times;</span>
+        <h3>
+            <?= $this->lang->line('tone'); ?>
+        </h3>
+
+        <div id="tonesFlex">
+            <?php foreach ($tones_chords as $tone) { ?>
+                <?php if ($song['tonalidad_id'] == $tone['tonalidad_id']) { ?>
+                    <p data-id="<?= $tone['tonalidad_id']; ?>" style="background-color: #FF7300; color: #303030;">
+                        <?= $tone['tonalidad_nombre']; ?>
+                    </p>
+                <?php } else { ?>
+                    <p data-id="<?= $tone['tonalidad_id']; ?>">
+                        <?= $tone['tonalidad_nombre']; ?>
+                    </p>
+                <?php } ?>
+            <?php } ?>
+        </div>
     </div>
-    <div class="bocadillo-arrow"></div>
+</div>
+
+<div id="chordModal" class="custom-modal">
+    <div class="custom-modal-content">
+        <span class="custom-close">&times;</span>
+        <h3>
+            <?= $this->lang->line('chords'); ?>
+        </h3>
+        <div id="chordsFlex">
+            <?php foreach ($tones_chords[$song['tonalidad_id']]['acordes'] as $chords) { ?>
+                <p data-id="<?= $chords['grado']; ?>">
+                    <?= $chords['acorde_nombre']; ?>
+                </p>
+            <?php } ?>
+        </div>
+    </div>
 </div>
 
 
@@ -40,8 +91,8 @@
         </div>
     </div>
     <div id="infoSong">
-        <div data-id="<?= $song['tonalidad_id'] ?>">
-            <?= $this->lang->line('tone'); ?>: <span id="tonoCancion">
+        <div data-id="<?= $song['tonalidad_id'] ?>" id="tonoCancion">
+            <?= $this->lang->line('tone'); ?>: <span>
                 <?= $tono; ?>
             </span>
         </div>
@@ -58,15 +109,33 @@
     </div>
 
     <div id="cancionLetraAcordes">
-        <div class="impar">ey </div>
-        <div class="par"><span class="structure">Coro:</span> TÚ FUISTE EL VERBO EN EL PRINCIPIO, UNIGÉNITO DE DIOS
-        </div>
-        <div class="impar">ey </div>
-        <div class="par">TÚ FUISTE EL VERBO EN EL PRINCIPIO, UNIGÉNITO DE DIOS, </div>
-        <div class="impar">ey </div>
-        <div class="par">TÚ FUISTE EL VERBO EN EL PRINCIPIO, UNIGÉNITO DE DIOS </div>
-        <div class="impar">ey </div>
-        <div class="par">CUÁN HERMOSO SU NOMBRE ES, NADA SE IGUALA A ÉL, CUÁN HERMOSO SU NOMBRE ES, </div>
+        <?php foreach ($chordsAndLetters as $fila) { ?>
+            <div class="impar">
+                <?php foreach ($fila['acordes'] as $acorde) {
+                    $nombreAcorde = null;
+                    $array = $this->session->userdata('tonalidades_acordes')[$song['tonalidad_id']]['acordes'];
+                    foreach ($array as $acordes) {
+                        if ($acordes['grado'] == $acorde['grado']) {
+                            $nombreAcorde = $acordes['acorde_nombre'];
+                            break;
+                        }
+                    }
+                    ?>
+                    <span class="chord-container" data-id="<?= $acorde['grado']; ?>"
+                        style="position: absolute; transform: translate(-50%, 0); left: <?= $acorde['coordenada_x']; ?>px;">
+                        <span>
+                            <?= $nombreAcorde ?>
+                        </span>
+                    </span>
+                <?php } ?>
+            </div>
+            <div class="par" contenteditable="true">
+                <?= $fila['letra']; ?>
+            </div>
+        <?php } ?>
+        <?php if ($this->session->userdata('is_logged_in') && ($this->session->userdata('rol') == 'admin' || $this->session->userdata('rol') == 'colaborador')) { ?>
+            <div class="addPart">+</div>
+        <?php } ?>
     </div>
 
     <div id="footerSong">
@@ -97,7 +166,7 @@
 
 <?php if ($this->session->userdata('is_logged_in') && ($this->session->userdata('rol') == 'admin' || $this->session->userdata('rol') == 'colaborador')) { ?>
     <div id="containerGuardarCancion">
-        <a href="#" class="btn-custom success confirmarAgregar" id="guardarCanción">
+        <a href="#" class="btn-custom success confirmarAgregar" id="guardarCancion">
             <?= $this->lang->line('saveSong'); ?>
         </a>
     </div>
@@ -107,69 +176,98 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-
+    const acordesPorTonalidad = <?= json_encode($tones_chords, JSON_UNESCAPED_UNICODE); ?>;
 
     $(function () {
-        //clicamos y nos sale una modal para poner acordes de está tonalidad
-        $('.impar').on('click', function (e) {
-            const modal = $('#bocadillo-modal');
-            e.stopPropagation()
-            const $this = $(this);
-            $this.css('position', 'relative'); // Asegura que el contenedor sea relativo
-
-            // Calculamos la posición relativa al .impar clicado
-            const offset = $this.offset();
-            const x = e.pageX - offset.left;
-            const clickX = e.pageX;
-            const clickY = e.pageY;
-
-            modal.css({ visibility: 'hidden', display: 'block' });
-
-            const modalHeight = modal.outerHeight();
-            const arrowHeight = 10;
-            let topPos = clickY - modalHeight - arrowHeight;
-            const leftPos = clickX - modal.outerWidth() / 2;
-
-            if (topPos < 0) {
-                topPos = clickY + arrowHeight;
-                modal.addClass('arrow-down');
-            } else {
-                modal.removeClass('arrow-down');
-            }
-
-            modal.css({
-                position: 'absolute',
-                top: topPos - 110 + 'px',
-                left: leftPos + 'px',
-                visibility: 'visible',
-                display: 'block'
-            }).removeClass('hidden');
-
-            // Guardamos datos para usar después si quieres aplicar cambios
-            window.posicionClick = { x: clickX, y: clickY };
-            window.elementoClicado = $this;
-
-            //LATER
-            // const $ok = $('<span class="ok-container"><span>OK</span></span>');
-            // $ok.css({
-            //     position: 'absolute',
-            //     transform: 'translate(-50%, 0)',
-            //     left: x + 'px',
-            //     zIndex: 10
-            // });
-
-            // $ok.find('span').css({
-            //     background: 'green',
-            //     color: 'white',
-            //     padding: '2px 6px',
-            //     borderRadius: '4px',
-            //     fontSize: '12px',
-            //     whiteSpace: 'nowrap'
-            // });
-
-            // $this.append($ok);
+        //cambiamos de tono
+        $('#tonoCancion').on('click', function () {
+            $('#toneModal').fadeIn();
 
         })
+
+        $('#tonesFlex').on('click', 'p', function () {
+            $('#tonesFlex p').css('background-color', '').css('color', '');
+            $(this).css('background-color', '#FF7300').css('color', '#303030');
+
+            const nuevaTonalidad = $(this).data('id')
+            const nuevaTonalidadNombre = $(this).text()
+
+            $('#tonoCancion').attr('data-id', nuevaTonalidad)
+            $('#tonoCancion span').text(nuevaTonalidadNombre)
+
+            const acordes = acordesPorTonalidad[nuevaTonalidad]?.acordes || [];
+            const $chordsFlex = $('#chordsFlex');
+            $chordsFlex.empty(); // limpiar acordes anteriores
+
+            acordes.forEach(acorde => {
+                const $p = $('<p>').attr('data-id', acorde.grado).text(acorde.acorde_nombre);
+                $chordsFlex.append($p);
+            });
+
+            transponerAcordes(nuevaTonalidad);
+            $('#toneModal').fadeOut();
+        })
+
+        // Cerrar el modal al hacer clic en el botón de cierre
+        $('.custom-close').on('click', function () {
+            $('#toneModal').fadeOut();
+            $('#chordModal').fadeOut();
+        });
+
+        // Cerrar el modal al hacer clic fuera del contenido
+        $(window).on('click', function (e) {
+            if ($(e.target).is('#toneModal')) {
+                $('#toneModal').fadeOut();
+            }
+
+            if ($(e.target).is('#chordModal')) {
+                $('#chordModal').fadeOut();
+            }
+        });
+
+        $('#toneModal').on('change', function () {
+            const tonalidadId = $(this).val()
+            const acordes = acordesPorTonalidad[tonalidadId]?.acordes || []
+            const chordsFlex = $('#chordsFlex')
+        })
+
+
+        let $currentImpar = null;
+        let chordPosX = 0;
+
+        //clicamos y nos sale una modal para poner acordes de está tonalidad
+        $('#cancionLetraAcordes').on('click', '.impar', function (e) {
+            e.stopPropagation()
+            $currentImpar = $(this);
+            $currentImpar.css('position', 'relative');
+
+            // Calculamos la posición relativa al .impar clicado
+            const offset = $(this).offset();
+            chordPosX = e.pageX - offset.left;
+
+            $('#chordModal').fadeIn();
+
+        })
+
+        $('#chordsFlex').off('click').on('click', 'p', function () {
+            if (!$currentImpar) return;
+
+            const acordeNombre = $(this).text();
+            const acordeGrado = $(this).data('id');
+
+            const $chord = $('<span class="chord-container" data-id="' + acordeGrado + '"><span>' + acordeNombre + '</span></span>');
+            $chord.css({
+                position: 'absolute',
+                transform: 'translate(-50%, 0)',
+                left: chordPosX + 'px',
+                zIndex: 10
+            });
+
+            $currentImpar.append($chord);
+
+            $('#chordModal').fadeOut();
+            $currentImpar = null; // Reseteamos para la próxima vez
+        });
 
         //Ocultar modal bocadillo$(document).on('click', function (e) {
         $(document).on('click', function (e) {
@@ -208,10 +306,12 @@
 
             $('#downloadPdf').on('click', function () {
                 if (!isFullscreen) {
-                    console.log('hola')
+                    $('.par').css('border', 'none');
+                    const addPartDiv = $('.addPart').detach();
+
                     const pdf = new jsPDF('p', 'pt', 'letter');
                     const element = document.getElementById('songPdf');
-                    const tonoCancion = document.getElementById('tonoCancion').textContent.trim();
+                    const tonoCancion = $('#tonoCancion span').text().trim();
                     const nombreCancion = document.getElementById('tituloCancion').textContent.trim();
 
                     html2canvas(element, { scale: 2 }).then(canvas => {
@@ -234,6 +334,9 @@
                         }
 
                         pdf.save(`${nombreCancion}-${tonoCancion}.pdf`);
+
+                        $('#songPdf').append(addPartDiv);
+                        $('.par').css('border', 'solid 1px');
                     });
                 }
             })
@@ -250,16 +353,15 @@
 
 
         // Clic directo en el fondo (sin que sea un hijo)
-        $('#cancionLetraAcordes').on('click', function (e) {
+        $('.addPart').on('click', function (e) {
             if (e.target === this) {
                 const divImpar = $('<div class="impar"></div>');
                 const divPar = $('<div class="par" contenteditable="true"></div>');
-                $('#cancionLetraAcordes').append(divImpar, divPar);
+                $(this).before(divImpar, divPar);
                 currentParDiv = divPar;
 
                 createdImpar = divImpar;
                 createdPar = divPar;
-                openModal('');
             }
         });
 
@@ -281,13 +383,13 @@
         });
 
         // Solo clic en el span.structure dentro de .par abre modal
-        $('#cancionLetraAcordes').on('click', 'span.structure', function (e) {
-            e.stopPropagation();
-            const span = $(this);
-            currentParDiv = span.parent(); // div.par
-            const existingText = span.text();
-            openModal(existingText);
-        });
+        // $('#cancionLetraAcordes').on('click', 'span.structure', function (e) {
+        //     e.stopPropagation();
+        //     const span = $(this);
+        //     currentParDiv = span.parent(); // div.par
+        //     const existingText = span.text();
+        //     openModal(existingText);
+        // });
 
         //Hacemos que cuando clique en un elemento pueda editarlo de clase par
         $('#cancionLetraAcordes').on('click', '.par', function (e) {
@@ -304,40 +406,40 @@
             divImpar.remove();
         });
 
-        function openModal(text) {
-            $('input[name="structureSong"]').val(text);
-            $('#addStructure').fadeIn();
-        }
+        // function openModal(text) {
+        //     $('input[name="structureSong"]').val(text);
+        //     $('#addStructure').fadeIn();
+        // }
 
-        $('.custom-close, .cancelar').on('click', function (e) {
-            e.preventDefault();
-            $('#addStructure').fadeOut();
+        // $('.custom-close, .cancelar').on('click', function (e) {
+        //     e.preventDefault();
+        //     $('#addStructure').fadeOut();
 
-            const texto = $('input[name="structureSong"]').val().trim();
-            if (texto === '' && createdImpar && createdPar) {
-                createdImpar.remove();
-                createdPar.remove();
-            }
+        //     const texto = $('input[name="structureSong"]').val().trim();
+        //     if (texto === '' && createdImpar && createdPar) {
+        //         createdImpar.remove();
+        //         createdPar.remove();
+        //     }
 
-            createdImpar = null;
-            createdPar = null;
-        });
+        //     createdImpar = null;
+        //     createdPar = null;
+        // });
 
-        $('.confirmarAgregar').on('click', function (e) {
-            e.preventDefault();
-            const texto = $('input[name="structureSong"]').val().trim();
+        // $('.confirmarAgregar').on('click', function (e) {
+        //     e.preventDefault();
+        //     const texto = $('input[name="structureSong"]').val().trim();
 
-            if (texto !== '' && currentParDiv) {
-                currentParDiv.html('<span class="structure" contenteditable="false">' + texto + '</span>');
-            } else if (texto === '' && createdImpar && createdPar) {
-                createdImpar.remove();
-                createdPar.remove();
-            }
+        //     if (texto !== '' && currentParDiv) {
+        //         currentParDiv.html('<span class="structure" contenteditable="false">' + texto + '</span>');
+        //     } else if (texto === '' && createdImpar && createdPar) {
+        //         createdImpar.remove();
+        //         createdPar.remove();
+        //     }
 
-            $('#addStructure').fadeOut();
-            createdImpar = null;
-            createdPar = null;
-        });
+        //     $('#addStructure').fadeOut();
+        //     createdImpar = null;
+        //     createdPar = null;
+        // });
 
         //actualizamos el last_activity
         setInterval(function () {
@@ -352,7 +454,126 @@
                 }
             })
         }, 300000)
+
+        function transponerAcordes(nuevaTonalidadId) {
+            // Obtener acordes de la nueva tonalidad
+            const nuevosAcordes = acordesPorTonalidad[nuevaTonalidadId]?.acordes || [];
+
+            // Crear un mapa grado -> nombre acorde para la nueva tonalidad
+            const mapaGrados = {};
+            nuevosAcordes.forEach(acorde => {
+                mapaGrados[acorde.grado] = acorde.acorde_nombre;
+            });
+
+            // Recorrer todos los spans con clase chord-container dentro de #cancionLetraAcordes
+            $('#cancionLetraAcordes').find('.chord-container').each(function () {
+                const grado = $(this).data('id'); // obtener el grado del acorde actual
+                const nuevoNombre = mapaGrados[grado];
+
+                if (nuevoNombre) {
+                    // Cambiar el texto del acorde al nuevo acorde transpuesto
+                    $(this).find('span').text(nuevoNombre);
+                }
+            });
+        }
+
+        //insertamos los acordes y letras en la base de datos
+        $('#guardarCancion').on('click', function (e) {
+            e.preventDefault()
+
+            const acordes = extraerAcordes()
+            const letras = extraerLetras()
+            const tonoCancion = $('#tonoCancion').data('id');
+
+            $.ajax({
+                url: '<?= site_url('Songs/insertChordsLetters') ?>',
+                method: 'POST',
+                data: {
+                    cancion_id: <?= $song['cancion_id'] ?>,
+                    nuevoTono: tonoCancion,
+                    acordes: JSON.stringify(acordes),
+                    letras: JSON.stringify(letras)
+                },
+                success: function (respuesta) {
+                    console.log('Song Saved');
+                },
+                error: function () {
+                    console.log('Error saving chords and letters');
+                }
+            })
+            console.log(JSON.stringify(acordes) + '      ' + JSON.stringify(letras) + '      ' + cancionId)
+        })
+
+        function extraerAcordes() {
+            const acordes = [];
+
+            $('#cancionLetraAcordes .impar').each(function (lineaIndex) {
+                $(this).find('.chord-container').each(function () {
+                    const grado = $(this).data('id');
+                    const posX = parseFloat($(this).css('left'));
+                    const posY = lineaIndex;
+
+                    acordes.push({
+                        grado: grado,
+                        coordenada_x: posX,
+                        coordenada_y: posY
+                    });
+                });
+            });
+
+            return acordes;
+        }
+
+        function extraerLetras() {
+            const letras = [];
+
+            $('#cancionLetraAcordes .par').each(function (lineaIndex) {
+                const letra_cancion = $(this).text().trim();
+                const posY = lineaIndex;
+
+                letras.push({
+                    letra: letra_cancion,
+                    coordenada_y: posY
+                });
+            });
+
+            return letras;
+        }
+
+        //quitar algun acorde ya puesto
+        let chordRemove = null
+        $('#cancionLetraAcordes').on('click', '.chord-container', function (e) {
+            e.stopPropagation()
+            acordeAEliminar = $(this);
+            $('#cancelarAcorde').fadeIn();
+        });
+
+        // Confirmar eliminación
+        $('.confirmarEliminar').on('click', function (e) {
+            e.preventDefault();
+            if (acordeAEliminar) {
+                acordeAEliminar.remove();
+                acordeAEliminar = null;
+            }
+            $('#cancelarAcorde').fadeOut();
+        });
+
+        // Cancelar eliminación
+        $('.cancelar').on('click', function (e) {
+            e.preventDefault();
+            acordeAEliminar = null;
+            $('#cancelarAcorde').fadeOut();
+        });
+
+        $('.custom-modal-content').on('click', function () {
+            $('#cancelarAcorde').fadeOut();
+        });
+
+        // Cerrar el modal al hacer clic fuera del contenido
+        $(window).on('click', function (e) {
+            if ($(e.target).is('#cancelarAcorde')) {
+                $('#cancelarAcorde').fadeOut();
+            }
+        });
     });
-
-
 </script>

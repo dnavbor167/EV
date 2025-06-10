@@ -132,12 +132,14 @@ class Songs extends MY_Controller
 
 	public function song($cancion_id = false)
 	{
+		$data['tones_chords'] = $this->session->userdata('tonalidades_acordes');
 		$grupoActual = $this->session->userdata('actual_group');
 		$grupo = $this->session->userdata('groups')[$grupoActual];
 		$data['plan_actual'] = $grupo['plan_id'];
 
 		if ($this->input->is_ajax_request()) {
 			$songId = $this->input->post('song_id');
+			$data['chordsAndLetters'] = $this->Songs_model->getChordsLetters($songId);
 			$data['song'] = $this->Songs_model->getASong($songId);
 			$tone = $data['song']['tonalidad_id'];
 			$data['tono'] = $this->Songs_model->getATone($tone);
@@ -147,6 +149,7 @@ class Songs extends MY_Controller
 				'html' => $html
 			]);
 		} else {
+			$data['chordsAndLetters'] = $this->Songs_model->getChordsLetters($cancion_id);
 			$data['song'] = $this->Songs_model->getASong($cancion_id);
 			$tone = $data['song']['tonalidad_id'];
 			$data['tono'] = $this->Songs_model->getATone($tone);
@@ -154,8 +157,21 @@ class Songs extends MY_Controller
 		}
 	}
 
-	public function keep_alive() {
+	public function keep_alive()
+	{
 		$this->session->set_userdata('last_activity', time());
 		echo json_encode(['success' => '200']);
+	}
+
+	public function insertChordsLetters()
+	{
+		$song_id = $this->input->post('cancion_id');
+		$chords = json_decode($this->input->post('acordes'), true);
+		$letras = json_decode($this->input->post('letras'), true);
+		$newTone = $this->input->post('nuevoTono');
+
+		$this->Songs_model->updateTone($song_id, $newTone);
+		$this->Songs_model->insertChords($song_id, $chords);
+		$this->Songs_model->insertLetters($song_id, $letras);
 	}
 }
